@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application;
 
+use App\Application\Bootloader\BosonBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
 use Spiral\Bootloader\I18nBootloader;
@@ -74,6 +75,8 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // Fast code prototyping
             PrototypeBootloader::class,
+
+            BosonBootloader::class,
         ];
     }
 }
