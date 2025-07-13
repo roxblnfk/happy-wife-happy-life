@@ -11,7 +11,9 @@
     "require": {
         "php": ">=8.1",
         "ext-mbstring": "*",
+        "boson-php/psr-http-bridge": "^0.14.0",
         "boson-php/runtime": "^0.14.0",
+        "spiral-packages/yii-error-handler-bridge": "^1.1",
         "spiral/cycle-bridge": "^2.11",
         "spiral/framework": "^3.15.7",
         "spiral/nyholm-bridge": "^1.3",

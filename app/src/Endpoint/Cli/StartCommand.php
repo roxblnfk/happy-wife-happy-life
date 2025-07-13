@@ -1,23 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Endpoint\Cli;
 
+use App\Application\AppScope;
 use Boson\Application;
-use Boson\WebView\WebViewCreateInfo;
-use Boson\Window\WindowCreateInfo;
+use Spiral\Core\Container;
+use Spiral\Core\Scope;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 
 #[AsCommand('start')]
 class StartCommand extends \Spiral\Console\Command
 {
-    public function __invoke(Application $app): int
+    public function __invoke(Container $core): int
     {
-        // Set the initial URL to load the menu
-        $app->webview->url = 'soco://localhost/index.html';
-
-        // Run the application
-        $app->run();
+        $core->runScope(
+            new Scope(
+                name: AppScope::Boson,
+            ),
+            static function (Application $app): void {
+                // Set the initial URL
+                $app->webview->url = 'http://localhost/';
+                $app->run();
+            },
+        );
 
         return Command::SUCCESS;
     }

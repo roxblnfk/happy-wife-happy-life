@@ -17,6 +17,8 @@ use Spiral\Nyholm\Bootloader\NyholmBootloader;
 use Spiral\Prototype\Bootloader\PrototypeBootloader;
 use Spiral\Scaffolder\Bootloader\ScaffolderBootloader;
 use Spiral\Tokenizer\Bootloader\TokenizerListenerBootloader;
+use Spiral\Views\Bootloader\ViewsBootloader;
+use Spiral\YiiErrorHandler\Bootloader\YiiErrorHandlerBootloader;
 
 /**
  * @psalm-suppress ClassMustBeFinal
@@ -41,6 +43,7 @@ class Kernel extends \Spiral\Framework\Kernel
         return [
             // Logging and exceptions handling
             MonologBootloader::class,
+            YiiErrorHandlerBootloader::class,
             Bootloader\ExceptionHandlerBootloader::class,
 
             // Application specific logs
@@ -51,6 +54,19 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // Security and validation
             Framework\Security\EncrypterBootloader::class,
+
+            // HTTP extensions
+            Framework\Http\HttpBootloader::class,
+            Framework\Http\RouterBootloader::class,
+            Framework\Http\JsonPayloadsBootloader::class,
+            Framework\Http\CookiesBootloader::class,
+            Framework\Http\SessionBootloader::class,
+            Framework\Http\CsrfBootloader::class,
+            Framework\Http\PaginationBootloader::class,
+            NyholmBootloader::class,
+
+            // Views
+            ViewsBootloader::class,
 
             // Databases
             CycleBridge\DatabaseBootloader::class,
@@ -65,8 +81,6 @@ class Kernel extends \Spiral\Framework\Kernel
             I18nBootloader::class,
             TranslatedCacheBootloader::class,
 
-            NyholmBootloader::class,
-
             // Console commands
             Framework\CommandBootloader::class,
             CycleBridge\CommandBootloader::class,
@@ -76,6 +90,7 @@ class Kernel extends \Spiral\Framework\Kernel
             // Fast code prototyping
             PrototypeBootloader::class,
 
+            Bootloader\RoutesBootloader::class,
             BosonBootloader::class,
         ];
     }
