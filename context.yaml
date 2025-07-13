@@ -5,14 +5,16 @@ documents:
     outputPath: project-structure.md
     overwrite: true
     sources:
-      -
-        type: tree
+      - type: tree
         sourcePaths:
           - app/src
         filePattern: '*'
         renderFormat: ascii
         enabled: true
         showCharCount: true
+      - type: file
+        sourcePaths:
+          - docs/llm-context.md
 
   # BosonPHP Docs
   - description: 'Boson Docs structure'
