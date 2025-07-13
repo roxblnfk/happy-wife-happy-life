@@ -1,0 +1,51 @@
+$schema: 'https://raw.githubusercontent.com/context-hub/generator/refs/heads/main/json-schema.json'
+documents:
+  # SRC structure
+  - description: 'Project structure overview'
+    outputPath: project-structure.md
+    overwrite: true
+    sources:
+      -
+        type: tree
+        sourcePaths:
+          - app/src
+        filePattern: '*'
+        renderFormat: ascii
+        enabled: true
+        showCharCount: true
+
+  # BosonPHP Docs
+  - description: 'Boson Docs structure'
+    outputPath: boson-docs.md
+    overwrite: true
+    sources:
+      - type: text
+        tag: instruction
+        content: |
+          The application uses BosonPHP - a PHP framework for building Windows applications based on WebView.
+          Use the following documentation to understand how to work with it.
+      - type: tree
+        sourcePaths:
+          - docs/Boson
+        filePattern: '*.md'
+        renderFormat: ascii
+        enabled: true
+        showCharCount: true
+      - type: file
+        sourcePaths:
+          - docs/Boson/overview.topic
+
+  # Guidelines
+  - description: 'Guidelines and instructions'
+    outputPath: guidelines.md
+    overwrite: true
+    sources:
+      - type: text
+        tag: instruction
+        content: |
+          There are all the guidelines about how to do some things in the project.
+          Feel free to load any related guideline to the current context to make the work more efficient.
+      - type: tree
+        sourcePaths: 'docs/guidelines'
+        showCharCount: true
+        showSize: true
