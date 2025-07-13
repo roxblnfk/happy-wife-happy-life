@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Overview"
+       id="overview" help-id="index">
+    <section-starting-page>
+        <title>Overview</title>
+        <description>
+            Boson is a lightweight and powerful solution that uses all
+            the capabilities of modern PHP to build client applications.
+        </description>
+
+        <spotlight>
+            <a href="introduction.md" type="documents"
+               summary="Check out all the possibilities of building lightweight and powerful client solutions on PHP">
+                Documentation
+            </a>
+            <a href="https://github.com/boson-php/runtime" type="mixed"
+               summary="Boson is a completely open source solution">
+                Source Code
+            </a>
+        </spotlight>
+
+        <primary>
+            <title>Core Components</title>
+            <a href="application.md" type="start"/>
+            <a href="window.md" type="presentation"/>
+            <a href="webview.md" type="world" />
+            <a href="events.md" type="turn-on" />
+        </primary>
+
+        <secondary>
+            <title>Advanced Features</title>
+            <a href="schemes-api.md" />
+            <a href="scripts-api.md" />
+            <a href="bindings-api.md" />
+            <a href="data-api.md" />
+        </secondary>
+
+        <misc>
+            <cards>
+                <title>Other APIs</title>
+                <card href="web-components-api.md" />
+                <card href="security-api.md" />
+                <card href="battery-api.md" />
+            </cards>
+        </misc>
+    </section-starting-page>
+</topic>
