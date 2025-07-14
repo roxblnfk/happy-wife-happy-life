@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var \Spiral\Views\ViewInterface $this
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
  * @var int<1, 3> $stepIndicator
  */

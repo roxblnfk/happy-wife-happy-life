@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var \Spiral\Views\ViewInterface $this
  * @var \Throwable $exception
  * @var null|\App\Module\Common\Config\LLMConfig $LLMConfig
  */

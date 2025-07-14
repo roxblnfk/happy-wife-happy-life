@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var \Spiral\Views\ViewInterface $this
  * @var array $models - Array of available models
  * @var null|\App\Module\Common\Config\LLMConfig $LLMConfig
  */

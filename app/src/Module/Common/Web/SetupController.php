@@ -74,17 +74,22 @@ final class SetupController
         ]);
     }
 
-    #[Route(route: '/setup', name: self::ROUTE_SETUP, methods: ['GET'])]
+    #[Route(route: '/setup[/<page>]', name: self::ROUTE_SETUP, methods: ['GET'])]
     public function setup(
         GlobalStateConfig $globalState,
         ?RelationConfig $relationConfig,
         ?LLMConfig $LLMConfig,
         ?CalendarConfig $calendarConfig,
+        ?string $page = null,
     ): string {
-        $page = match (true) {
+        \in_array($page, ['relation', 'llm', 'calendar'], true)
+            ? $page = "setup/$page"
+            : $page = null;
+
+        $page ??= match (true) {
             $relationConfig === null => 'setup/relation',
             $LLMConfig === null || $LLMConfig->model === null => 'setup/llm',
-            $calendarConfig === null => 'setup/personal-data',
+            $calendarConfig === null => 'setup/calendar',
             default => 'setup',
         };
 

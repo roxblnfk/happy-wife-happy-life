@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \Spiral\Views\ViewInterface $this
+ */
+?>
+
 <!-- Навигация -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4" style="border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
     <div class="container-fluid px-4">
@@ -24,9 +30,9 @@
                     13 день цикла • Фолликулярная фаза
                 </div>
             </div>
-            
+
             <hr>
-            
+
             <h6 class="mb-3">Ближайшие события</h6>
             <div class="mb-2">
                 <div class="d-flex justify-content-between align-items-center">
@@ -40,9 +46,9 @@
                     <span class="badge bg-warning">7 дней</span>
                 </div>
             </div>
-            
+
             <hr>
-            
+
             <div class="d-grid gap-2">
                 <button class="btn btn-primary btn-sm" hx-get="/advice" hx-target="#main-content">
                     Получить совет
@@ -53,7 +59,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Основной контент -->
     <div class="col-md-9">
         <div class="content-area" id="main-content">
@@ -70,7 +76,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <!-- Календарь настроения -->
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -80,7 +86,7 @@
                         <button type="button" class="btn btn-outline-secondary">Август</button>
                     </div>
                 </div>
-                
+
                 <div class="calendar-container">
                     <div class="row text-center text-muted mb-2">
                         <div class="col">Пн</div>
@@ -91,7 +97,7 @@
                         <div class="col">Сб</div>
                         <div class="col">Вс</div>
                     </div>
-                    
+
                     <!-- Первая неделя -->
                     <div class="row mb-2">
                         <div class="col text-center">
@@ -137,7 +143,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Вторая неделя -->
                     <div class="row mb-2">
                         <div class="col text-center">
@@ -183,7 +189,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Третья неделя -->
                     <div class="row mb-2">
                         <div class="col text-center">
@@ -229,7 +235,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Четвертая неделя -->
                     <div class="row mb-2">
                         <div class="col text-center">
@@ -275,7 +281,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Пятая неделя -->
                     <div class="row">
                         <div class="col text-center">
@@ -302,7 +308,7 @@
                         <div class="col"></div>
                     </div>
                 </div>
-                
+
                 <!-- Легенда -->
                 <div class="mt-3">
                     <small class="text-muted">Легенда: </small>
@@ -313,7 +319,7 @@
                     <span><div class="mood-indicator mood-terrible d-inline-block me-1"></div><small>Очень плохо</small></span>
                 </div>
             </div>
-            
+
             <!-- Быстрые действия -->
             <div class="row">
                 <div class="col-md-6">
