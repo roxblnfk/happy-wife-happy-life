@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Module\Common\Web;
 
 use App\Endpoint\Web\HomeController;
+use App\Module\Common\Config\CalendarConfig;
+use App\Module\Common\Config\GlobalStateConfig;
+use App\Module\Common\Config\LLMConfig;
 use App\Module\Common\Config\RelationConfig;
 use App\Module\Config\ConfigService;
 use Psr\Http\Message\ResponseInterface;
@@ -24,25 +27,11 @@ final class SetupController
 
     public function __construct(
         private readonly ViewsInterface $views,
+        private readonly ConfigService $configService,
     ) {}
 
-    #[Route(route: '/setup', name: self::ROUTE_SETUP, methods: ['GET'])]
-    public function setup(
-        ?RelationConfig $user,
-    ): string {
-        $page = match (true) {
-            $user === null => 'setup/relation',
-            default => [
-                'setup/llm',
-                'setup/personal-data',
-            ][\mt_rand(0, 1)],
-        };
-
-        return $this->views->render($page);
-    }
-
     #[Route(route: '/setup/relation', methods: ['POST'])]
-    public function setupRelation(StartForm $form, ConfigService $configService): ResponseInterface
+    public function setupRelation(RelationshipForm $form): ResponseInterface
     {
         $config = new RelationConfig(
             userName: $form->userName,
@@ -50,8 +39,60 @@ final class SetupController
             relationType: $form->relationType,
         );
 
-        $configService->persistConfig($config, true);
+        $this->configService->persistConfig($config, true);
 
         return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
+    }
+
+    #[Route(route: '/setup/llm/provider', methods: ['POST'])]
+    public function checkLLMProvider(LLMProviderForm $form): mixed
+    {
+        $LLMConfig = new LLMConfig(
+            provider: $form->provider,
+            token: $form->apiToken,
+        );
+
+        # Rewrite the config
+        $this->configService->persistConfig($LLMConfig, true);
+
+        try {
+            # Check connection to the LLM provider
+            // todo
+            throw new \Exception('Not implemented yet');
+        } catch (\Throwable $e) {
+            return $this->views->render('setup/llm/connection-error', [
+                'exception' => $e,
+                'LLMConfig' => $LLMConfig,
+            ]);
+        }
+
+        return $this->views->render('setup/llm/model-selection', [
+            'models' => [
+                ['id' => 1, 'name' => 'foo', 'description' => 'bar']
+            ],
+            'LLMConfig' => $LLMConfig,
+        ]);
+    }
+
+    #[Route(route: '/setup', name: self::ROUTE_SETUP, methods: ['GET'])]
+    public function setup(
+        GlobalStateConfig $globalState,
+        ?RelationConfig $relationConfig,
+        ?LLMConfig $LLMConfig,
+        ?CalendarConfig $calendarConfig,
+    ): string {
+        $page = match (true) {
+            $relationConfig === null => 'setup/relation',
+            $LLMConfig === null || $LLMConfig->model === null => 'setup/llm',
+            $calendarConfig === null => 'setup/personal-data',
+            default => 'setup',
+        };
+
+        return $this->views->render($page, [
+            'globalState' => $globalState,
+            'relationConfig' => $relationConfig,
+            'LLMConfig' => $LLMConfig,
+            'calendarConfig' => $calendarConfig,
+        ]);
     }
 }

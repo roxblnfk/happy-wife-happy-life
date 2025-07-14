@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Endpoint\Web;
 
+use App\Module\Common\Config\GlobalStateConfig;
 use App\Module\Common\Web\SetupController;
+use App\Module\Config\ConfigService;
 use Spiral\Prototype\Traits\PrototypeTrait;
 use Spiral\Router\Annotation\Route;
 use Spiral\Views\ViewsInterface;
@@ -20,6 +22,7 @@ final class HomeController
 
     public function __construct(
         private readonly ViewsInterface $views,
+        private readonly ConfigService $configService,
     ) {}
 
     #[Route(route: '/')]
@@ -29,9 +32,14 @@ final class HomeController
     }
 
     #[Route(route: '/index', name: self::ROUTE_INDEX, methods: ['GET'])]
-    public function index(): mixed
+    public function index(?GlobalStateConfig $globalState): mixed
     {
-        if (true) {
+        if ($globalState === null) {
+            $globalState = new GlobalStateConfig();
+            $this->configService->persistConfig($globalState);
+        }
+
+        if (!$globalState->configured) {
             // Go to the configure page if the user is not configured
             return $this->response->redirect($this->router->uri(SetupController::ROUTE_SETUP));
         }

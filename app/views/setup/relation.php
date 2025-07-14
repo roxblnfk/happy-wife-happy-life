@@ -1,15 +1,14 @@
-<div class="app-header">
-    <h1 class="app-title">Happy Wife - Happy Life</h1>
-    <p class="app-subtitle">Помощник в построении гармоничных отношений</p>
-</div>
+<?php
+/**
+ * @var \App\Module\Common\Config\GlobalStateConfig $globalState
+ * @var null|\App\Module\Common\Config\RelationConfig $relationConfig
+ * @var null|\App\Module\Common\Config\LLMConfig $LLMConfig
+ * @var null|\App\Module\Common\Config\CalendarConfig $calendarConfig
+ */
 
-<div class="step-indicator">
-    <div class="step active">1</div>
-    <div class="step-line"></div>
-    <div class="step">2</div>
-    <div class="step-line"></div>
-    <div class="step">3</div>
-</div>
+$stepIndicator = 1;
+include __DIR__ . '/step-indicator.php';
+?>
 
 <div class="setup-card">
     <h3 class="mb-4">Шаг 1: Анкетные данные</h3>

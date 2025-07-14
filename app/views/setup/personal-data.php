@@ -1,20 +1,19 @@
-<div class="app-header">
-    <h1 class="app-title">Happy Wife - Happy Life</h1>
-    <p class="app-subtitle">Помощник в построении гармоничных отношений</p>
-</div>
+<?php
+/**
+ * @var \App\Module\Common\Config\GlobalStateConfig $globalState
+ * @var null|\App\Module\Common\Config\RelationConfig $relationConfig
+ * @var null|\App\Module\Common\Config\LLMConfig $LLMConfig
+ * @var null|\App\Module\Common\Config\CalendarConfig $calendarConfig
+ */
 
-<div class="step-indicator">
-    <div class="step completed">1</div>
-    <div class="step-line completed"></div>
-    <div class="step completed">2</div>
-    <div class="step-line completed"></div>
-    <div class="step active">3</div>
-</div>
+$stepIndicator = 3;
+include __DIR__ . '/step-indicator.php';
+?>
 
 <div class="setup-card">
     <h3 class="mb-4">Шаг 3: Персональные данные</h3>
     <p class="text-muted mb-4">Последний шаг - расскажите о важных датах и особенностях цикла вашей спутницы.</p>
-    
+
     <form hx-post="/setup/complete" hx-target="#app-content" hx-swap="innerHTML">
         <!-- Менструальный цикл -->
         <h5 class="mb-3">Менструальный цикл</h5>
@@ -32,12 +31,12 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="form-floating mb-4">
             <input type="date" class="form-control" id="lastPeriodStart" name="last_period_start" required>
             <label for="lastPeriodStart">Дата начала последних месячных</label>
         </div>
-        
+
         <!-- Важные даты -->
         <h5 class="mb-3">Важные даты</h5>
         <div class="row mb-3">
@@ -54,7 +53,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Дополнительные важные даты -->
         <div id="additional-dates">
             <div class="row">
@@ -72,28 +71,28 @@
                 </div>
             </div>
         </div>
-        
+
         <button type="button" class="btn btn-outline-secondary btn-sm mb-4" onclick="addCustomDate()">
             + Добавить ещё дату
         </button>
-        
+
         <!-- Предпочтения и особенности -->
         <h5 class="mb-3">Особенности и предпочтения</h5>
         <div class="form-floating mb-3">
             <textarea class="form-control" id="preferences" name="preferences" style="height: 100px" placeholder="Например: любит шоколад во время ПМС, не переносит шум по утрам..."></textarea>
             <label for="preferences">Что важно учитывать?</label>
         </div>
-        
+
         <div class="form-floating mb-4">
             <textarea class="form-control" id="triggers" name="triggers" style="height: 100px" placeholder="Например: критика внешности, обсуждение веса, упоминание бывших..."></textarea>
             <label for="triggers">Что может расстроить или разозлить?</label>
         </div>
-        
+
         <div class="alert alert-warning" role="alert">
             <h6 class="alert-heading">Конфиденциальность</h6>
             <p class="mb-0">Вся информация хранится только на вашем устройстве и используется исключительно для персонализации рекомендаций.</p>
         </div>
-        
+
         <div class="d-flex justify-content-between">
             <button type="button" class="btn btn-outline-secondary" hx-get="/setup/llm" hx-target="#app-content">
                 Назад
