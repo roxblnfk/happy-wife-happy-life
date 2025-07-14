@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80b11fe23c54d8867ce1727fa31da822",
+    "content-hash": "a31e887207a41bf53b84bb8a6cf90a26",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -2508,6 +2508,72 @@
             "time": "2024-09-09T07:06:30+00:00"
         },
         {
+            "name": "nyholm/psr7-server",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nyholm/psr7-server.git",
+                "reference": "4335801d851f554ca43fa6e7d2602141538854dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nyholm/psr7-server/zipball/4335801d851f554ca43fa6e7d2602141538854dc",
+                "reference": "4335801d851f554ca43fa6e7d2602141538854dc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "nyholm/nsa": "^1.1",
+                "nyholm/psr7": "^1.3",
+                "phpunit/phpunit": "^7.0 || ^8.5 || ^9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nyholm\\Psr7Server\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com"
+                },
+                {
+                    "name": "Martijn van der Ven",
+                    "email": "martijn@vanderven.se"
+                }
+            ],
+            "description": "Helper classes to handle PSR-7 server requests",
+            "homepage": "http://tnyholm.se",
+            "keywords": [
+                "psr-17",
+                "psr-7"
+            ],
+            "support": {
+                "issues": "https://github.com/Nyholm/psr7-server/issues",
+                "source": "https://github.com/Nyholm/psr7-server/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Zegnat",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nyholm",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-11-08T09:30:43+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v9.99.100",
             "source": {
@@ -4349,6 +4415,95 @@
                 }
             ],
             "time": "2025-05-05T12:34:50+00:00"
+        },
+        {
+            "name": "spiral/sapi-bridge",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spiral/sapi-bridge.git",
+                "reference": "af36208db3fe394e6424d08428b65867619c1d9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spiral/sapi-bridge/zipball/af36208db3fe394e6424d08428b65867619c1d9a",
+                "reference": "af36208db3fe394e6424d08428b65867619c1d9a",
+                "shasum": ""
+            },
+            "require": {
+                "nyholm/psr7-server": "^1.0",
+                "php": "^8.1",
+                "psr/http-factory-implementation": "^1.0",
+                "spiral/boot": "^3.14",
+                "spiral/core": "^3.14",
+                "spiral/exceptions": "^3.14",
+                "spiral/http": "^3.14"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5.20",
+                "spiral/dumper": "^3.3",
+                "spiral/framework": "^3.14.1",
+                "spiral/nyholm-bridge": "^1.2",
+                "spiral/router": "^3.14",
+                "spiral/testing": "^2.7",
+                "vimeo/psalm": "^5.25"
+            },
+            "type": "library",
+            "extra": {
+                "spiral": {
+                    "bootloaders": [
+                        "Spiral\\Sapi\\Bootloader\\SapiBootloader"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spiral\\Sapi\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Titov (wolfy-j)",
+                    "email": "wolfy-j@spiralscout.com"
+                },
+                {
+                    "name": "Aleksei Gagarin (roxblnfk)",
+                    "email": "alexey.gagarin@spiralscout.com"
+                },
+                {
+                    "name": "Pavel Buchnev (butschster)",
+                    "email": "pavel.buchnev@spiralscout.com"
+                },
+                {
+                    "name": "Maksim Smakouz (msmakouz)",
+                    "email": "maksim.smakouz@spiralscout.com"
+                }
+            ],
+            "description": "Spiral Framework SAPI bridge",
+            "homepage": "https://spiral.dev",
+            "keywords": [
+                "sapi",
+                "sapi-bridge",
+                "spiral"
+            ],
+            "support": {
+                "chat": "https://discord.gg/V6EK4he",
+                "docs": "https://spiral.dev/docs",
+                "forum": "https://forum.spiral.dev",
+                "issues": "https://github.com/spiral/sapi-bridge/issues",
+                "source": "https://github.com/spiral/sapi-bridge"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/spiral",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-04T11:19:08+00:00"
         },
         {
             "name": "symfony/console",

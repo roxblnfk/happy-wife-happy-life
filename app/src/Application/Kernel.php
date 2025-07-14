@@ -15,6 +15,7 @@ use Spiral\DotEnv\Bootloader\DotenvBootloader;
 use Spiral\Monolog\Bootloader\MonologBootloader;
 use Spiral\Nyholm\Bootloader\NyholmBootloader;
 use Spiral\Prototype\Bootloader\PrototypeBootloader;
+use Spiral\Sapi\Bootloader\SapiBootloader;
 use Spiral\Scaffolder\Bootloader\ScaffolderBootloader;
 use Spiral\Tokenizer\Bootloader\TokenizerListenerBootloader;
 use Spiral\Views\Bootloader\ViewsBootloader;
@@ -56,6 +57,7 @@ class Kernel extends \Spiral\Framework\Kernel
             Framework\Security\EncrypterBootloader::class,
 
             // HTTP extensions
+            SapiBootloader::class,
             Framework\Http\HttpBootloader::class,
             Framework\Http\RouterBootloader::class,
             Framework\Http\JsonPayloadsBootloader::class,

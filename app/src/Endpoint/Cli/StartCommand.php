@@ -22,7 +22,7 @@ class StartCommand extends \Spiral\Console\Command
             ),
             static function (Application $app): void {
                 // Set the initial URL
-                $app->webview->url = 'http://localhost/';
+                $app->webview->url = 'http://localhost/index';
                 $app->run();
             },
         );
