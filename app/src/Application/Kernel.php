@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Application;
 
 use App\Application\Bootloader\BosonBootloader;
+use App\Module\Config\ConfigBootloader;
+use Cycle\ActiveRecord\Bridge\Spiral\Bootloader\ActiveRecordBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
 use Spiral\Bootloader\I18nBootloader;
@@ -17,6 +19,7 @@ use Spiral\Nyholm\Bootloader\NyholmBootloader;
 use Spiral\Prototype\Bootloader\PrototypeBootloader;
 use Spiral\Sapi\Bootloader\SapiBootloader;
 use Spiral\Scaffolder\Bootloader\ScaffolderBootloader;
+use Spiral\Sentry\Bootloader\SentryReporterBootloader;
 use Spiral\Tokenizer\Bootloader\TokenizerListenerBootloader;
 use Spiral\Views\Bootloader\ViewsBootloader;
 use Spiral\YiiErrorHandler\Bootloader\YiiErrorHandlerBootloader;
@@ -52,6 +55,7 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // Core Services
             Framework\SnapshotsBootloader::class,
+            SentryReporterBootloader::class,
 
             // Security and validation
             Framework\Security\EncrypterBootloader::class,
@@ -78,6 +82,7 @@ class Kernel extends \Spiral\Framework\Kernel
             CycleBridge\SchemaBootloader::class,
             CycleBridge\CycleOrmBootloader::class,
             CycleBridge\AnnotatedBootloader::class,
+            ActiveRecordBootloader::class,
 
             // Internationalization
             I18nBootloader::class,
@@ -94,6 +99,9 @@ class Kernel extends \Spiral\Framework\Kernel
 
             Bootloader\RoutesBootloader::class,
             BosonBootloader::class,
+
+            // Modules
+            ConfigBootloader::class,
         ];
     }
 }

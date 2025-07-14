@@ -16,6 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Spiral\Boot\Bootloader\Bootloader;
+use Spiral\Boot\FinalizerInterface;
 use Spiral\Bootloader\Http\HttpBootloader;
 use Spiral\Core\BinderInterface;
 use Spiral\Core\Container;
@@ -68,12 +69,24 @@ final class BosonBootloader extends Bootloader
         $httpHandler = ScopeHandler::create(
             $container,
             Spiral::Http,
-            static fn(Http $http) => static fn(ServerRequestInterface $request): ResponseInterface => $http
-                ->handle($request),
-            static function (\Throwable $e) use ($exceptionHandler): ?ResponseInterface {
-                tr($e);
-                $exceptionHandler->report($e);
-                return null;
+            static fn(
+                Http $http,
+                ExceptionHandlerInterface $exceptionHandler,
+                FinalizerInterface $finalizer,
+            ) => static function (ServerRequestInterface $request) use (
+                $http,
+                $exceptionHandler,
+                $finalizer,
+            ): ?ResponseInterface {
+                try {
+                    return $http->handle($request);
+                } catch (\Throwable $e) {
+                    tr($e);
+                    $exceptionHandler->report($e);
+                    return null;
+                } finally {
+                    $finalizer->finalize();
+                }
             },
         );
 
