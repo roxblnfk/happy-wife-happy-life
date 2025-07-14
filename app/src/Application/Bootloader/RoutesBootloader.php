@@ -57,8 +57,8 @@ final class RoutesBootloader extends BaseRoutesBootloader
     {
         // Fallback route if no other route matched
         // Will show 404 page
-        $routes->default('/<path:.*>')
-            ->controller(PageNotFoundController::class)
-            ->defaults(['action' => '__invoke']);
+        // $routes->default('/<path:.*>')
+        //     ->controller(PageNotFoundController::class)
+        //     ->defaults(['action' => '__invoke']);
     }
 }

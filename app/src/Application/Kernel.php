@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application;
 
 use App\Application\Bootloader\BosonBootloader;
+use App\Application\Bootloader\FormsBootloader;
 use App\Module\Config\ConfigBootloader;
 use Cycle\ActiveRecord\Bridge\Spiral\Bootloader\ActiveRecordBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
@@ -59,6 +60,8 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // Security and validation
             Framework\Security\EncrypterBootloader::class,
+            Framework\Security\FiltersBootloader::class,
+            FormsBootloader::class,
 
             // HTTP extensions
             SapiBootloader::class,
