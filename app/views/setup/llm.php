@@ -56,5 +56,11 @@ include __DIR__ . '/step-indicator.php';
                 </div>
             </div>
         <?php endif; ?>
+        <?php if (!$globalState->configured): ?>
+            <button type="button" class="btn btn-outline-secondary" hx-get="/setup/relation" hx-target="#app-content">
+                Назад
+            </button>
+        <?php endif; ?>
     </div>
+
 </div>

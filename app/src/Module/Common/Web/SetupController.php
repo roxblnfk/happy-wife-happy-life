@@ -48,7 +48,8 @@ final class SetupController
     }
 
     #[Route(route: '/setup/llm', name: self::POST_SETUP_LLM, methods: ['POST'])]
-    public function setupLLM(LLMProviderForm $form, LLMProvider $LLMProvider): mixed
+    public function setupLLM(
+        GlobalStateConfig $globalState,LLMProviderForm $form, LLMProvider $LLMProvider): mixed
     {
         $LLMConfig = new LLMConfig(
             platform: $form->provider,
@@ -81,12 +82,14 @@ final class SetupController
 
             # Render model selection page
             return $this->views->render('setup/llm/model-selection', [
+                'globalState' => $globalState,
                 'models' => $models,
                 'LLMConfig' => $LLMConfig,
             ]);
         } catch (\Throwable $e) {
             # Render error page
             return $this->views->render('setup/llm/error', [
+                'globalState' => $globalState,
                 'exception' => $e,
                 'LLMConfig' => $LLMConfig,
             ]);

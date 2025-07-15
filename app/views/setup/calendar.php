@@ -7,6 +7,8 @@
  * @var null|\App\Module\Common\Config\CalendarConfig $calendarConfig
  */
 
+use App\Module\Common\Config\RelationType;
+
 $stepIndicator = 3;
 include __DIR__ . '/step-indicator.php';
 ?>
@@ -47,30 +49,18 @@ include __DIR__ . '/step-indicator.php';
                     <label for="partnerBirthday">День рождения спутницы</label>
                 </div>
             </div>
+            <?php if ($relationConfig?->relationType === RelationType::Married): ?>
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="anniversary" name="anniversary" placeholder="14 февраля">
-                    <label for="anniversary">Годовщина отношений</label>
+                    <input type="date" class="form-control" id="anniversary" name="anniversary">
+                    <label for="anniversary">Годовщина свадьбы</label>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
 
         <!-- Дополнительные важные даты -->
         <div id="additional-dates">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="customDate1" name="custom_dates[]" placeholder="Название события">
-                        <label for="customDate1">Дополнительная важная дата</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="customDateValue1" name="custom_date_values[]">
-                        <label for="customDateValue1">Дата</label>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <button type="button" class="btn btn-outline-secondary btn-sm mb-4" onclick="addCustomDate()">
@@ -89,15 +79,13 @@ include __DIR__ . '/step-indicator.php';
             <label for="triggers">Что может расстроить или разозлить?</label>
         </div>
 
-        <div class="alert alert-warning" role="alert">
-            <h6 class="alert-heading">Конфиденциальность</h6>
-            <p class="mb-0">Вся информация хранится только на вашем устройстве и используется исключительно для персонализации рекомендаций.</p>
-        </div>
-
         <div class="d-flex justify-content-between">
+            <?php if (!$globalState->configured): ?>
             <button type="button" class="btn btn-outline-secondary" hx-get="/setup/llm" hx-target="#app-content">
                 Назад
             </button>
+            <?php endif; ?>
+
             <button type="submit" class="btn btn-success btn-next">
                 Завершить настройку
                 <span class="htmx-indicator spinner-border spinner-border-sm ms-2" role="status"></span>
@@ -115,16 +103,16 @@ function addCustomDate() {
     const newRow = document.createElement('div');
     newRow.className = 'row';
     newRow.innerHTML = `
-        <div class="col-md-8">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="customDate${customDateCount}" name="custom_dates[]" placeholder="Название события">
-                <label for="customDate${customDateCount}">Дополнительная важная дата</label>
-            </div>
-        </div>
         <div class="col-md-4">
             <div class="form-floating mb-3">
                 <input type="date" class="form-control" id="customDateValue${customDateCount}" name="custom_date_values[]">
                 <label for="customDateValue${customDateCount}">Дата</label>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="customDate${customDateCount}" name="custom_dates[]" placeholder="Название события">
+                <label for="customDate${customDateCount}">Дополнительная важная дата</label>
             </div>
         </div>
     `;
