@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Common\Web\Input;
+namespace App\Feature\Setup\Input;
 
 use Spiral\Filters\Attribute\Input\Post;
 use Spiral\Filters\Model\Filter;

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Common\Web;
+namespace App\Feature\Setup;
 
 use App\Endpoint\Web\HomeController;
-use App\Module\Common\Config\WomenCycleConfig;
+use App\Feature\Setup\Input\Calendar\CalendarForm;
+use App\Feature\Setup\Input\LLMProviderForm;
+use App\Feature\Setup\Input\PersonalDataForm;
+use App\Feature\Setup\Input\RelationshipForm;
 use App\Module\Common\Config\GlobalStateConfig;
 use App\Module\Common\Config\RelationConfig;
 use App\Module\Common\Config\UserConfig;
+use App\Module\Common\Config\WomenCycleConfig;
 use App\Module\Common\Config\WomenPersonConfig;
-use App\Module\Common\Web\Input\Calendar\CalendarForm;
-use App\Module\Common\Web\Input\LLMProviderForm;
-use App\Module\Common\Web\Input\PersonalDataForm;
-use App\Module\Common\Web\Input\RelationshipForm;
 use App\Module\Config\ConfigService;
 use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\LLMProvider;
@@ -107,14 +107,14 @@ final class SetupController
             }
 
             # Render model selection page
-            return $this->views->render('setup/llm/model-selection', [
+            return $this->views->render('setup:llm/model-selection', [
                 'globalState' => $globalState,
                 'models' => $models,
                 'LLMConfig' => $LLMConfig,
             ]);
         } catch (\Throwable $e) {
             # Render error page
-            return $this->views->render('setup/llm/error', [
+            return $this->views->render('setup:llm/error', [
                 'globalState' => $globalState,
                 'exception' => $e,
                 'LLMConfig' => $LLMConfig,
@@ -187,15 +187,15 @@ final class SetupController
         ?string $page = null,
     ): string {
         \in_array($page, ['relation', 'llm', 'calendar'], true)
-            ? $page = "setup/$page"
+            ? $page = "setup:$page"
             : $page = null;
 
         $page ??= match (true) {
-            $relationConfig === null => 'setup/relation',
-            $LLMConfig === null || $LLMConfig->model === null => 'setup/llm',
-            $womenCycleConfig === null => 'setup/calendar',
-            !$globalState->configured => 'setup/personal',
-            default => 'setup',
+            $relationConfig === null => 'setup:relation',
+            $LLMConfig === null || $LLMConfig->model === null => 'setup:llm',
+            $womenCycleConfig === null => 'setup:calendar',
+            !$globalState->configured => 'setup:personal',
+            default => 'setup:setup',
         };
 
         return $this->views->render($page, [

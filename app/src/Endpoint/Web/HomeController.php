@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Endpoint\Web;
 
+use App\Feature\Setup\SetupController;
 use App\Module\Common\Config\GlobalStateConfig;
-use App\Module\Common\Web\SetupController;
 use App\Module\Config\ConfigService;
 use Spiral\Prototype\Traits\PrototypeTrait;
 use Spiral\Router\Annotation\Route;

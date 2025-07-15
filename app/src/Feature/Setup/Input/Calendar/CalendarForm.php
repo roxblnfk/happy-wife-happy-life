@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Common\Web\Input\Calendar;
+namespace App\Feature\Setup\Input\Calendar;
 
 use App\Application\Value\Date;
 use Spiral\Filters\Attribute\Input\Post;

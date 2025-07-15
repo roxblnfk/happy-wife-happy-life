@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Common\Web\Input;
+namespace App\Feature\Setup\Input;
 
 use App\Module\Common\Config\RelationType;
 use Spiral\Filters\Attribute\Input\Post;
