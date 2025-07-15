@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Feature\Setup;
 
-use App\Endpoint\Web\HomeController;
+use App\Feature\Index\IndexController;
 use App\Feature\Setup\Input\Calendar\CalendarForm;
 use App\Feature\Setup\Input\LLMProviderForm;
 use App\Feature\Setup\Input\PersonalDataForm;
@@ -68,7 +68,7 @@ final class SetupController
         $this->configService->persistConfig($womenPersonalConfig, true);
         $this->configService->persistConfig($userConfig, true);
 
-        return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
+        return $this->response->redirect($this->router->uri(IndexController::ROUTE_INDEX));
     }
 
     #[Route(route: '/setup/llm', name: self::POST_SETUP_LLM, methods: ['POST'])]
@@ -103,7 +103,7 @@ final class SetupController
                 $this->configService->persistConfig($LLMConfig, true);
 
                 # Redirect to the home page
-                return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
+                return $this->response->redirect($this->router->uri(IndexController::ROUTE_INDEX));
             }
 
             # Render model selection page
@@ -152,7 +152,7 @@ final class SetupController
         $relationConfig === null or $this->configService->persistConfig($relationConfig, true);
         $womenPersonalConfig === null or $this->configService->persistConfig($womenPersonalConfig, true);
 
-        return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
+        return $this->response->redirect($this->router->uri(IndexController::ROUTE_INDEX));
     }
 
     #[Route(route: '/setup/personal', methods: ['POST'])]
@@ -173,7 +173,7 @@ final class SetupController
         $this->configService->persistConfig($womenPersonalConfig, true);
         $this->configService->persistConfig($globalState, true);
 
-        return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
+        return $this->response->redirect($this->router->uri(IndexController::ROUTE_INDEX));
     }
 
     #[Route(route: '/setup[/<page>]', name: self::ROUTE_SETUP, methods: ['GET'])]

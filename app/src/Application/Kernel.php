@@ -6,6 +6,7 @@ namespace App\Application;
 
 use App\Application\Bootloader\BosonBootloader;
 use App\Application\Bootloader\FormsBootloader;
+use App\Feature\Index\IndexBootloader;
 use App\Feature\Setup\SetupBootloader;
 use App\Module\Config\ConfigBootloader;
 use App\Module\LLM\LLMBootloader;
@@ -110,6 +111,7 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // Features
             SetupBootloader::class,
+            IndexBootloader::class,
 
             // Modules
             ConfigBootloader::class,
