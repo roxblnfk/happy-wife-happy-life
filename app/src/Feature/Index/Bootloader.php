@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Feature\Setup;
+namespace App\Feature\Index;
 
-use Spiral\Boot\Bootloader\Bootloader;
+use Spiral\Boot\Bootloader\Bootloader as SpiralBootloader;
 use Spiral\Views\Bootloader\ViewsBootloader;
 
-final class SetupBootloader extends Bootloader
+final class Bootloader extends SpiralBootloader
 {
     public function defineDependencies(): array
     {
@@ -18,6 +18,6 @@ final class SetupBootloader extends Bootloader
 
     public function boot(ViewsBootloader $views): void
     {
-        $views->addDirectory('setup', __DIR__ . '/views');
+        $views->addDirectory('index', __DIR__ . '/views');
     }
 }

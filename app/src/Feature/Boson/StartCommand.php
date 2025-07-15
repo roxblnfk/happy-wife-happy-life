@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Endpoint\Cli;
+namespace App\Feature\Boson;
 
 use App\Application\AppScope;
 use Boson\Application;
@@ -22,7 +22,7 @@ class StartCommand extends \Spiral\Console\Command
             ),
             static function (Application $app): void {
                 // Set the initial URL
-                $app->webview->url = 'http://localhost/index';
+                $app->webview->url = 'http://localhost/';
                 $app->run();
             },
         );

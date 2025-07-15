@@ -1,7 +1,11 @@
 <?php
 /**
  * @var \Spiral\Views\ViewInterface $this
+ * @var \Spiral\Router\RouterInterface $router
  */
+
+use App\Feature\Chat\Controller as ChatController;
+
 ?>
 
 <!-- Навигация -->
@@ -50,9 +54,10 @@
             <hr>
 
             <div class="d-grid gap-2">
-                <button class="btn btn-primary btn-sm" hx-get="/advice" hx-target="#main-content">
-                    Получить совет
-                </button>
+                <button class="btn btn-primary btn-sm"
+                        hx-get="<?= $router->uri(ChatController::ROUTE_INDEX)->__toString() ?>"
+                        hx-target="#main-content"
+                >Получить совет</button>
                 <button class="btn btn-outline-secondary btn-sm" hx-get="/setup" hx-target="#app-content">
                     Настройки
                 </button>

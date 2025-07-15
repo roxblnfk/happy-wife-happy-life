@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Feature\Setup;
 
-use App\Feature\Index\IndexController;
+use App\Feature\Index\Controller as IndexController;
 use App\Feature\Setup\Input\Calendar\CalendarForm;
 use App\Feature\Setup\Input\LLMProviderForm;
 use App\Feature\Setup\Input\PersonalDataForm;
@@ -27,7 +27,7 @@ use Symfony\AI\Platform\Model;
  * Simple home page controller. It renders home page template and also provides
  * an example of exception page.
  */
-final class SetupController
+final class Controller
 {
     use PrototypeTrait;
 

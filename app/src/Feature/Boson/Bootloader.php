@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Bootloader;
+namespace App\Feature\Boson;
 
 use App\Application\AppScope;
 use App\Application\ScopeHandler;
@@ -15,7 +15,7 @@ use Boson\Window\WindowCreateInfo;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Spiral\Boot\Bootloader\Bootloader;
+use Spiral\Boot\Bootloader\Bootloader as SpiralBootloader;
 use Spiral\Boot\FinalizerInterface;
 use Spiral\Bootloader\Http\HttpBootloader;
 use Spiral\Core\BinderInterface;
@@ -24,7 +24,7 @@ use Spiral\Exceptions\ExceptionHandlerInterface;
 use Spiral\Framework\Spiral;
 use Spiral\Http\Http;
 
-final class BosonBootloader extends Bootloader
+final class Bootloader extends SpiralBootloader
 {
     public function defineDependencies(): array
     {
@@ -51,8 +51,8 @@ final class BosonBootloader extends Bootloader
                 debug: false,
                 window: new WindowCreateInfo(
                     title: 'Happy Wife – Happy Life',
-                    width: 800,
-                    height: 600,
+                    width: 980,
+                    height: 768,
                     resizable: true,
                     webview: new WebViewCreateInfo(
                         contextMenu: true,
@@ -81,7 +81,6 @@ final class BosonBootloader extends Bootloader
                 try {
                     return $http->handle($request);
                 } catch (\Throwable $e) {
-                    tr($e);
                     $exceptionHandler->report($e);
                     return null;
                 } finally {

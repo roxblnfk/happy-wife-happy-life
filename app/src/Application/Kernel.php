@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application;
 
-use App\Application\Bootloader\BosonBootloader;
 use App\Application\Bootloader\FormsBootloader;
-use App\Feature\Index\IndexBootloader;
-use App\Feature\Setup\SetupBootloader;
+use App\Feature;
 use App\Module\Config\ConfigBootloader;
 use App\Module\LLM\LLMBootloader;
 use Cycle\ActiveRecord\Bridge\Spiral\Bootloader\ActiveRecordBootloader;
@@ -104,14 +102,15 @@ class Kernel extends \Spiral\Framework\Kernel
             PrototypeBootloader::class,
 
             Bootloader\RoutesBootloader::class,
-            BosonBootloader::class,
 
             // LLM
             LLMBootloader::class,
 
             // Features
-            SetupBootloader::class,
-            IndexBootloader::class,
+            Feature\Boson\Bootloader::class,
+            Feature\Setup\Bootloader::class,
+            Feature\Index\Bootloader::class,
+            Feature\Chat\Bootloader::class,
 
             // Modules
             ConfigBootloader::class,

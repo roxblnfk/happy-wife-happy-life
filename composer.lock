@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bc71e8777c2fb45b47e065327a8de9e",
+    "content-hash": "671b773cd4beec088b820f5c1ee58757",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -2455,6 +2455,89 @@
                 }
             ],
             "time": "2024-09-21T08:32:55+00:00"
+        },
+        {
+            "name": "llm-agents/agents",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/llm-agents-php/agents.git",
+                "reference": "c0ca3fbc861f689fe32bc9f1e158de0dd6108345"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/llm-agents-php/agents/zipball/c0ca3fbc861f689fe32bc9f1e158de0dd6108345",
+                "reference": "c0ca3fbc861f689fe32bc9f1e158de0dd6108345",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2",
+                "ramsey/uuid": "^4.7"
+            },
+            "require-dev": {
+                "ergebnis/phpunit-slow-test-detector": "^2.15",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.4",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5",
+                "psalm/plugin-phpunit": "^0.19.0",
+                "rector/rector": "^1.2",
+                "roave/infection-static-analysis-plugin": "^1.35",
+                "vimeo/psalm": "^5.24",
+                "wayofdev/cs-fixer-config": "^1.5"
+            },
+            "type": "library",
+            "extra": {
+                "composer-normalize": {
+                    "indent-size": 4,
+                    "indent-style": "space"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LLM\\Agents\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pavel Buchnev",
+                    "email": "butschster@gmail.com"
+                },
+                {
+                    "name": "the dev",
+                    "email": "the@wayof.dev"
+                }
+            ],
+            "description": "LLM Agents PHP SDK - Autonomous Language Model Agents for PHP",
+            "homepage": "https://github.com/llm-agents-php",
+            "keywords": [
+                "Agent",
+                "anthropic",
+                "autophp",
+                "claude",
+                "claude-ai",
+                "genai",
+                "generative-ai",
+                "gpt4",
+                "langchain",
+                "laravel",
+                "llm",
+                "openai",
+                "php",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com//llm-agents-php/agents/issues",
+                "security": "https://github.com//llm-agents-php/agents/blob/master/.github/SECURITY.md",
+                "source": "https://github.com//llm-agents-php/agents"
+            },
+            "time": "2024-09-15T18:44:16+00:00"
         },
         {
             "name": "monolog/monolog",
