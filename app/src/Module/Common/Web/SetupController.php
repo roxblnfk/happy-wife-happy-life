@@ -7,13 +7,15 @@ namespace App\Module\Common\Web;
 use App\Endpoint\Web\HomeController;
 use App\Module\Common\Config\CalendarConfig;
 use App\Module\Common\Config\GlobalStateConfig;
-use App\Module\Common\Config\LLMConfig;
 use App\Module\Common\Config\RelationConfig;
 use App\Module\Config\ConfigService;
+use App\Module\LLM\Config\LLMConfig;
+use App\Module\LLM\LLMProvider;
 use Psr\Http\Message\ResponseInterface;
 use Spiral\Prototype\Traits\PrototypeTrait;
 use Spiral\Router\Annotation\Route;
 use Spiral\Views\ViewsInterface;
+use Symfony\AI\Platform\Model;
 
 /**
  * Simple home page controller. It renders home page template and also provides
@@ -24,6 +26,7 @@ final class SetupController
     use PrototypeTrait;
 
     public const ROUTE_SETUP = 'setup';
+    public const POST_SETUP_LLM = 'setup-llm';
 
     public function __construct(
         private readonly ViewsInterface $views,
@@ -44,34 +47,50 @@ final class SetupController
         return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
     }
 
-    #[Route(route: '/setup/llm/provider', methods: ['POST'])]
-    public function checkLLMProvider(LLMProviderForm $form): mixed
+    #[Route(route: '/setup/llm', name: self::POST_SETUP_LLM, methods: ['POST'])]
+    public function setupLLM(LLMProviderForm $form, LLMProvider $LLMProvider): mixed
     {
         $LLMConfig = new LLMConfig(
-            provider: $form->provider,
-            token: $form->apiToken,
+            platform: $form->provider,
+            apiKey: $form->apiToken,
+            model: $form->model,
         );
-
-        # Rewrite the config
-        $this->configService->persistConfig($LLMConfig, true);
 
         try {
             # Check connection to the LLM provider
             // todo
-            throw new \Exception('Not implemented yet');
+
+            # Get available models from the provider
+            $models = $LLMProvider->getPlatformModels($LLMConfig->platform);
+
+            if ($LLMConfig->model !== null) {
+                # Check model
+                $LLMConfig->model === null or \array_find(
+                    $models,
+                    static fn(Model $model): bool => $model->getName() === $LLMConfig->model,
+                ) ?? throw new \InvalidArgumentException(
+                    "Model '{$LLMConfig->model}' is not available for platform '{$LLMConfig->platform->name}'.",
+                );
+
+                # Rewrite the config
+                $this->configService->persistConfig($LLMConfig, true);
+
+                # Redirect to the home page
+                return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
+            }
+
+            # Render model selection page
+            return $this->views->render('setup/llm/model-selection', [
+                'models' => $models,
+                'LLMConfig' => $LLMConfig,
+            ]);
         } catch (\Throwable $e) {
-            return $this->views->render('setup/llm/connection-error', [
+            # Render error page
+            return $this->views->render('setup/llm/error', [
                 'exception' => $e,
                 'LLMConfig' => $LLMConfig,
             ]);
         }
-
-        return $this->views->render('setup/llm/model-selection', [
-            'models' => [
-                ['id' => 1, 'name' => 'foo', 'description' => 'bar']
-            ],
-            'LLMConfig' => $LLMConfig,
-        ]);
     }
 
     #[Route(route: '/setup[/<page>]', name: self::ROUTE_SETUP, methods: ['GET'])]

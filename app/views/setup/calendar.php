@@ -3,7 +3,7 @@
  * @var \Spiral\Views\ViewInterface $this
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
  * @var null|\App\Module\Common\Config\RelationConfig $relationConfig
- * @var null|\App\Module\Common\Config\LLMConfig $LLMConfig
+ * @var null|\App\Module\LLM\Config\LLMConfig $LLMConfig
  * @var null|\App\Module\Common\Config\CalendarConfig $calendarConfig
  */
 

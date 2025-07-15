@@ -9,7 +9,7 @@ if ($globalState->configured) {
     return;
 }
 
-$stepModifier = fn(int $step): string => match (true) {
+$stepModifier = static fn(int $step): string => match (true) {
     $step < $stepIndicator => 'completed',
     $step === $stepIndicator => 'active',
     default => '',

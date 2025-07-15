@@ -10,7 +10,7 @@
         <span class="navbar-brand mb-0 h1">Happy Wife - Happy Life</span>
         <div class="navbar-nav ms-auto">
             <span class="nav-text text-muted">
-                Добро пожаловать, <strong><?= htmlspecialchars($userName ?? 'Пользователь') ?></strong>
+                Добро пожаловать, <strong><?= \htmlspecialchars($userName ?? 'Пользователь') ?></strong>
             </span>
         </div>
     </div>
@@ -68,7 +68,7 @@
                 <h4 class="mb-3">Рекомендации на сегодня</h4>
                 <div class="alert alert-success" role="alert">
                     <h6 class="alert-heading">✨ Отличное время для общения!</h6>
-                    <p class="mb-2">Сегодня <?= htmlspecialchars($partnerName ?? 'ваша спутница') ?> находится в хорошем настроении. Это отличное время для:</p>
+                    <p class="mb-2">Сегодня <?= \htmlspecialchars($partnerName ?? 'ваша спутница') ?> находится в хорошем настроении. Это отличное время для:</p>
                     <ul class="mb-0">
                         <li>Обсуждения планов на выходные</li>
                         <li>Романтического ужина дома</li>
