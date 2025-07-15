@@ -3,8 +3,10 @@
  * @var \Spiral\Views\ViewInterface $this
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
  * @var null|\App\Module\Common\Config\RelationConfig $relationConfig
+ * @var null|\App\Module\Common\Config\UserConfig $userConfig
+ * @var null|\App\Module\Common\Config\WomenPersonConfig $womenPersonalConfig
  * @var null|\App\Module\LLM\Config\LLMConfig $LLMConfig
- * @var null|\App\Module\Common\Config\CalendarConfig $calendarConfig
+ * @var null|\App\Module\Common\Config\WomenCycleConfig $womenCycleConfig
  */
 
 use App\Module\LLM\Config\Platforms;

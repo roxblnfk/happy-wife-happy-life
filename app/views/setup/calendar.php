@@ -3,8 +3,10 @@
  * @var \Spiral\Views\ViewInterface $this
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
  * @var null|\App\Module\Common\Config\RelationConfig $relationConfig
+ * @var null|\App\Module\Common\Config\UserConfig $userConfig
+ * @var null|\App\Module\Common\Config\WomenPersonConfig $womenPersonalConfig
  * @var null|\App\Module\LLM\Config\LLMConfig $LLMConfig
- * @var null|\App\Module\Common\Config\CalendarConfig $calendarConfig
+ * @var null|\App\Module\Common\Config\WomenCycleConfig $womenCycleConfig
  */
 
 use App\Module\Common\Config\RelationType;
@@ -15,29 +17,37 @@ include __DIR__ . '/step-indicator.php';
 
 <div class="setup-card">
     <h3 class="mb-4">Шаг 3: Персональные данные</h3>
-    <p class="text-muted mb-4">Последний шаг - расскажите о важных датах и особенностях цикла вашей спутницы.</p>
+    <p class="text-muted mb-4">Данные, от которых зависит ваша жизнь.</p>
 
-    <form hx-post="/setup/complete" hx-target="#app-content" hx-swap="innerHTML">
+    <form hx-post="/setup/calendar" hx-target="#app-content" hx-swap="innerHTML">
         <!-- Менструальный цикл -->
         <h5 class="mb-3">Менструальный цикл</h5>
         <div class="row mb-4">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="cycleLength" name="cycle_length" placeholder="28" min="21" max="35" value="28" required>
+                    <input type="number" class="form-control" id="cycleLength" name="cycle_length" placeholder="28"
+                           min="21" max="35"
+                           value="<?= $womenCycleConfig?->cycleLength ?? 28 ?>"
+                           required />
                     <label for="cycleLength">Длительность цикла (дни)</label>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="periodLength" name="period_length" placeholder="5" min="3" max="8" value="5" required>
+                    <input type="number" class="form-control" id="periodLength" name="period_length" placeholder="5"
+                           min="3" max="8"
+                           value="<?= $womenCycleConfig?->periodLength ?? 5 ?>"
+                           required />
                     <label for="periodLength">Длительность месячных (дни)</label>
                 </div>
             </div>
-        </div>
-
-        <div class="form-floating mb-4">
-            <input type="date" class="form-control" id="lastPeriodStart" name="last_period_start" required>
-            <label for="lastPeriodStart">Дата начала последних месячных</label>
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="lastPeriodStart" name="last_period_start" required
+                           value="<?= $womenCycleConfig?->lastPeriodStart?->__toString() ?? '' ?>" />
+                    <label for="lastPeriodStart">Дата начала последних месячных</label>
+                </div>
+            </div>
         </div>
 
         <!-- Важные даты -->
@@ -45,14 +55,18 @@ include __DIR__ . '/step-indicator.php';
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="partnerBirthday" name="partner_birthday">
+                    <input type="date" class="form-control" id="partnerBirthday" name="birthday"
+                           value="<?= $womenPersonalConfig?->birthday?->__toString() ?? '' ?>"
+                    />
                     <label for="partnerBirthday">День рождения спутницы</label>
                 </div>
             </div>
             <?php if ($relationConfig?->relationType === RelationType::Married): ?>
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="anniversary" name="anniversary">
+                    <input type="date" class="form-control" id="anniversary" name="anniversary"
+                           value="<?= $relationConfig?->anniversary?->__toString() ?? '' ?>"
+                    />
                     <label for="anniversary">Годовщина свадьбы</label>
                 </div>
             </div>
@@ -67,27 +81,15 @@ include __DIR__ . '/step-indicator.php';
             + Добавить ещё дату
         </button>
 
-        <!-- Предпочтения и особенности -->
-        <h5 class="mb-3">Особенности и предпочтения</h5>
-        <div class="form-floating mb-3">
-            <textarea class="form-control" id="preferences" name="preferences" style="height: 100px" placeholder="Например: любит шоколад во время ПМС, не переносит шум по утрам..."></textarea>
-            <label for="preferences">Что важно учитывать?</label>
-        </div>
-
-        <div class="form-floating mb-4">
-            <textarea class="form-control" id="triggers" name="triggers" style="height: 100px" placeholder="Например: критика внешности, обсуждение веса, упоминание бывших..."></textarea>
-            <label for="triggers">Что может расстроить или разозлить?</label>
-        </div>
-
         <div class="d-flex justify-content-between">
             <?php if (!$globalState->configured): ?>
-            <button type="button" class="btn btn-outline-secondary" hx-get="/setup/llm" hx-target="#app-content">
-                Назад
-            </button>
+                <button type="button" class="btn btn-outline-secondary" hx-get="/setup/llm" hx-target="#app-content">
+                    Назад
+                </button>
             <?php endif; ?>
 
             <button type="submit" class="btn btn-success btn-next">
-                Завершить настройку
+                Сохранить
                 <span class="htmx-indicator spinner-border spinner-border-sm ms-2" role="status"></span>
             </button>
         </div>
@@ -98,24 +100,29 @@ include __DIR__ . '/step-indicator.php';
 let customDateCount = 1;
 
 function addCustomDate() {
-    customDateCount++;
     const container = document.getElementById('additional-dates');
     const newRow = document.createElement('div');
     newRow.className = 'row';
     newRow.innerHTML = `
         <div class="col-md-4">
             <div class="form-floating mb-3">
-                <input type="date" class="form-control" id="customDateValue${customDateCount}" name="custom_date_values[]">
+                <input type="date" class="form-control" id="customDateValue${customDateCount}"
+                       name="important_date[${customDateCount}][value]"
+                />
                 <label for="customDateValue${customDateCount}">Дата</label>
             </div>
         </div>
         <div class="col-md-8">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="customDate${customDateCount}" name="custom_dates[]" placeholder="Название события">
+                <input type="text" class="form-control" id="customDate${customDateCount}"
+                       name="important_date[${customDateCount}][title]"
+                       placeholder="Название события"
+                />
                 <label for="customDate${customDateCount}">Дополнительная важная дата</label>
             </div>
         </div>
     `;
+    customDateCount++;
     container.appendChild(newRow);
 }
 

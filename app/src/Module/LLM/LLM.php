@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Module\LLM;
 
-use Symfony\AI\Platform\Model;
 use Symfony\AI\Platform\Response\ResponsePromise;
 
 interface LLM

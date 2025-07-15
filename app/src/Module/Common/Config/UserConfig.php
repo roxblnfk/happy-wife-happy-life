@@ -6,10 +6,15 @@ namespace App\Module\Common\Config;
 
 use App\Module\Config\Attribute\Config;
 
-#[Config(name: 'calendar')]
-class CalendarConfig implements \JsonSerializable
+#[Config(name: 'user')]
+class UserConfig implements \JsonSerializable
 {
-    public function __construct() {}
+    /**
+     * @param non-empty-string $name
+     */
+    public function __construct(
+        public string $name,
+    ) {}
 
     #[\Override]
     public function jsonSerialize(): array

@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace App\Module\Common\Web;
 
 use App\Endpoint\Web\HomeController;
-use App\Module\Common\Config\CalendarConfig;
+use App\Module\Common\Config\WomenCycleConfig;
 use App\Module\Common\Config\GlobalStateConfig;
 use App\Module\Common\Config\RelationConfig;
+use App\Module\Common\Config\UserConfig;
+use App\Module\Common\Config\WomenPersonConfig;
+use App\Module\Common\Web\Input\Calendar\CalendarForm;
+use App\Module\Common\Web\Input\LLMProviderForm;
+use App\Module\Common\Web\Input\RelationshipForm;
 use App\Module\Config\ConfigService;
 use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\LLMProvider;
@@ -34,23 +39,42 @@ final class SetupController
     ) {}
 
     #[Route(route: '/setup/relation', methods: ['POST'])]
-    public function setupRelation(RelationshipForm $form): ResponseInterface
-    {
-        $config = new RelationConfig(
-            userName: $form->userName,
-            womanName: $form->partnerName,
+    public function setupRelation(
+        RelationshipForm $form,
+        ?RelationConfig $relationConfig,
+        ?UserConfig $userConfig,
+        ?WomenPersonConfig $womenPersonalConfig,
+    ): ResponseInterface {
+        # Get configs or create new ones if they do not exist
+        $relationConfig ??= new RelationConfig(
             relationType: $form->relationType,
         );
+        $userConfig ??= new UserConfig(
+            name: $form->userName,
+        );
+        $womenPersonalConfig ??= new WomenPersonConfig(
+            name: $form->partnerName,
+        );
 
-        $this->configService->persistConfig($config, true);
+        # Update configs with data from the form
+        $relationConfig->relationType = $form->relationType;
+        $userConfig->name = $form->userName;
+        $womenPersonalConfig->name = $form->partnerName;
+
+        # Persist configs
+        $this->configService->persistConfig($relationConfig, true);
+        $this->configService->persistConfig($womenPersonalConfig, true);
+        $this->configService->persistConfig($userConfig, true);
 
         return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
     }
 
     #[Route(route: '/setup/llm', name: self::POST_SETUP_LLM, methods: ['POST'])]
     public function setupLLM(
-        GlobalStateConfig $globalState,LLMProviderForm $form, LLMProvider $LLMProvider): mixed
-    {
+        GlobalStateConfig $globalState,
+        LLMProviderForm $form,
+        LLMProvider $LLMProvider,
+    ): mixed {
         $LLMConfig = new LLMConfig(
             platform: $form->provider,
             apiKey: $form->apiToken,
@@ -96,12 +120,47 @@ final class SetupController
         }
     }
 
+    #[Route(route: '/setup/calendar', methods: ['POST'])]
+    public function setupCalendar(
+        CalendarForm $form,
+        ?WomenCycleConfig $womenCycleConfig,
+        ?RelationConfig $relationConfig,
+        ?WomenPersonConfig $womenPersonalConfig,
+    ): ResponseInterface {
+        # Get configs or create new ones if they do not exist
+        $womenCycleConfig ??= new WomenCycleConfig(
+            lastPeriodStart: $form->lastPeriodStart,
+        );
+
+        # Update configs with data from the form
+        $womenCycleConfig->lastPeriodStart = $form->lastPeriodStart;
+        $womenCycleConfig->cycleLength = $form->cycleLength;
+        $womenCycleConfig->periodLength = $form->periodLength;
+        $relationConfig === null or $relationConfig->anniversary = $form->anniversary;
+        $womenPersonalConfig === null or $womenPersonalConfig->birthday = $form->birthday;
+
+        # Store important dates
+        foreach ($form->importantDates as $date) {
+            // todo
+            // $date->
+        }
+
+        # Persist configs
+        $this->configService->persistConfig($womenCycleConfig, true);
+        $relationConfig === null or $this->configService->persistConfig($relationConfig, true);
+        $womenPersonalConfig === null or $this->configService->persistConfig($womenPersonalConfig, true);
+
+        return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
+    }
+
     #[Route(route: '/setup[/<page>]', name: self::ROUTE_SETUP, methods: ['GET'])]
     public function setup(
         GlobalStateConfig $globalState,
         ?RelationConfig $relationConfig,
         ?LLMConfig $LLMConfig,
-        ?CalendarConfig $calendarConfig,
+        ?WomenCycleConfig $womenCycleConfig,
+        ?UserConfig $userConfig,
+        ?WomenPersonConfig $womenPersonalConfig,
         ?string $page = null,
     ): string {
         \in_array($page, ['relation', 'llm', 'calendar'], true)
@@ -111,15 +170,18 @@ final class SetupController
         $page ??= match (true) {
             $relationConfig === null => 'setup/relation',
             $LLMConfig === null || $LLMConfig->model === null => 'setup/llm',
-            $calendarConfig === null => 'setup/calendar',
+            $womenCycleConfig === null => 'setup/calendar',
+            !$globalState->configured => 'setup/personal',
             default => 'setup',
         };
 
         return $this->views->render($page, [
             'globalState' => $globalState,
             'relationConfig' => $relationConfig,
+            'userConfig' => $userConfig,
+            'womenPersonalConfig' => $womenPersonalConfig,
             'LLMConfig' => $LLMConfig,
-            'calendarConfig' => $calendarConfig,
+            'womenCycleConfig' => $womenCycleConfig,
         ]);
     }
 }

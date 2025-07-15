@@ -7,12 +7,13 @@ namespace App\Module\Common\Config;
 use App\Application\Value\Date;
 use App\Module\Config\Attribute\Config;
 
-#[Config(name: 'relation')]
-class RelationConfig implements \JsonSerializable
+#[Config(name: 'women_cycle')]
+class WomenCycleConfig implements \JsonSerializable
 {
     public function __construct(
-        public RelationType $relationType,
-        public ?Date $anniversary = null,
+        public Date $lastPeriodStart,
+        public int $cycleLength = 28,
+        public int $periodLength = 5,
     ) {}
 
     #[\Override]
