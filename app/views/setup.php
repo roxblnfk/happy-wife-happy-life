@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <!-- Персональные данные -->
+    <!-- Важные даты -->
     <div class="col-md-6">
         <div class="card h-100" hx-get="/setup/calendar" hx-target="#app-content" style="cursor: pointer">
             <div class="card-body">
@@ -59,7 +59,25 @@
                         <small class="text-muted">Менструальный цикл, важные события</small>
                     </div>
                 </div>
-                <p class="card-text">Данные о цикле, важных датах, предпочтениях и особенностях вашей спутницы.</p>
+                <p class="card-text">Данные о женском цикле и важных датах.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Важные даты -->
+    <div class="col-md-6">
+        <div class="card h-100" hx-get="/setup/calendar" hx-target="#app-content" style="cursor: pointer">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="rounded-circle bg-info d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                        <i class="text-white" style="font-size: 24px;">📝</i>
+                    </div>
+                    <div>
+                        <h5 class="card-title mb-0">Характер</h5>
+                        <small class="text-muted">Предпочтения и особенности</small>
+                    </div>
+                </div>
+                <p class="card-text">Важные аспекты характера и предпочтений вашей спутницы.</p>
             </div>
         </div>
     </div>
@@ -141,7 +159,7 @@
 
 <!-- Кнопка возврата -->
 <div class="d-flex justify-content-center mt-5">
-    <button class="btn btn-secondary" hx-get="/" hx-target="#app-content">
+    <button class="btn btn-secondary" hx-get="/index" hx-target="#app-content">
         Назад
     </button>
 </div>

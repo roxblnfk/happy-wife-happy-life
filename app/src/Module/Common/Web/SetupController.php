@@ -12,6 +12,7 @@ use App\Module\Common\Config\UserConfig;
 use App\Module\Common\Config\WomenPersonConfig;
 use App\Module\Common\Web\Input\Calendar\CalendarForm;
 use App\Module\Common\Web\Input\LLMProviderForm;
+use App\Module\Common\Web\Input\PersonalDataForm;
 use App\Module\Common\Web\Input\RelationshipForm;
 use App\Module\Config\ConfigService;
 use App\Module\LLM\Config\LLMConfig;
@@ -31,6 +32,7 @@ final class SetupController
     use PrototypeTrait;
 
     public const ROUTE_SETUP = 'setup';
+    public const ROUTE_SETUP_RELATION = 'setup-relation';
     public const POST_SETUP_LLM = 'setup-llm';
 
     public function __construct(
@@ -38,7 +40,7 @@ final class SetupController
         private readonly ConfigService $configService,
     ) {}
 
-    #[Route(route: '/setup/relation', methods: ['POST'])]
+    #[Route(route: '/setup/relation', name: self::ROUTE_SETUP_RELATION, methods: ['POST'])]
     public function setupRelation(
         RelationshipForm $form,
         ?RelationConfig $relationConfig,
@@ -149,6 +151,27 @@ final class SetupController
         $this->configService->persistConfig($womenCycleConfig, true);
         $relationConfig === null or $this->configService->persistConfig($relationConfig, true);
         $womenPersonalConfig === null or $this->configService->persistConfig($womenPersonalConfig, true);
+
+        return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
+    }
+
+    #[Route(route: '/setup/personal', methods: ['POST'])]
+    public function setupPersonal(
+        PersonalDataForm $form,
+        ?WomenPersonConfig $womenPersonalConfig,
+        GlobalStateConfig $globalState,
+    ): ResponseInterface {
+        if ($womenPersonalConfig === null) {
+            return $this->response->redirect($this->router->uri(self::ROUTE_SETUP_RELATION));
+        }
+
+        $womenPersonalConfig->preferences = $form->preferences;
+        $womenPersonalConfig->triggers = $form->triggers;
+        $globalState->configured = true;
+
+        # Persist configs
+        $this->configService->persistConfig($womenPersonalConfig, true);
+        $this->configService->persistConfig($globalState, true);
 
         return $this->response->redirect($this->router->uri(HomeController::ROUTE_INDEX));
     }

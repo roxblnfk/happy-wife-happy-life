@@ -53,7 +53,7 @@
                 <button class="btn btn-primary btn-sm" hx-get="/advice" hx-target="#main-content">
                     Получить совет
                 </button>
-                <button class="btn btn-outline-secondary btn-sm" hx-get="/settings" hx-target="#main-content">
+                <button class="btn btn-outline-secondary btn-sm" hx-get="/setup" hx-target="#app-content">
                     Настройки
                 </button>
             </div>

@@ -16,7 +16,7 @@ include __DIR__ . '/step-indicator.php';
 ?>
 
 <div class="setup-card">
-    <h3 class="mb-4">Шаг 3: Персональные данные</h3>
+    <h3 class="mb-4">Шаг 3: Важные даты</h3>
     <p class="text-muted mb-4">Данные, от которых зависит ваша жизнь.</p>
 
     <form hx-post="/setup/calendar" hx-target="#app-content" hx-swap="innerHTML">
