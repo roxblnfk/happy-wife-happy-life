@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Config\Internal\Persistance;
+namespace App\Module\Config\Internal\Persistence;
 
-use Cycle\ActiveRecord\ActiveRecord;
+use App\Module\ORM\ActiveRecord;
 use Cycle\Annotated\Annotation\Column;
 use Cycle\Annotated\Annotation\Entity as EntityAttribute;
 

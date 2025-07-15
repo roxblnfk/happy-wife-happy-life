@@ -14,6 +14,7 @@
         "boson-php/psr-http-bridge": "^0.14.0",
         "boson-php/runtime": "^0.14.0",
         "cycle/active-record": "^0.8.0",
+        "cycle/entity-behavior-uuid": "^1.2",
         "llm-agents/agents": "^1.7",
         "roxblnfk/unpoly": "^1.8",
         "spiral-packages/yii-error-handler-bridge": "^1.1",

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Config;
 
 use App\Module\Config\Internal\ConfigRegistry;
-use App\Module\Config\Internal\Persistance\Entity;
+use App\Module\Config\Internal\Persistence\Entity;
 use Spiral\Core\Attribute\Singleton;
 
 #[Singleton]

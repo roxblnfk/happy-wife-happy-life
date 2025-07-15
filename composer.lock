@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "671b773cd4beec088b820f5c1ee58757",
+    "content-hash": "ba6ba656da398291ca0fb355b6e179a2",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -1251,6 +1251,150 @@
                 }
             ],
             "time": "2025-07-14T11:36:41+00:00"
+        },
+        {
+            "name": "cycle/entity-behavior",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cycle/entity-behavior.git",
+                "reference": "49b0c71485855f16193b0720d637d822d65f688c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cycle/entity-behavior/zipball/49b0c71485855f16193b0720d637d822d65f688c",
+                "reference": "49b0c71485855f16193b0720d637d822d65f688c",
+                "shasum": ""
+            },
+            "require": {
+                "cycle/database": "^2.14",
+                "cycle/orm": "^2.10",
+                "cycle/schema-builder": "^2.8",
+                "php": ">=8.0",
+                "psr/container": "^1.0|^2.0",
+                "psr/event-dispatcher": "^1",
+                "yiisoft/injector": "^1.0"
+            },
+            "require-dev": {
+                "cycle/annotated": "^3.0",
+                "phpunit/phpunit": "^9.5",
+                "ramsey/uuid": "^4.5",
+                "spiral/code-style": "^2.2",
+                "spiral/tokenizer": "^2.8 || ^3.0",
+                "vimeo/psalm": "^5.11 || ^6.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cycle\\ORM\\Entity\\Behavior\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Titov (wolfy-j)",
+                    "email": "wolfy-j@spiralscout.com"
+                },
+                {
+                    "name": "Aleksei Gagarin (roxblnfk)",
+                    "email": "alexey.gagarin@spiralscout.com"
+                },
+                {
+                    "name": "Pavel Butchnev (butschster)",
+                    "email": "pavel.buchnev@spiralscout.com"
+                },
+                {
+                    "name": "Maksim Smakouz (msmakouz)",
+                    "email": "maksim.smakouz@spiralscout.com"
+                }
+            ],
+            "description": "Provides a collection of attributes that add behaviors to Cycle ORM entities",
+            "homepage": "https://cycle-orm.dev",
+            "support": {
+                "chat": "https://discord.gg/spiralphp",
+                "docs": "https://cycle-orm.dev/docs",
+                "issues": "https://github.com/cycle/entity-behavior/issues",
+                "source": "https://github.com/cycle/entity-behavior"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/cycle",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-07-14T19:37:04+00:00"
+        },
+        {
+            "name": "cycle/entity-behavior-uuid",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cycle/entity-behavior-uuid.git",
+                "reference": "04b27fcd5e0b7bce9a596889215f6a999d8cb2e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cycle/entity-behavior-uuid/zipball/04b27fcd5e0b7bce9a596889215f6a999d8cb2e9",
+                "reference": "04b27fcd5e0b7bce9a596889215f6a999d8cb2e9",
+                "shasum": ""
+            },
+            "require": {
+                "cycle/entity-behavior": "^1.3",
+                "php": ">=8.0",
+                "ramsey/uuid": "^4.5"
+            },
+            "require-dev": {
+                "cycle/annotated": "^3.0",
+                "phpunit/phpunit": "^9.5",
+                "spiral/tokenizer": "^2.8",
+                "vimeo/psalm": "^5.11"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cycle\\ORM\\Entity\\Behavior\\Uuid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Titov (wolfy-j)",
+                    "email": "wolfy-j@spiralscout.com"
+                },
+                {
+                    "name": "Aleksei Gagarin (roxblnfk)",
+                    "email": "alexey.gagarin@spiralscout.com"
+                },
+                {
+                    "name": "Pavel Butchnev (butschster)",
+                    "email": "pavel.buchnev@spiralscout.com"
+                },
+                {
+                    "name": "Maksim Smakouz (msmakouz)",
+                    "email": "maksim.smakouz@spiralscout.com"
+                }
+            ],
+            "description": "Provides an ability to use ramsey/uuid as a Cycle ORM entity column type",
+            "homepage": "https://cycle-orm.dev",
+            "support": {
+                "chat": "https://discord.gg/spiralphp",
+                "docs": "https://cycle-orm.dev/docs",
+                "issues": "https://github.com/cycle/entity-behavior-uuid/issues",
+                "source": "https://github.com/cycle/entity-behavior-uuid"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/cycle",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-08T19:43:45+00:00"
         },
         {
             "name": "cycle/migrations",

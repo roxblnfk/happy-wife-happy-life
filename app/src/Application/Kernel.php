@@ -8,12 +8,11 @@ use App\Application\Bootloader\FormsBootloader;
 use App\Feature;
 use App\Module\Config\ConfigBootloader;
 use App\Module\LLM\LLMBootloader;
-use Cycle\ActiveRecord\Bridge\Spiral\Bootloader\ActiveRecordBootloader;
+use App\Module\ORM\ORMBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
 use Spiral\Bootloader\I18nBootloader;
 use Spiral\Bootloader\Views\TranslatedCacheBootloader;
-use Spiral\Cycle\Bootloader as CycleBridge;
 use Spiral\Debug\Bootloader\DumperBootloader;
 use Spiral\DotEnv\Bootloader\DotenvBootloader;
 use Spiral\Monolog\Bootloader\MonologBootloader;
@@ -78,15 +77,8 @@ class Kernel extends \Spiral\Framework\Kernel
             // Views
             ViewsBootloader::class,
 
-            // Databases
-            CycleBridge\DatabaseBootloader::class,
-            CycleBridge\MigrationsBootloader::class,
-
             // ORM
-            CycleBridge\SchemaBootloader::class,
-            CycleBridge\CycleOrmBootloader::class,
-            CycleBridge\AnnotatedBootloader::class,
-            ActiveRecordBootloader::class,
+            ORMBootloader::class,
 
             // Internationalization
             I18nBootloader::class,
@@ -94,9 +86,7 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // Console commands
             Framework\CommandBootloader::class,
-            CycleBridge\CommandBootloader::class,
             ScaffolderBootloader::class,
-            CycleBridge\ScaffolderBootloader::class,
 
             // Fast code prototyping
             PrototypeBootloader::class,
