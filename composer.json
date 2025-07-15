@@ -22,7 +22,8 @@
         "spiral/roadrunner-cli": "^2.5",
         "spiral/sapi-bridge": "^1.1",
         "spiral/sentry-bridge": "^2.3",
-        "spiral/translator": "^3.15"
+        "spiral/translator": "^3.15",
+        "symfony/ai-platform": "dev-main#4064606b69a0d0c5387fb8a3c3359b9565491f82"
     },
     "require-dev": {
         "spiral/code-style": "^2.2",

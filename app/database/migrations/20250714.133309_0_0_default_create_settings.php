@@ -13,10 +13,10 @@ class OrmDefault7304df858c72086f8742c69d2fe29080 extends Migration
     public function up(): void
     {
         $this->table('settings')
-        ->addColumn('name', 'string', ['nullable' => false, 'defaultValue' => null, 'size' => 255])
-        ->addColumn('value', 'text', ['nullable' => false, 'defaultValue' => null])
-        ->setPrimaryKeys(['name'])
-        ->create();
+            ->addColumn('name', 'string', ['nullable' => false, 'defaultValue' => null, 'size' => 255])
+            ->addColumn('value', 'text', ['nullable' => false, 'defaultValue' => null])
+            ->setPrimaryKeys(['name'])
+            ->create();
     }
 
     public function down(): void

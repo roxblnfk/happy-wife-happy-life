@@ -7,6 +7,7 @@ namespace App\Application;
 use App\Application\Bootloader\BosonBootloader;
 use App\Application\Bootloader\FormsBootloader;
 use App\Module\Config\ConfigBootloader;
+use App\Module\LLM\LLMBootloader;
 use Cycle\ActiveRecord\Bridge\Spiral\Bootloader\ActiveRecordBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
@@ -102,6 +103,9 @@ class Kernel extends \Spiral\Framework\Kernel
 
             Bootloader\RoutesBootloader::class,
             BosonBootloader::class,
+
+            // LLM
+            LLMBootloader::class,
 
             // Modules
             ConfigBootloader::class,
