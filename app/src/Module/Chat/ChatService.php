@@ -71,7 +71,7 @@ final class ChatService
             $request = $this->llm->request(
                 new MessageBag(\Symfony\AI\Platform\Message\Message::ofUser($message->message)),
                 options: [],
-                onProgress: function (Request $requestUuid, string $chunk) use ($messageId): void {
+                onProgress: function (UuidInterface $requestUuid, string $chunk) use ($messageId): void {
                     $this->cache->write($messageId->toString(), $chunk, true);
                 },
                 onError: tr(...),

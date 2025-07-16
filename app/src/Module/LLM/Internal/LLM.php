@@ -48,6 +48,8 @@ final class LLM implements \App\Module\LLM\LLM
         ): \Generator {
             $request = null;
             try {
+                # todo Wait generators from Symfony side
+                /*
                 $generator = $response->asStream();
                 while ($generator->valid()) {
                     $chunk = $generator->current();
@@ -57,17 +59,27 @@ final class LLM implements \App\Module\LLM\LLM
                         continue;
                     }
 
-                    $onProgress === null or $onProgress($uuid, $chunk);
+                    try {
+                        $onProgress === null or $onProgress($uuid, $chunk);
+                    } catch (\Throwable) {
+                        # Do nothing
+                    }
                     yield;
                 }
+                /*/
+                yield
+                $chunk = $response->asText();
+                try {
+                    $onProgress === null or $onProgress($uuid, $chunk);
+                } catch (\Throwable) {
+                    # Do nothing
+                }
+                // */
 
                 $request = Request::findByPK($uuid) ?? throw new \RuntimeException(
                     "Request with UUID `{$uuid}` not found.",
                 );
-                $content = $response->getResponse()->getContent();
-                $request->output = \is_array($content)
-                    ? $response->getResponse()->getContent()
-                    : (string) $content;
+                $request->output = $response->asText();
                 $request->status = RequestStatus::Completed;
                 $request->saveOrFail();
 
@@ -82,7 +94,6 @@ final class LLM implements \App\Module\LLM\LLM
             } finally {
                 $onFinish === null or $onFinish($request, $response);
             }
-
         })($response, $request->uuid));
 
         return $request;

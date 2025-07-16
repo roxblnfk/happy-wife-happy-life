@@ -13,6 +13,7 @@ use Spiral\Core\Options;
 \mb_internal_encoding('UTF-8');
 \error_reporting(E_ALL ^ E_DEPRECATED);
 \ini_set('display_errors', 'stderr');
+\set_time_limit(120);
 
 // Register Composer's auto loader.
 require __DIR__ . '/vendor/autoload.php';

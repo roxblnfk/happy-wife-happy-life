@@ -46,6 +46,8 @@ final class Process
                 if ($handler->valid()) {
                     // Execute the handler until it yields control.
                     $handler->next();
+                } else {
+                    unset($this->handlers[$key]);
                 }
             } catch (\Throwable $e) {
                 unset($this->handlers[$key]);
