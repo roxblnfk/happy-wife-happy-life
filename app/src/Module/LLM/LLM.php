@@ -87,5 +87,8 @@ interface LLM
         MessageBagInterface $messages,
         array $options = [],
         ?callable $onProgress = null,
-    ): ResponseInterface;
+        ?callable $onError = null,
+        ?callable $onComplete = null,
+        ?callable $onFinish = null,
+    ): Request;
 }

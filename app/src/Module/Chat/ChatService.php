@@ -14,7 +14,6 @@ use App\Module\LLM\LLM;
 use Ramsey\Uuid\UuidInterface;
 use Spiral\Core\Attribute\Proxy;
 use Symfony\AI\Platform\Message\MessageBag;
-use Symfony\AI\Platform\Response\ResponsePromise;
 
 final class ChatService
 {
@@ -68,21 +67,21 @@ final class ChatService
             $aiMessage = Message::create($chat, null, false);
             $messageId = $aiMessage->uuid;
             $aiMessage->saveOrFail();
-            $request = $this->llm->request(
+            $request = $this->llm->callAgent(
                 new MessageBag(\Symfony\AI\Platform\Message\Message::ofUser($message->message)),
                 options: [],
                 onProgress: function (UuidInterface $requestUuid, string $chunk) use ($messageId): void {
                     $this->cache->write($messageId->toString(), $chunk, true);
                 },
                 onError: tr(...),
-                onFinish: function (Request $request, ResponsePromise $promise) use ($messageId): void {
+                onFinish: function (Request $request) use ($messageId): void {
                     $msg = Message::findByPK($messageId);
                     $msg->message = $request->output;
                     $msg->status = $request->status === RequestStatus::Completed
                         ? MessageStatus::Completed
                         : MessageStatus::Failed;
                     $msg->save();
-                    // $this->cache->delete($messageId->toString());
+                    $this->cache->delete($messageId->toString());
                 },
             );
             $message->requestUuid = $request->uuid;
@@ -90,16 +89,6 @@ final class ChatService
 
         return $message;
     }
-
-    // public function agentic()
-    // {
-    //     $agent = new Agent(
-    //         // $this->llm->
-    //     );
-    //     foreach ($agent->call()->getContent() as $chunk) {
-    //
-    //     }
-    // }
 
     /**
      * Retrieves new tokens for a message.

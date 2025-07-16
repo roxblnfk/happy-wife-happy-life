@@ -36,7 +36,7 @@ final class LLM implements \App\Module\LLM\LLM
         ?callable $onError = null,
         ?callable $onComplete = null,
         ?callable $onFinish = null,
-    ): ResponseInterface {
+    ): Request {
         $request = Request::create(
             $this->model->getName(),
             $this->serializeMessageBag($messages),
@@ -79,13 +79,13 @@ final class LLM implements \App\Module\LLM\LLM
                 );
                 $request->status = RequestStatus::Failed;
 
-                $onError === null or $onError($uuid, $e);
+                $onError === null or $onError($request, $e);
             } finally {
-                $onFinish === null or $onFinish($uuid, $onProgress);
+                $onFinish === null or $onFinish($request, $onProgress);
             }
         })($response, $request->uuid));
 
-        return $response;
+        return $request;
     }
 
     public function rawRequest(array|string|object $input, array $options = []): ResponsePromise
