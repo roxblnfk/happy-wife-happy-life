@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Module\Chat\Internal;
 
+use Spiral\Core\Attribute\Singleton;
+
 /**
  * Cache interface for streaming data.
  */
+#[Singleton]
 interface StreamCache
 {
     /**

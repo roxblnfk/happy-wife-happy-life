@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application;
 
+use App\Application\Bootloader\AppBootloader;
 use App\Application\Bootloader\FormsBootloader;
 use App\Feature;
 use App\Module\Chat\ChatBootloader;
@@ -94,8 +95,8 @@ class Kernel extends \Spiral\Framework\Kernel
 
             Bootloader\RoutesBootloader::class,
 
-            // LLM
-            LLMBootloader::class,
+            // APP
+            AppBootloader::class,
 
             // Features
             Feature\Boson\Bootloader::class,
@@ -106,6 +107,7 @@ class Kernel extends \Spiral\Framework\Kernel
             // Modules
             ConfigBootloader::class,
             ChatBootloader::class,
+            LLMBootloader::class,
         ];
     }
 }

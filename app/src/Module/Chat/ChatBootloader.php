@@ -17,7 +17,7 @@ final class ChatBootloader extends BaseBootloader
     ): void {
         $binder->bind(StreamCache::class, new Proxy(
             StreamCache::class,
-            singleton: true,
+            singleton: false,
             fallbackFactory: static fn() => new StreamCache\FileCache(directory('runtime') . '/chat'),
         ));
 
