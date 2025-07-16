@@ -6,6 +6,7 @@ namespace App\Application;
 
 use App\Application\Bootloader\FormsBootloader;
 use App\Feature;
+use App\Module\Chat\ChatBootloader;
 use App\Module\Config\ConfigBootloader;
 use App\Module\LLM\LLMBootloader;
 use App\Module\ORM\ORMBootloader;
@@ -104,6 +105,7 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // Modules
             ConfigBootloader::class,
+            ChatBootloader::class,
         ];
     }
 }
