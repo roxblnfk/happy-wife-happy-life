@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Chat\Domain;
+namespace App\Module\LLM\Internal\Domain;
 
 use App\Module\ORM\ActiveRecord;
 use Cycle\Annotated\Annotation\Column;
@@ -15,19 +15,14 @@ use Ramsey\Uuid\UuidInterface;
  * AI chat entity.
  */
 #[EntityAttribute(
-    table: 'chat_message_request_chunk',
+    table: 'chat_message_request',
 )]
+#[Uuid7('uuid')]
 #[CreatedAt('createdAt')]
-class Chunk extends ActiveRecord
+class Request extends ActiveRecord
 {
     #[Column(type: 'uuid', primary: true, nullable: false, typecast: 'uuid')]
-    public UuidInterface $requestUuid;
-
-    #[Column(type: 'uuid', primary: true, nullable: false)]
-    public int $index;
-
-    #[Column(type: 'text', nullable: false)]
-    public string $content;
+    public UuidInterface $uuid;
 
     public \DateTimeImmutable $createdAt;
 }

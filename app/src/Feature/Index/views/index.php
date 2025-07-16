@@ -55,9 +55,9 @@ use App\Feature\Chat\Controller as ChatController;
 
             <div class="d-grid gap-2">
                 <button class="btn btn-primary btn-sm"
-                        hx-get="<?= $router->uri(ChatController::ROUTE_INDEX)->__toString() ?>"
-                        hx-target="#main-content"
-                >Получить совет</button>
+                        hx-get="<?= $router->uri(ChatController::ROUTE_CHATS)->__toString() ?>"
+                        hx-target="#app-content"
+                >Чаты</button>
                 <button class="btn btn-outline-secondary btn-sm" hx-get="/setup" hx-target="#app-content">
                     Настройки
                 </button>

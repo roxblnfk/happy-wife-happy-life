@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var \Spiral\Views\ViewInterface $this
+ * @var array<\App\Module\Chat\Domain\Message> $messages Array of Message objects
+ */
+
+use App\Module\Chat\Domain\MessageStatus;
+
+foreach ($messages as $message):
+    $content = $message->message ?? '';
+    $isAI = !$message->isHuman;
+    $isPending = $message->status === MessageStatus::Pending;
+
+    // Remove AI: prefix if present
+    if ($isAI) {
+        $content = \trim(\substr($content, 3));
+    }
+    ?>
+    <div class="message <?= $isPending ? 'message-pending' : '' ?> <?= $isAI ? 'message-ai' : 'message-user' ?>"
+         data-message-uuid="<?= $message->uuid->toString() ?>"
+         data-status="<?= $message->status->value ?>">
+        <div class="message-content">
+            <?= \htmlspecialchars($content) ?>
+            <?php if ($isPending): ?>
+                <span class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            <?php endif; ?>
+        </div>
+        <div class="message-timestamp">
+            <?= $message->createdAt->format('H:i') ?>
+            <?php if ($isPending): ?>
+                <span class="badge bg-secondary ms-1">Печатает...</span>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endforeach; ?>

@@ -8,6 +8,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
@@ -160,8 +163,8 @@
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <div id="app-content" hx-get="/index" hx-trigger="load">
+    <div class="main-container vh-100">
+        <div id="app-content" hx-get="/index" hx-trigger="load" class="h-100">
             <!-- Контент будет загружен через HTMX -->
             <div class="d-flex justify-content-center align-items-center" style="height: 60vh;">
                 <div class="spinner-border text-primary" role="status">

@@ -8,6 +8,11 @@ declare(strict_types=1);
  *
  * @link https://spiral.dev/docs/basics-orm#orm
  */
+
+use App\Module\ORM\UuidTypecast;
+use Cycle\ORM\Parser\Typecast;
+use Cycle\ORM\SchemaInterface;
+
 return [
     'schema' => [
         /**
@@ -27,9 +32,10 @@ return [
             // SchemaInterface::MAPPER => \Cycle\ORM\Mapper\Mapper::class,
             // SchemaInterface::REPOSITORY => \Cycle\ORM\Select\Repository::class,
             // SchemaInterface::SCOPE => null,
-            // SchemaInterface::TYPECAST_HANDLER => [
-            //    \Cycle\ORM\Parser\Typecast::class,
-            // ],
+            SchemaInterface::TYPECAST_HANDLER => [
+                UuidTypecast::class,
+                Typecast::class,
+            ],
         ],
 
         'collections' => [
