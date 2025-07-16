@@ -38,10 +38,10 @@ class Request extends ActiveRecord
     public array $options = [];
 
     #[Column(type: 'json', nullable: false, default: '', typecast: 'json', castDefault: true)]
-    public array|string $input;
+    public array|string $input = '';
 
     #[Column(type: 'json', nullable: false, default: '', typecast: 'json', castDefault: true)]
-    public string|array $output;
+    public string|array $output = '';
 
     public \DateTimeImmutable $createdAt;
 
@@ -51,7 +51,6 @@ class Request extends ActiveRecord
      * @param non-empty-string $model The model to use for the request.
      * @param array|string|object $input The input data for the request.
      * @param array $options Additional options for the request.
-     * @return self
      */
     public static function create(
         string $model,
@@ -61,7 +60,7 @@ class Request extends ActiveRecord
         return static::make([
             'uuid' => Uuid::uuid7(),
             'model' => $model,
-            'input' => $input,
+            'input' => \gettype($input),
             'options' => $options,
             'createdAt' => new \DateTimeImmutable(),
         ]);

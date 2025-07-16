@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Module\StreamCache;
+namespace Tests\Unit\Module\Chat\StreamCache;
 
-use App\Module\LLM\Internal\StreamCache;
+use App\Module\Chat\Internal\StreamCache;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(StreamCache\FileCache::class)]

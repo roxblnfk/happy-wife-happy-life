@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\LLM\Internal;
+namespace App\Module\Chat\Internal;
 
 use Spiral\Core\Attribute\Singleton;
 
@@ -19,7 +19,7 @@ interface StreamCache
      * @param int<0, max> $offset The starting position in the stream to read from.
      * @param int<1, max> $length The maximum number of bytes to read from the stream.
      */
-    public function read(string $id, int $offset = 0, int $length = PHP_INT_MAX): string;
+    public function read(string $id, int $offset = 0, int $length = \PHP_INT_MAX): string;
 
     /**
      * Write data to the cached stream.

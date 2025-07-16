@@ -105,6 +105,12 @@ use App\Module\Chat\Domain\Chat;
         position: relative;
     }
 
+    .message-failed .message-content {
+        background-color: #b67f7f;
+        border: 1px solid #b63636;
+        position: relative;
+    }
+
     .message-timestamp {
         font-size: 0.75rem;
         color: #6c757d;

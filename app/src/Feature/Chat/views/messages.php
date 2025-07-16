@@ -10,13 +10,14 @@ foreach ($messages as $message):
     $content = $message->message ?? '';
     $isAI = !$message->isHuman;
     $isPending = $message->status === MessageStatus::Pending;
+    $isFailed = $message->status === MessageStatus::Failed;
 
     // Remove AI: prefix if present
     if ($isAI) {
         $content = \trim(\substr($content, 3));
     }
     ?>
-    <div class="message <?= $isPending ? 'message-pending' : '' ?> <?= $isAI ? 'message-ai' : 'message-user' ?>"
+    <div class="message <?= $isPending ? 'message-pending' : '' ?> <?= $isFailed ? 'message-failed' : '' ?> <?= $isAI ? 'message-ai' : 'message-user' ?>"
          data-message-uuid="<?= $message->uuid->toString() ?>"
          data-status="<?= $message->status->value ?>">
         <div class="message-content">

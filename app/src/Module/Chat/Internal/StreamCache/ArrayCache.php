@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Module\LLM\Internal\StreamCache;
+namespace App\Module\Chat\Internal\StreamCache;
 
-use App\Module\LLM\Internal\StreamCache;
+use App\Module\Chat\Internal\StreamCache;
 
 /**
  * Array-based implementation of StreamCache for in-memory storage.
@@ -16,7 +16,7 @@ final class ArrayCache implements StreamCache
      */
     private array $cache = [];
 
-    public function read(string $id, int $offset = 0, int $length = PHP_INT_MAX): string
+    public function read(string $id, int $offset = 0, int $length = \PHP_INT_MAX): string
     {
         if (!$this->exists($id)) {
             return '';

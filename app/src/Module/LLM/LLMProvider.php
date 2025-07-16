@@ -9,7 +9,6 @@ use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\Config\Platforms;
 use App\Module\LLM\Internal\AIPlatformBridge;
 use App\Module\LLM\Internal\Platform;
-use App\Module\LLM\Internal\StreamCache;
 use Spiral\Core\Attribute\Singleton;
 use Symfony\AI\Platform\Model;
 
@@ -19,7 +18,6 @@ class LLMProvider
     public function __construct(
         private readonly AIPlatformBridge $platformBridge,
         private readonly Process $process,
-        private readonly StreamCache $cache,
     ) {}
 
     public function getLLM(LLMConfig $config): LLM
@@ -41,7 +39,7 @@ class LLMProvider
             );
         }
 
-        return new \App\Module\LLM\Internal\LLM($platform, $model, $this->process, $this->cache);
+        return new \App\Module\LLM\Internal\LLM($platform, $model, $this->process);
     }
 
     /**

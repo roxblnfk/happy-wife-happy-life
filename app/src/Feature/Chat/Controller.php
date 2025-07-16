@@ -7,7 +7,6 @@ namespace App\Feature\Chat;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\Message;
-use App\Module\Chat\Domain\MessageStatus;
 use App\Module\Config\ConfigService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
