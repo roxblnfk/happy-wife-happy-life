@@ -15,7 +15,6 @@
         "boson-php/runtime": "^0.14.0",
         "cycle/active-record": "^0.8.0",
         "cycle/entity-behavior-uuid": "^1.2",
-        "llm-agents/agents": "^1.7",
         "roxblnfk/unpoly": "^1.8",
         "spiral-packages/yii-error-handler-bridge": "^1.1",
         "spiral/cycle-bridge": "^2.11",
@@ -25,7 +24,8 @@
         "spiral/sapi-bridge": "^1.1",
         "spiral/sentry-bridge": "^2.3",
         "spiral/translator": "^3.15",
-        "symfony/ai-platform": "dev-main#4064606b69a0d0c5387fb8a3c3359b9565491f82"
+        "symfony/ai-agent": "dev-main#58e5b27debcd48a5d2bb7f93cb4cba7bee823255",
+        "symfony/ai-platform": "dev-main#82894c9fc7a01a2dcdf97cd3440c7bb777ed9c86"
     },
     "require-dev": {
         "spiral/code-style": "^2.2",

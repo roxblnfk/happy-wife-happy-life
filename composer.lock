@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba6ba656da398291ca0fb355b6e179a2",
+    "content-hash": "ec46136738e2f5b4d55265c17446d432",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -2599,89 +2599,6 @@
                 }
             ],
             "time": "2024-09-21T08:32:55+00:00"
-        },
-        {
-            "name": "llm-agents/agents",
-            "version": "1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/llm-agents-php/agents.git",
-                "reference": "c0ca3fbc861f689fe32bc9f1e158de0dd6108345"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/llm-agents-php/agents/zipball/c0ca3fbc861f689fe32bc9f1e158de0dd6108345",
-                "reference": "c0ca3fbc861f689fe32bc9f1e158de0dd6108345",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.2",
-                "ramsey/uuid": "^4.7"
-            },
-            "require-dev": {
-                "ergebnis/phpunit-slow-test-detector": "^2.15",
-                "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.11",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.4",
-                "phpstan/phpstan-strict-rules": "^1.6",
-                "phpunit/phpunit": "^10.5",
-                "psalm/plugin-phpunit": "^0.19.0",
-                "rector/rector": "^1.2",
-                "roave/infection-static-analysis-plugin": "^1.35",
-                "vimeo/psalm": "^5.24",
-                "wayofdev/cs-fixer-config": "^1.5"
-            },
-            "type": "library",
-            "extra": {
-                "composer-normalize": {
-                    "indent-size": 4,
-                    "indent-style": "space"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "LLM\\Agents\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pavel Buchnev",
-                    "email": "butschster@gmail.com"
-                },
-                {
-                    "name": "the dev",
-                    "email": "the@wayof.dev"
-                }
-            ],
-            "description": "LLM Agents PHP SDK - Autonomous Language Model Agents for PHP",
-            "homepage": "https://github.com/llm-agents-php",
-            "keywords": [
-                "Agent",
-                "anthropic",
-                "autophp",
-                "claude",
-                "claude-ai",
-                "genai",
-                "generative-ai",
-                "gpt4",
-                "langchain",
-                "laravel",
-                "llm",
-                "openai",
-                "php",
-                "symfony"
-            ],
-            "support": {
-                "issues": "https://github.com//llm-agents-php/agents/issues",
-                "security": "https://github.com//llm-agents-php/agents/blob/master/.github/SECURITY.md",
-                "source": "https://github.com//llm-agents-php/agents"
-            },
-            "time": "2024-09-15T18:44:16+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6045,17 +5962,108 @@
             "time": "2024-08-21T09:46:28+00:00"
         },
         {
+            "name": "symfony/ai-agent",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ai-agent.git",
+                "reference": "58e5b27debcd48a5d2bb7f93cb4cba7bee823255"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ai-agent/zipball/58e5b27debcd48a5d2bb7f93cb4cba7bee823255",
+                "reference": "58e5b27debcd48a5d2bb7f93cb4cba7bee823255",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "php": ">=8.2",
+                "phpdocumentor/reflection-docblock": "^5.4",
+                "phpstan/phpdoc-parser": "^2.1",
+                "psr/log": "^3.0",
+                "symfony/ai-platform": "@dev",
+                "symfony/clock": "^6.4 || ^7.1",
+                "symfony/http-client": "^6.4 || ^7.1",
+                "symfony/property-access": "^6.4 || ^7.1",
+                "symfony/property-info": "^6.4 || ^7.1",
+                "symfony/serializer": "^6.4 || ^7.1",
+                "symfony/type-info": "^7.2.3"
+            },
+            "require-dev": {
+                "mrmysql/youtube-transcript": "^v0.0.5",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^11.5.13",
+                "symfony/ai-store": "@dev",
+                "symfony/cache": "^6.4 || ^7.1",
+                "symfony/css-selector": "^6.4 || ^7.1",
+                "symfony/dom-crawler": "^6.4 || ^7.1",
+                "symfony/event-dispatcher": "^6.4 || ^7.1",
+                "symfony/http-foundation": "^6.4 || ^7.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/ai",
+                    "name": "symfony/ai"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\AI\\Agent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christopher Hertel",
+                    "email": "mail@christopher-hertel.de"
+                },
+                {
+                    "name": "Oskar Stark",
+                    "email": "oskarstark@googlemail.com"
+                }
+            ],
+            "description": "PHP library for building agentic applications.",
+            "keywords": [
+                "Agent",
+                "ai",
+                "llm"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/ai-agent/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-07-16T07:46:25+00:00"
+        },
+        {
             "name": "symfony/ai-platform",
             "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-platform.git",
-                "reference": "4064606b69a0d0c5387fb8a3c3359b9565491f82"
+                "reference": "82894c9fc7a01a2dcdf97cd3440c7bb777ed9c86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/4064606b69a0d0c5387fb8a3c3359b9565491f82",
-                "reference": "4064606b69a0d0c5387fb8a3c3359b9565491f82",
+                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/82894c9fc7a01a2dcdf97cd3440c7bb777ed9c86",
+                "reference": "82894c9fc7a01a2dcdf97cd3440c7bb777ed9c86",
                 "shasum": ""
             },
             "require": {
@@ -6071,15 +6079,13 @@
                 "symfony/property-info": "^6.4 || ^7.1",
                 "symfony/serializer": "^6.4 || ^7.1",
                 "symfony/type-info": "^7.2.3",
-                "symfony/uid": "^6.4 || ^7.1",
-                "webmozart/assert": "^1.11"
+                "symfony/uid": "^6.4 || ^7.1"
             },
             "require-dev": {
                 "async-aws/bedrock-runtime": "^0.1.0",
                 "codewithkyrian/transformers": "^0.5.3",
                 "phpstan/phpstan": "^2.1.17",
                 "phpstan/phpstan-symfony": "^2.0.6",
-                "phpstan/phpstan-webmozart-assert": "^2.0.0",
                 "phpunit/phpunit": "^11.5",
                 "symfony/ai-agent": "@dev",
                 "symfony/console": "^6.4 || ^7.1",
@@ -6140,7 +6146,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-15T11:06:04+00:00"
+            "time": "2025-07-16T07:46:25+00:00"
         },
         {
             "name": "symfony/clock",
@@ -10224,16 +10230,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.83.0",
+            "version": "v3.84.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "b83916e79a6386a1ec43fdd72391aeb13b63282f"
+                "reference": "38dad0767bf2a9b516b976852200ae722fe984ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/b83916e79a6386a1ec43fdd72391aeb13b63282f",
-                "reference": "b83916e79a6386a1ec43fdd72391aeb13b63282f",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/38dad0767bf2a9b516b976852200ae722fe984ca",
+                "reference": "38dad0767bf2a9b516b976852200ae722fe984ca",
                 "shasum": ""
             },
             "require": {
@@ -10317,7 +10323,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.83.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.84.0"
             },
             "funding": [
                 {
@@ -10325,7 +10331,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-14T15:41:41+00:00"
+            "time": "2025-07-15T18:21:57+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -13634,6 +13640,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "symfony/ai-agent": 20,
         "symfony/ai-platform": 20
     },
     "prefer-stable": true,

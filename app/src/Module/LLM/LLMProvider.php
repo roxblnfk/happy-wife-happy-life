@@ -8,7 +8,6 @@ use App\Application\Process\Process;
 use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\Config\Platforms;
 use App\Module\LLM\Internal\AIPlatformBridge;
-use App\Module\LLM\Internal\Platform;
 use Spiral\Core\Attribute\Singleton;
 use Symfony\AI\Platform\Model;
 
@@ -22,7 +21,7 @@ class LLMProvider
 
     public function getLLM(LLMConfig $config): LLM
     {
-        $platform = $this->getPlatform($config);
+        $platform = $this->platformBridge->getPlatform($config);
 
         $config->model ?? throw new \LogicException('Platform model not configured.');
 
@@ -48,12 +47,5 @@ class LLMProvider
     public function getPlatformModels(Platforms $platform): array
     {
         return $this->platformBridge->getModels($platform);
-    }
-
-    private function getPlatform(
-        LLMConfig $config,
-    ): Platform {
-        $platform = $this->platformBridge->getPlatform($config);
-        return Platform::createFromAIPlatform($platform);
     }
 }

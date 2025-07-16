@@ -91,6 +91,16 @@ final class ChatService
         return $message;
     }
 
+    // public function agentic()
+    // {
+    //     $agent = new Agent(
+    //         // $this->llm->
+    //     );
+    //     foreach ($agent->call()->getContent() as $chunk) {
+    //
+    //     }
+    // }
+
     /**
      * Retrieves new tokens for a message.
      *
