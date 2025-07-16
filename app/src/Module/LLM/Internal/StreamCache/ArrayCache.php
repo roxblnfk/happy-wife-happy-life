@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Chat\Internal\StreamCache;
+namespace App\Module\LLM\Internal\StreamCache;
 
-use App\Module\Chat\Internal\StreamCache;
+use App\Module\LLM\Internal\StreamCache;
 
 /**
  * Array-based implementation of StreamCache for in-memory storage.

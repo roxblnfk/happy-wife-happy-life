@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Chat\Internal;
+namespace App\Module\LLM\Internal;
 
 use Spiral\Core\Attribute\Singleton;
 

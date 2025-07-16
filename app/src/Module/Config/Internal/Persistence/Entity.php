@@ -9,7 +9,7 @@ use Cycle\Annotated\Annotation\Column;
 use Cycle\Annotated\Annotation\Entity as EntityAttribute;
 
 #[EntityAttribute(
-    table: 'settings',
+    table: 'config',
 )]
 class Entity extends ActiveRecord
 {
