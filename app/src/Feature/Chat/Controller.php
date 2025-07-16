@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Feature\Chat;
 
+use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\Message;
 use App\Module\Chat\Domain\MessageStatus;
 use App\Module\Config\ConfigService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Ramsey\Uuid\Uuid;
 use Spiral\Prototype\Traits\PrototypeTrait;
 use Spiral\Router\Annotation\Route;
 use Spiral\Views\ViewsInterface;
@@ -22,7 +22,6 @@ final class Controller
 {
     use PrototypeTrait;
 
-    public const ROUTE_INDEX = 'chat-index';
     public const ROUTE_CHATS = 'chat-chats';
     public const ROUTE_CREATE = 'chat-create';
     public const ROUTE_DELETE = 'chat-delete';
@@ -34,6 +33,7 @@ final class Controller
     public const ROUTE_MESSAGE_TOKENS = 'chat-message-tokens';
 
     public function __construct(
+        private readonly ChatService $chatService,
         private readonly ViewsInterface $views,
         private readonly ConfigService $configService,
     ) {}
@@ -68,10 +68,8 @@ final class Controller
     #[Route(route: '/chat/create', name: self::ROUTE_CREATE, methods: ['POST'])]
     public function createChat(): string
     {
-        $chat = Chat::create();
-        $chat->save();
         return $this->views->render('chat:chat', [
-            'chat' => $chat,
+            'chat' => $this->chatService->createChat(),
         ]);
     }
 
@@ -83,7 +81,7 @@ final class Controller
     #[Route(route: '/chat/<uuid>/delete', name: self::ROUTE_DELETE, methods: ['DELETE'])]
     public function deleteChat(string $uuid): ResponseInterface
     {
-        Chat::findByPK($uuid)?->deleteOrFail();
+        $this->chatService->deleteChat($uuid);
         return $this->response->create(200);
     }
 
@@ -134,12 +132,8 @@ final class Controller
     #[Route(route: '/chat/<uuid>/send', name: self::ROUTE_SEND, methods: ['POST'])]
     public function sendMessage(string $uuid, ServerRequestInterface $request): string
     {
-        $chat = Chat::findByPK($uuid) ?? throw new \RuntimeException('Chat not found.');
         $data = $request->getParsedBody();
-
-        // Todo use service
-        $message = Message::create($chat, $data['message']);
-        $message->saveOrFail();
+        $this->chatService->sendMessage($uuid, $data['message'], isHuman: true);
 
         return $this->views->render('chat:messages', [
             'messages' => [],
@@ -151,15 +145,17 @@ final class Controller
      * Used by JavaScript polling: GET /chat/message/{uuid}/tokens (every 300ms)
      * Response: JSON {"tokens": "partial response text", "status": "pending|completed", "append": true< "position": 24}
      */
-    #[Route(route: '/chat/message/<uuid>/tokens[/<position>]', name: self::ROUTE_MESSAGE_TOKENS, methods: ['GET'])]
-    public function getMessageTokens(string $uuid, ?string $position = null): array
+    #[Route(route: '/chat/message/<uuid>/tokens[/<offset>]', name: self::ROUTE_MESSAGE_TOKENS, methods: ['GET'])]
+    public function getMessageTokens(string $uuid, ?string $offset = null): array
     {
-        $tokens = ' foo bar baz';
+        $offset = (int) $offset;
+        $message = Message::findByPK($uuid) ?? throw new \RuntimeException('Message not found.');
+        $tokens = $this->chatService->getNewTokens($message, $offset);
         return [
             'tokens' => $tokens,
-            'status' => \mt_rand(0, 1) ? MessageStatus::Pending->value : MessageStatus::Completed->value,
+            'status' => $message->status->value,
             'append' => true,
-            'position' => \strlen($tokens) + $position,
+            'offset' => \strlen($tokens) + $offset,
         ];
     }
 }

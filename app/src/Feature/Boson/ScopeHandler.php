@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application;
+namespace App\Feature\Boson;
 
 use Spiral\Core\Container;
 use Spiral\Core\Scope;

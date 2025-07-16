@@ -42,7 +42,7 @@ class Message extends ActiveRecord
     #[Column(type: 'uuid', nullable: true, typecast: 'uuid')]
     public UuidInterface|null $requestUuid = null;
 
-    public static function create(Chat|UuidInterface $chat, ?string $message): self
+    public static function create(Chat|UuidInterface $chat, ?string $message, bool $isHuman = true): self
     {
         return self::make([
             'uuid' => Uuid::uuid7(),

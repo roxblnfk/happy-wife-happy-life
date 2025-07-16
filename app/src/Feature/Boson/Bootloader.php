@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Feature\Boson;
 
 use App\Application\AppScope;
-use App\Application\ScopeHandler;
 use Boson\Application;
 use Boson\ApplicationCreateInfo;
 use Boson\Bridge\Psr\Http\Psr7HttpAdapter;
