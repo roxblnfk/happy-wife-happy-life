@@ -6,6 +6,7 @@ namespace App\Module\LLM\Internal;
 
 use App\Application\Process\Process;
 use App\Module\LLM\Internal\Domain\Request;
+use App\Module\LLM\Internal\Domain\RequestStatus;
 use Symfony\AI\Platform\Model;
 use Symfony\AI\Platform\Response\ResponsePromise;
 
@@ -35,28 +36,49 @@ final class LLM implements \App\Module\LLM\LLM
         );
         $request->saveOrFail();
 
-        $this->process->defer((function (ResponsePromise $response): \Generator {
+        $cacheId = $request->uuid->toString();
+
+        $this->process->defer((function (ResponsePromise $response, string $cacheId): \Generator {
             try {
                 $generator = $response->asStream();
                 while ($generator->valid()) {
                     $chunk = $generator->current();
-                    if ($chunk === null) {
-                        break;
+                    if ($chunk === null || $chunk === '') {
+                        yield;
+                        $generator->next();
+                        continue;
                     }
 
-                    // Cache the chunk for streaming responses
-                    yield $this->cache->cacheChunk($chunk);
-                    $generator->next();
+                    tr($chunk);
+
+                    # Cache chunk
+                    $this->cache->write($cacheId, $chunk, true);
+                    yield;
                 }
+
+                #
             } catch (\Throwable $e) {
-                // Handle any exceptions that occur during streaming
-                yield $this->cache->cacheError($e);
+                tr($e);
             } finally {
                 // Finalize the stream cache
-                yield $this->cache->delete()
+                $request = Request::findByPK($cacheId);
+                // $this->cache->delete($cacheId);
+
+                if ($request !== null) {
+                    $request->status === RequestStatus::Pending and $request->status = isset($e)
+                        ? RequestStatus::Failed
+                        : RequestStatus::Completed;
+
+                    $content = $response->getResponse()->getContent();
+                    tr(response: $response, content: $content);
+                    $request->output = is_array($content)
+                        ? $response->getResponse()->getContent()
+                        : (string) $content;
+                    $request->save();
+                }
             }
 
-        })($response));
+        })($response, $cacheId));
 
         return $request;
     }

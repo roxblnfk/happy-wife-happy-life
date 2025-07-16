@@ -16,6 +16,7 @@ use App\Module\Common\Config\WomenCycleConfig;
 use App\Module\Common\Config\WomenPersonConfig;
 use App\Module\Config\ConfigService;
 use App\Module\LLM\Config\LLMConfig;
+use App\Module\LLM\Config\Platforms;
 use App\Module\LLM\LLMProvider;
 use Psr\Http\Message\ResponseInterface;
 use Spiral\Prototype\Traits\PrototypeTrait;
@@ -91,8 +92,8 @@ final class Controller
             $models = $LLMProvider->getPlatformModels($LLMConfig->platform);
 
             if ($LLMConfig->model !== null) {
-                # Check model
-                $LLMConfig->model === null or \array_find(
+                # Check model name
+                $LLMConfig->platform === Platforms::Local or \array_find(
                     $models,
                     static fn(Model $model): bool => $model->getName() === $LLMConfig->model,
                 ) ?? throw new \InvalidArgumentException(

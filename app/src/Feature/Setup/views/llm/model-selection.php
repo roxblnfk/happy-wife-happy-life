@@ -6,6 +6,7 @@
  * @var list<Model> $models Available models for the selected platform
  */
 
+use App\Module\LLM\Config\Platforms;
 use Symfony\AI\Platform\Model;
 
 ?>
@@ -21,14 +22,19 @@ use Symfony\AI\Platform\Model;
         <input hidden="hidden" name="llm_provider" value="<?= \htmlspecialchars($LLMConfig->platform->value) ?>" />
         <input hidden="hidden" name="api_token" value="<?= \htmlspecialchars($LLMConfig->apiKey) ?>" />
         <div class="form-floating mb-3">
+            <?php if ($LLMConfig->platform === Platforms::Local): ?>
+            <input type="text" class="form-control" id="modelName" name="model_name"
+                   value="<?= \htmlspecialchars($LLMConfig->model ?? '') ?>" required>
+            <?php else: ?>
             <select class="form-select" id="modelName" name="model_name" required>
                 <option value="">Выберите модель</option>
                 <?php foreach ($models as $model): ?>
-                    <option value="<?= \htmlspecialchars($model->getName()) ?>">
+                    <option value="<?= \htmlspecialchars($model->getName()) ?>" <?= $model->getName() === $LLMConfig->model ? 'selected' : '' ?>>
                         <?= \htmlspecialchars($model->getName()) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
+            <?php endif; ?>
             <label for="modelName">Модель</label>
         </div>
 

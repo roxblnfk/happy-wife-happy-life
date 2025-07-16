@@ -25,6 +25,9 @@ class Request extends ActiveRecord
     #[Column(type: 'uuid', primary: true, nullable: false, typecast: 'uuid')]
     public UuidInterface $uuid;
 
+    #[Column(type: 'string', typecast: RequestStatus::class)]
+    public RequestStatus $status = RequestStatus::Pending;
+
     /**
      * @var non-empty-string The model to use for the request.
      */
@@ -36,6 +39,9 @@ class Request extends ActiveRecord
 
     #[Column(type: 'json', nullable: false, default: '', typecast: 'json', castDefault: true)]
     public array|string $input;
+
+    #[Column(type: 'json', nullable: false, default: '', typecast: 'json', castDefault: true)]
+    public string|array $output;
 
     public \DateTimeImmutable $createdAt;
 

@@ -4,34 +4,44 @@ declare(strict_types=1);
 
 namespace App\Module\LLM;
 
+use App\Application\Process\Process;
 use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\Config\Platforms;
 use App\Module\LLM\Internal\AIPlatformBridge;
 use App\Module\LLM\Internal\Platform;
+use App\Module\LLM\Internal\StreamCache;
+use Spiral\Core\Attribute\Singleton;
 use Symfony\AI\Platform\Model;
 
+#[Singleton]
 class LLMProvider
 {
     public function __construct(
         private readonly AIPlatformBridge $platformBridge,
+        private readonly Process $process,
+        private readonly StreamCache $cache,
     ) {}
 
     public function getLLM(LLMConfig $config): LLM
     {
         $platform = $this->getPlatform($config);
-        $models = $this->getPlatformModels($config->platform);
 
         $config->model ?? throw new \LogicException('Platform model not configured.');
 
-        # Find the model
-        $model = \array_find(
-            $models,
-            static fn(Model $model): bool => $model->getName() === $config->model,
-        ) ?? throw new \InvalidArgumentException(
-            "Model `{$config->model}` not found for platform `{$config->platform->value}`.",
-        );
+        if ($config->platform === Platforms::Local) {
+            $model = new Model($config->model);
+        } else {
+            $models = $this->getPlatformModels($config->platform);
+            # Find the model
+            $model = \array_find(
+                $models,
+                static fn(Model $model): bool => $model->getName() === $config->model,
+            ) ?? throw new \InvalidArgumentException(
+                "Model `{$config->model}` not found for platform `{$config->platform->value}`.",
+            );
+        }
 
-        return new \App\Module\LLM\Internal\LLM($platform, $model);
+        return new \App\Module\LLM\Internal\LLM($platform, $model, $this->process, $this->cache);
     }
 
     /**
