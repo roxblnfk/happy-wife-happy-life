@@ -16,6 +16,8 @@ use Ramsey\Uuid\UuidInterface;
 
 /**
  * AI chat entity.
+ *
+ * @final
  */
 #[EntityAttribute(
     table: 'chat_message',
@@ -36,25 +38,25 @@ class Message extends ActiveRecord
     #[Column(type: 'string', nullable: true)]
     public ?string $message = null;
 
-    #[Column(type: 'boolean', nullable: false, default: true, typecast: 'bool')]
-    public bool $isHuman = true;
+    #[Column(type: 'string', nullable: false, default: 'user', typecast: MessageRole::class, size: 32)]
+    public MessageRole $role;
 
     public \DateTimeImmutable $createdAt;
 
     #[Column(type: 'uuid', nullable: true, typecast: 'uuid')]
     public UuidInterface|null $requestUuid = null;
 
-    #[BelongsTo(target: Request::class,innerKey: 'requestUuid', outerKey: 'uuid', cascade: false, nullable: true, fkOnDelete: 'SET NULL')]
+    #[BelongsTo(target: Request::class, innerKey: 'requestUuid', outerKey: 'uuid', cascade: false, nullable: true, fkOnDelete: 'SET NULL')]
     private ?Request $request = null;
 
-    public static function create(Chat|UuidInterface $chat, ?string $message, bool $isHuman = true): self
+    public static function create(Chat|UuidInterface $chat, ?string $message, MessageRole $role): self
     {
         return self::make([
             'uuid' => Uuid::uuid7(),
             'chatUuid' => $chat instanceof Chat ? $chat->uuid : $chat,
             'message' => $message,
             'status' => MessageStatus::Pending,
-            'isHuman' => $isHuman,
+            'role' => $role,
             'createdAt' => new \DateTimeImmutable(),
         ]);
     }

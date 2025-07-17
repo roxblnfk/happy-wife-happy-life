@@ -132,7 +132,7 @@ final class Controller
     public function sendMessage(string $uuid, ServerRequestInterface $request): void
     {
         $data = $request->getParsedBody();
-        $this->chatService->sendMessage($uuid, $data['message'], isHuman: true);
+        $this->chatService->sendMessage($uuid, $data['message']);
     }
 
     /**

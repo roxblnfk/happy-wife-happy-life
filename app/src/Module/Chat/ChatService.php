@@ -6,6 +6,7 @@ namespace App\Module\Chat;
 
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\Message;
+use App\Module\Chat\Domain\MessageRole;
 use App\Module\Chat\Domain\MessageStatus;
 use App\Module\Chat\Internal\StreamCache;
 use App\Module\LLM\Internal\Domain\Request;
@@ -52,19 +53,19 @@ final class ChatService
     public function sendMessage(
         string|UuidInterface|Chat $chat,
         string $message,
-        bool $isHuman = true,
+        MessageRole $role = MessageRole::User,
     ): Message {
         $chat instanceof Chat or $chat = Chat::findByPK($chat) ?? throw new \InvalidArgumentException(
             'Chat not found.',
         );
 
-        $message = Message::create($chat, $message, $isHuman);
-        $isHuman and $message->status = MessageStatus::Completed;
+        $message = Message::create($chat, $message, $role);
+        $message->status = MessageStatus::Completed;
 
         $message->saveOrFail();
 
-        if ($isHuman) {
-            $aiMessage = Message::create($chat, null, false);
+        if ($role === MessageRole::User) {
+            $aiMessage = Message::create($chat, null, MessageRole::Assistant);
             $messageId = $aiMessage->uuid;
             $aiMessage->saveOrFail();
             $request = $this->llm->request(

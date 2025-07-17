@@ -4,18 +4,18 @@
  * @var array<\App\Module\Chat\Domain\Message> $messages Array of Message objects
  */
 
+use App\Module\Chat\Domain\MessageRole;
 use App\Module\Chat\Domain\MessageStatus;
 
 foreach ($messages as $message):
     $content = $message->message ?? '';
-    $isAI = !$message->isHuman;
+    $isAI = $message->role === MessageRole::Assistant;
     $isPending = $message->status === MessageStatus::Pending;
     $isFailed = $message->status === MessageStatus::Failed;
 
     // Remove AI: prefix if present
-    if ($isAI) {
-        $content = \trim(\substr($content, 3));
-    }
+    // $isAI and $content = \trim(\substr($content, 3));
+
     ?>
     <div class="message <?= $isPending ? 'message-pending' : '' ?> <?= $isFailed ? 'message-failed' : '' ?> <?= $isAI ? 'message-ai' : 'message-user' ?>"
          data-message-uuid="<?= $message->uuid->toString() ?>"

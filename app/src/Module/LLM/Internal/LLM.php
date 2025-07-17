@@ -10,6 +10,8 @@ use App\Module\LLM\Internal\Domain\RequestStatus;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\AI\Agent\Agent;
 use Symfony\AI\Agent\AgentInterface;
+use Symfony\AI\Platform\Message\Message;
+use Symfony\AI\Platform\Message\MessageBag;
 use Symfony\AI\Platform\Message\MessageBagInterface;
 use Symfony\AI\Platform\Model;
 use Symfony\AI\Platform\PlatformInterface;
@@ -94,17 +96,19 @@ final class LLM implements \App\Module\LLM\LLM
     }
 
     public function request(
-        array|string|object $input,
+        string|MessageBagInterface $input,
         array $options = [],
         ?callable $onProgress = null,
         ?callable $onError = null,
         ?callable $onComplete = null,
         ?callable $onFinish = null,
     ): Request {
+        \is_string($input) and $input = new MessageBag(Message::ofUser($input));
+
         $response = $this->rawRequest($input, ['stream' => true] + $options);
         $request = Request::create(
             $this->model->getName(),
-            $input,
+            $this->serializeMessageBag($input),
             $options,
         );
         $request->saveOrFail();

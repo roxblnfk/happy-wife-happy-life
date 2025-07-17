@@ -46,7 +46,7 @@ interface LLM
      *          - ResponsePromise: The response promise containing the result.
      */
     public function request(
-        array|string|object $input,
+        string|MessageBagInterface $input,
         array $options = [],
         ?callable $onProgress = null,
         ?callable $onError = null,
