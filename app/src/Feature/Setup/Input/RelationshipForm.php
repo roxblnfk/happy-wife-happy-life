@@ -24,4 +24,7 @@ final class RelationshipForm extends Filter
 
     #[Post(key: 'relationship_type')]
     public RelationType $relationType;
+
+    #[Post(key: 'description')]
+    public string $description;
 }

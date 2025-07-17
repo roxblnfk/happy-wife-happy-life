@@ -2,11 +2,11 @@
 /**
  * @var \Spiral\Views\ViewInterface $this
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
- * @var null|\App\Module\Common\Config\RelationConfig $relationConfig
- * @var null|\App\Module\Common\Config\UserConfig $userConfig
- * @var null|\App\Module\Common\Config\WomenPersonConfig $womenPersonalConfig
+ * @var null|\App\Module\Common\Config\RelationshipInfo $relationInfo
+ * @var null|\App\Module\Common\Config\UserInfo $userInfo
+ * @var null|\App\Module\Common\Config\WomenInfo $womenInfo
  * @var null|\App\Module\LLM\Config\LLMConfig $LLMConfig
- * @var null|\App\Module\Common\Config\WomenCycleConfig $womenCycleConfig
+ * @var null|\App\Module\Calendar\Info\WomenCycleInfo $womenCycleInfo
  */
 
 use App\Module\LLM\Config\Platforms;

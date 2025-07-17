@@ -2,11 +2,11 @@
 /**
  * @var \Spiral\Views\ViewInterface $this
  * @var \Spiral\Router\RouterInterface $router
- * @var UserConfig $userConfig
+ * @var UserInfo $userInfo
  */
 
 use App\Feature\Chat\Controller as ChatController;
-use App\Module\Common\Config\UserConfig;
+use App\Module\Common\Config\UserInfo;
 
 ?>
 
@@ -16,7 +16,7 @@ use App\Module\Common\Config\UserConfig;
         <span class="navbar-brand mb-0 h1">Happy Wife - Happy Life</span>
         <div class="navbar-nav ms-auto">
             <span class="nav-text text-muted">
-                Как дела, <strong><?= \htmlspecialchars($userConfig?->name ?? 'Пользователь') ?></strong>?
+                Как дела, <strong><?= \htmlspecialchars($userInfo?->name ?? 'Пользователь') ?></strong>?
             </span>
         </div>
     </div>

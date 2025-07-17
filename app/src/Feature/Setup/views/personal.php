@@ -2,11 +2,11 @@
 /**
  * @var \Spiral\Views\ViewInterface $this
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
- * @var null|\App\Module\Common\Config\RelationConfig $relationConfig
- * @var null|\App\Module\Common\Config\UserConfig $userConfig
- * @var null|\App\Module\Common\Config\WomenPersonConfig $womenPersonalConfig
+ * @var null|\App\Module\Common\Config\RelationshipInfo $relationInfo
+ * @var null|\App\Module\Common\Config\UserInfo $userInfo
+ * @var null|\App\Module\Common\Config\WomenInfo $womenInfo
  * @var null|\App\Module\LLM\Config\LLMConfig $LLMConfig
- * @var null|\App\Module\Common\Config\WomenCycleConfig $womenCycleConfig
+ * @var null|\App\Module\Calendar\Info\WomenCycleInfo $womenCycleInfo
  */
 
 $stepIndicator = 4;
@@ -21,16 +21,16 @@ include __DIR__ . '/step-indicator.php';
 
     <form hx-post="/setup/personal" hx-target="#app-content" hx-swap="innerHTML">
         <!-- Предпочтения и особенности -->
-        <h5 class="mb-3">Особенности и предпочтения</h5>
+        <h5 class="mb-3">Характер, особенности и предпочтения</h5>
         <div class="form-floating mb-3">
             <textarea class="form-control" id="preferences" name="preferences" style="height: 100px"
-            ><?= \htmlspecialchars($womenPersonalConfig?->preferences ?? 'Любит котиков и внимание. Аллергия на шоколад.') ?></textarea>
+            ><?= \htmlspecialchars($womenInfo?->preferences ?? 'Любит котиков и внимание. Аллергия на шоколад.') ?></textarea>
             <label for="preferences">Что важно учитывать?</label>
         </div>
 
         <div class="form-floating mb-4">
             <textarea class="form-control" id="triggers" name="triggers" style="height: 100px"
-            ><?= \htmlspecialchars($womenPersonalConfig?->triggers ?? 'Обсуждение веса.') ?></textarea>
+            ><?= \htmlspecialchars($womenInfo?->triggers ?? 'Обсуждение веса.') ?></textarea>
             <label for="triggers">Что может расстроить или разозлить?</label>
         </div>
 

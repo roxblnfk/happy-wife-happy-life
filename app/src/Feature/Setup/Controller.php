@@ -9,11 +9,11 @@ use App\Feature\Setup\Input\Calendar\CalendarForm;
 use App\Feature\Setup\Input\LLMProviderForm;
 use App\Feature\Setup\Input\PersonalDataForm;
 use App\Feature\Setup\Input\RelationshipForm;
+use App\Module\Calendar\Info\WomenCycleInfo;
 use App\Module\Common\Config\GlobalStateConfig;
-use App\Module\Common\Config\RelationConfig;
-use App\Module\Common\Config\UserConfig;
-use App\Module\Common\Config\WomenCycleConfig;
-use App\Module\Common\Config\WomenPersonConfig;
+use App\Module\Common\Config\RelationshipInfo;
+use App\Module\Common\Config\UserInfo;
+use App\Module\Common\Config\WomenInfo;
 use App\Module\Config\ConfigService;
 use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\Config\Platforms;
@@ -44,30 +44,31 @@ final class Controller
     #[Route(route: '/setup/relation', name: self::ROUTE_SETUP_RELATION, methods: ['POST'])]
     public function setupRelation(
         RelationshipForm $form,
-        ?RelationConfig $relationConfig,
-        ?UserConfig $userConfig,
-        ?WomenPersonConfig $womenPersonalConfig,
+        ?RelationshipInfo $relationInfo,
+        ?UserInfo $userInfo,
+        ?WomenInfo $womenInfo,
     ): ResponseInterface {
         # Get configs or create new ones if they do not exist
-        $relationConfig ??= new RelationConfig(
+        $relationInfo ??= new RelationshipInfo(
             relationType: $form->relationType,
         );
-        $userConfig ??= new UserConfig(
+        $userInfo ??= new UserInfo(
             name: $form->userName,
         );
-        $womenPersonalConfig ??= new WomenPersonConfig(
+        $womenInfo ??= new WomenInfo(
             name: $form->partnerName,
         );
 
         # Update configs with data from the form
-        $relationConfig->relationType = $form->relationType;
-        $userConfig->name = $form->userName;
-        $womenPersonalConfig->name = $form->partnerName;
+        $relationInfo->relationType = $form->relationType;
+        $relationInfo->description = $form->description;
+        $userInfo->name = $form->userName;
+        $womenInfo->name = $form->partnerName;
 
         # Persist configs
-        $this->configService->persistConfig($relationConfig, true);
-        $this->configService->persistConfig($womenPersonalConfig, true);
-        $this->configService->persistConfig($userConfig, true);
+        $this->configService->persistConfig($relationInfo, true);
+        $this->configService->persistConfig($womenInfo, true);
+        $this->configService->persistConfig($userInfo, true);
 
         return $this->response->redirect($this->router->uri(IndexController::ROUTE_INDEX));
     }
@@ -126,21 +127,21 @@ final class Controller
     #[Route(route: '/setup/calendar', methods: ['POST'])]
     public function setupCalendar(
         CalendarForm $form,
-        ?WomenCycleConfig $womenCycleConfig,
-        ?RelationConfig $relationConfig,
-        ?WomenPersonConfig $womenPersonalConfig,
+        ?WomenCycleInfo $womenCycleInfo,
+        ?RelationshipInfo $relationInfo,
+        ?WomenInfo $womenInfo,
     ): ResponseInterface {
         # Get configs or create new ones if they do not exist
-        $womenCycleConfig ??= new WomenCycleConfig(
+        $womenCycleInfo ??= new WomenCycleInfo(
             lastPeriodStart: $form->lastPeriodStart,
         );
 
         # Update configs with data from the form
-        $womenCycleConfig->lastPeriodStart = $form->lastPeriodStart;
-        $womenCycleConfig->cycleLength = $form->cycleLength;
-        $womenCycleConfig->periodLength = $form->periodLength;
-        $relationConfig === null or $relationConfig->anniversary = $form->anniversary;
-        $womenPersonalConfig === null or $womenPersonalConfig->birthday = $form->birthday;
+        $womenCycleInfo->lastPeriodStart = $form->lastPeriodStart;
+        $womenCycleInfo->cycleLength = $form->cycleLength;
+        $womenCycleInfo->periodLength = $form->periodLength;
+        $relationInfo === null or $relationInfo->anniversary = $form->anniversary;
+        $womenInfo === null or $womenInfo->birthday = $form->birthday;
 
         # Store important dates
         foreach ($form->importantDates as $date) {
@@ -149,9 +150,9 @@ final class Controller
         }
 
         # Persist configs
-        $this->configService->persistConfig($womenCycleConfig, true);
-        $relationConfig === null or $this->configService->persistConfig($relationConfig, true);
-        $womenPersonalConfig === null or $this->configService->persistConfig($womenPersonalConfig, true);
+        $this->configService->persistConfig($womenCycleInfo, true);
+        $relationInfo === null or $this->configService->persistConfig($relationInfo, true);
+        $womenInfo === null or $this->configService->persistConfig($womenInfo, true);
 
         return $this->response->redirect($this->router->uri(IndexController::ROUTE_INDEX));
     }
@@ -159,19 +160,19 @@ final class Controller
     #[Route(route: '/setup/personal', methods: ['POST'])]
     public function setupPersonal(
         PersonalDataForm $form,
-        ?WomenPersonConfig $womenPersonalConfig,
+        ?WomenInfo $womenInfo,
         GlobalStateConfig $globalState,
     ): ResponseInterface {
-        if ($womenPersonalConfig === null) {
+        if ($womenInfo === null) {
             return $this->response->redirect($this->router->uri(self::ROUTE_SETUP_RELATION));
         }
 
-        $womenPersonalConfig->preferences = $form->preferences;
-        $womenPersonalConfig->triggers = $form->triggers;
+        $womenInfo->preferences = $form->preferences;
+        $womenInfo->triggers = $form->triggers;
         $globalState->configured = true;
 
         # Persist configs
-        $this->configService->persistConfig($womenPersonalConfig, true);
+        $this->configService->persistConfig($womenInfo, true);
         $this->configService->persistConfig($globalState, true);
 
         return $this->response->redirect($this->router->uri(IndexController::ROUTE_INDEX));
@@ -180,11 +181,11 @@ final class Controller
     #[Route(route: '/setup[/<page>]', name: self::ROUTE_SETUP, methods: ['GET'])]
     public function setup(
         GlobalStateConfig $globalState,
-        ?RelationConfig $relationConfig,
+        ?RelationshipInfo $relationInfo,
         ?LLMConfig $LLMConfig,
-        ?WomenCycleConfig $womenCycleConfig,
-        ?UserConfig $userConfig,
-        ?WomenPersonConfig $womenPersonalConfig,
+        ?WomenCycleInfo $womenCycleInfo,
+        ?UserInfo $userInfo,
+        ?WomenInfo $womenInfo,
         ?string $page = null,
     ): string {
         \in_array($page, ['relation', 'llm', 'calendar'], true)
@@ -192,20 +193,20 @@ final class Controller
             : $page = null;
 
         $page ??= match (true) {
-            $relationConfig === null => 'setup:relation',
+            $relationInfo === null => 'setup:relation',
             $LLMConfig === null || $LLMConfig->model === null => 'setup:llm',
-            $womenCycleConfig === null => 'setup:calendar',
+            $womenCycleInfo === null => 'setup:calendar',
             !$globalState->configured => 'setup:personal',
             default => 'setup:setup',
         };
 
         return $this->views->render($page, [
             'globalState' => $globalState,
-            'relationConfig' => $relationConfig,
-            'userConfig' => $userConfig,
-            'womenPersonalConfig' => $womenPersonalConfig,
+            'relationInfo' => $relationInfo,
+            'userInfo' => $userInfo,
+            'womenInfo' => $womenInfo,
             'LLMConfig' => $LLMConfig,
-            'womenCycleConfig' => $womenCycleConfig,
+            'womenCycleInfo' => $womenCycleInfo,
         ]);
     }
 }

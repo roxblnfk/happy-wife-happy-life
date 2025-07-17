@@ -7,8 +7,8 @@ namespace App\Module\Common\Config;
 use App\Application\Value\Date;
 use App\Module\Config\Attribute\Config;
 
-#[Config(name: 'women_personal')]
-class WomenPersonConfig implements \JsonSerializable
+#[Config(name: 'women-info')]
+class WomenInfo implements \JsonSerializable
 {
     public function __construct(
         public string $name,

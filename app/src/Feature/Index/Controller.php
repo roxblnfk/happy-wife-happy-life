@@ -6,7 +6,7 @@ namespace App\Feature\Index;
 
 use App\Feature\Setup\Controller as SetupController;
 use App\Module\Common\Config\GlobalStateConfig;
-use App\Module\Common\Config\UserConfig;
+use App\Module\Common\Config\UserInfo;
 use App\Module\Config\ConfigService;
 use Spiral\Prototype\Traits\PrototypeTrait;
 use Spiral\Router\Annotation\Route;
@@ -27,7 +27,7 @@ final class Controller
     ) {}
 
     #[Route(route: '/index', name: self::ROUTE_INDEX, methods: ['GET'])]
-    public function index(?GlobalStateConfig $globalState, ?UserConfig $userConfig): mixed
+    public function index(?GlobalStateConfig $globalState, ?UserInfo $userInfo): mixed
     {
         if ($globalState === null) {
             $globalState = new GlobalStateConfig();
@@ -41,7 +41,7 @@ final class Controller
 
         return $this->views->render('index:index', [
             'router' => $this->router,
-            'userConfig' => $userConfig,
+            'userInfo' => $userInfo,
         ]);
     }
 }
