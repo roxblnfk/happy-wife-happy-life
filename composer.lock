@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec46136738e2f5b4d55265c17446d432",
+    "content-hash": "f30b2991f6cdb4f6f79c0f77e6c6113c",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -5967,12 +5967,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-agent.git",
-                "reference": "58e5b27debcd48a5d2bb7f93cb4cba7bee823255"
+                "reference": "2e2a894a161070c419387b65674c70b33f54bcef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-agent/zipball/58e5b27debcd48a5d2bb7f93cb4cba7bee823255",
-                "reference": "58e5b27debcd48a5d2bb7f93cb4cba7bee823255",
+                "url": "https://api.github.com/repos/symfony/ai-agent/zipball/2e2a894a161070c419387b65674c70b33f54bcef",
+                "reference": "2e2a894a161070c419387b65674c70b33f54bcef",
                 "shasum": ""
             },
             "require": {
@@ -6050,7 +6050,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-16T07:46:25+00:00"
+            "time": "2025-07-17T08:55:01+00:00"
         },
         {
             "name": "symfony/ai-platform",
@@ -6058,12 +6058,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-platform.git",
-                "reference": "82894c9fc7a01a2dcdf97cd3440c7bb777ed9c86"
+                "reference": "17cc7e7a30ce6d688ba80855d750546901867c6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/82894c9fc7a01a2dcdf97cd3440c7bb777ed9c86",
-                "reference": "82894c9fc7a01a2dcdf97cd3440c7bb777ed9c86",
+                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/17cc7e7a30ce6d688ba80855d750546901867c6c",
+                "reference": "17cc7e7a30ce6d688ba80855d750546901867c6c",
                 "shasum": ""
             },
             "require": {
@@ -6146,7 +6146,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-16T07:46:25+00:00"
+            "time": "2025-07-17T08:55:01+00:00"
         },
         {
             "name": "symfony/clock",

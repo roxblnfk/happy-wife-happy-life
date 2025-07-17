@@ -24,8 +24,8 @@
         "spiral/sapi-bridge": "^1.1",
         "spiral/sentry-bridge": "^2.3",
         "spiral/translator": "^3.15",
-        "symfony/ai-agent": "dev-main#58e5b27debcd48a5d2bb7f93cb4cba7bee823255",
-        "symfony/ai-platform": "dev-main#82894c9fc7a01a2dcdf97cd3440c7bb777ed9c86"
+        "symfony/ai-agent": "dev-main",
+        "symfony/ai-platform": "dev-main"
     },
     "require-dev": {
         "spiral/code-style": "^2.2",
