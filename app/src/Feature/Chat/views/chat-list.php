@@ -24,7 +24,7 @@ foreach ($chats as $chat):
                 </div>
             </div>
             <div class="flex-grow-1">
-                <!-- <h6 class="mb-1">--><?php //= \htmlspecialchars($chat->title) ?><!--</h6>-->
+                <!-- <h6 class="mb-1">--><?php //= \htmlspecialchars($chat->title)?><!--</h6>-->
                 <p class="mb-1 text-muted small"><?= \htmlspecialchars($preview) ?></p>
                 <small class="text-muted">
                     <?= $chat->createdAt->format('d.m.Y H:i') ?>

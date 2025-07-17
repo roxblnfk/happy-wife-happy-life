@@ -137,6 +137,7 @@ final class Controller
 
         return $this->views->render('chat:messages', [
             'messages' => $messages,
+            'chatUuid' => $uuid,
         ]);
     }
 
@@ -151,6 +152,15 @@ final class Controller
     {
         $data = $request->getParsedBody();
         $this->chatService->sendMessage($uuid, $data['message']);
+    }
+
+    /**
+     * Removes a message from the chat
+     */
+    #[Route(route: '/chat/<uuid>/remove/<message>', methods: ['POST'])]
+    public function removeMessage(string $uuid, string $message): void
+    {
+        $this->chatService->deleteMessage($uuid, $message);
     }
 
     /**

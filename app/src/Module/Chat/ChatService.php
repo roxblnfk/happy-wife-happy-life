@@ -132,6 +132,27 @@ final class ChatService
         return $this->cache->read($message->requestUuid->toString(), $offset);
     }
 
+    /**
+     * @return void
+     * @throws \Throwable
+     */
+    public function deleteMessage(string|UuidInterface|Chat $chat, string|UuidInterface|Message $message): void
+    {
+        $chat instanceof Chat or $chat = Chat::findByPK($chat) ?? throw new \InvalidArgumentException(
+            'Chat not found.',
+        );
+        $message instanceof Message or $message = Message::findByPK($message) ?? throw new \InvalidArgumentException(
+            'Message not found.',
+        );
+
+        $message->chatUuid->equals($chat->uuid) or throw new \InvalidArgumentException(
+            'Message does not belong to the specified chat.',
+        );
+
+        $message->deleteOrFail();
+        $this->cache->delete($message->uuid->toString());
+    }
+
     private function mergeBags(MessageBagInterface ...$bags): MessageBagInterface
     {
         $final = new MessageBag();
@@ -151,5 +172,4 @@ final class ChatService
 
         return $final;
     }
-
 }

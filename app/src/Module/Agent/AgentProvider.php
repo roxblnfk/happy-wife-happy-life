@@ -29,7 +29,6 @@ interface AgentProvider
      */
     public function getClassByName(string $name): ?string;
 
-
     /**
      * Builds an agent instance by its name.
      *

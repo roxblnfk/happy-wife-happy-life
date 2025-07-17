@@ -104,16 +104,30 @@ use App\Module\Chat\Domain\Chat;
     .message {
         margin-bottom: 1rem;
         max-width: 80%;
+        position: relative;
     }
 
     .message-user {
         margin-left: auto;
     }
 
+    .message-ai {
+        margin-right: auto;
+    }
+
+    /* Контейнер для содержимого сообщения и кнопки удаления */
+    .message-bubble {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
     .message-content {
-    /* render all the line breaks and spaces */
+        /* render all the line breaks and spaces */
         white-space: pre-wrap; /* Preserve whitespace and line breaks */
         word-break: break-word; /* Break long words to prevent overflow */
+        display: block;
+        width: 100%;
     }
 
     .message-user .message-content {
@@ -121,11 +135,6 @@ use App\Module\Chat\Domain\Chat;
         color: white;
         border-radius: 18px 18px 4px 18px;
         padding: 12px 16px;
-        /*text-align: right;*/
-    }
-
-    .message-ai {
-        margin-right: auto;
     }
 
     .message-ai .message-content {
@@ -160,6 +169,64 @@ use App\Module\Chat\Domain\Chat;
 
     .message-ai .message-timestamp {
         text-align: left;
+    }
+
+    /* Кнопка удаления сообщения в правом верхнем углу */
+    .message-delete-btn {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #dee2e6;
+        color: #dc3545;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+        padding: 2px 6px;
+        border-radius: 50%;
+        line-height: 1;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+    }
+
+    .message-delete-btn:hover {
+        color: #a71e2a;
+        background-color: rgba(220, 53, 69, 0.1);
+        border-color: #dc3545;
+        transform: scale(1.1);
+    }
+
+    /* Показываем кнопку удаления при наведении на сообщение */
+    .message:hover .message-delete-btn {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Для AI сообщений используем более светлую кнопку */
+    .message-ai .message-delete-btn {
+        background: rgba(248, 249, 250, 0.95);
+        color: #6c757d;
+        border-color: #dee2e6;
+    }
+
+    .message-ai .message-delete-btn:hover {
+        color: #495057;
+        background-color: rgba(108, 117, 125, 0.1);
+        border-color: #6c757d;
+    }
+
+    /* Для пользовательских сообщений */
+    .message-user .message-delete-btn {
+        background: rgba(255, 255, 255, 0.9);
+        color: #dc3545;
     }
 
     #messages-container {

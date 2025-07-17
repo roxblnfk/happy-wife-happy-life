@@ -27,9 +27,10 @@ class AgentRegistry implements TokenizationListenerInterface, AgentProvider
         private readonly ContainerInterface $container,
     ) {}
 
-    public function buildAgent(string $name): ChatAgent {
+    public function buildAgent(string $name): ChatAgent
+    {
         $class = $this->getClassByName($name) ?? throw new \InvalidArgumentException(
-            "Agent class for name '{$name}' not found."
+            "Agent class for name '{$name}' not found.",
         );
 
         return $this->container->get($class);
