@@ -4,11 +4,12 @@
  * @var array<\App\Module\Chat\Domain\Chat> $chats Array of Chat objects
  */
 foreach ($chats as $chat):
-    $chat->messages;
+    $chat->messages; # Preload messages
     $lastMessage = \end($chat->messages);
-    $preview = $lastMessage ? \substr($lastMessage->message ?? '', 0, 50) : 'Новый чат';
-    if (\strlen($preview) > 47) {
-        $preview = \substr($preview, 0, 47) . '...';
+    $maxLength = 100; # Maximum length for preview text
+    $preview = $lastMessage ? \mb_substr($lastMessage->message ?? '', 0, $maxLength) : 'Новый чат';
+    if (\mb_strlen($preview) > $maxLength - 1) {
+        $preview = \mb_substr($preview, 0, $maxLength - 1) . '…';
     }
     ?>
     <div class="chat-item p-3 border-bottom"
@@ -23,7 +24,7 @@ foreach ($chats as $chat):
                 </div>
             </div>
             <div class="flex-grow-1">
-                <h6 class="mb-1"><?= \htmlspecialchars($chat->title ?? $chat->uuid->toString()) ?></h6>
+                <!-- <h6 class="mb-1">--><?php //= \htmlspecialchars($chat->title) ?><!--</h6>-->
                 <p class="mb-1 text-muted small"><?= \htmlspecialchars($preview) ?></p>
                 <small class="text-muted">
                     <?= $chat->createdAt->format('d.m.Y H:i') ?>

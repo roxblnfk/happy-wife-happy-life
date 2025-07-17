@@ -2,6 +2,7 @@
 /**
  * @var \Spiral\Views\ViewInterface $this
  * @var Chat $chat
+ * @var array<\App\Module\Agent\AgentCard> $agents
  */
 
 use App\Module\Chat\Domain\Chat;
@@ -43,6 +44,35 @@ use App\Module\Chat\Domain\Chat;
              hx-get="/chat/<?= $chat->uuid->toString() ?>/messages">
 <!--             hx-trigger="load"-->
 <!--             hx-swap="innerHTML">-->
+
+            <!-- Agent Prompt Buttons - Show only when no messages -->
+            <div id="agent-prompts" class="agent-prompts-container">
+                <div class="text-center mb-4">
+                    <h6 class="text-muted">Выберите помощника для начала работы</h6>
+                </div>
+
+                <div class="row g-3">
+                    <?php foreach ($agents as $agent): ?>
+                        <div class="col-md-6">
+                            <button type="button"
+                                    class="agent-prompt-btn card h-100 w-100 border-0 shadow-sm"
+                                    hx-post="/chat/init-agent/<?= $chat->uuid->toString() ?>/<?= $agent->alias ?>"
+                            >
+                                <div class="card-body text-start">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="<?= $agent->icon ?> me-2" style="font-size: 1.5rem;"></i>
+                                        <h6 class="card-title mb-0 <?= $agent->color ?>"><?= \htmlspecialchars($agent->name) ?></h6>
+                                    </div>
+                                    <p class="card-text text-muted small mb-0">
+                                        <?= \htmlspecialchars($agent->description) ?>
+                                    </p>
+                                </div>
+                            </button>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
             <!-- Messages will be loaded here -->
         </div>
     </div>
@@ -80,12 +110,18 @@ use App\Module\Chat\Domain\Chat;
         margin-left: auto;
     }
 
+    .message-content {
+    /* render all the line breaks and spaces */
+        white-space: pre-wrap; /* Preserve whitespace and line breaks */
+        word-break: break-word; /* Break long words to prevent overflow */
+    }
+
     .message-user .message-content {
         background-color: #0d6efd;
         color: white;
         border-radius: 18px 18px 4px 18px;
         padding: 12px 16px;
-        text-align: right;
+        /*text-align: right;*/
     }
 
     .message-ai {
@@ -199,6 +235,48 @@ use App\Module\Chat\Domain\Chat;
         opacity: 0.7;
         pointer-events: none;
     }
+
+    /* Agent prompt buttons styling */
+    .agent-prompts-container {
+        padding: 2rem 1rem;
+    }
+
+    .agent-prompt-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+    }
+
+    .agent-prompt-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+        border-color: #0d6efd !important;
+    }
+
+    .agent-prompt-btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+
+    .agent-prompt-btn .card-body {
+        padding: 1.25rem;
+    }
+
+    .agent-prompt-btn .card-title {
+        color: #212529;
+        font-weight: 600;
+    }
+
+    .agent-prompt-btn:hover .card-title {
+        color: #0d6efd;
+    }
+
+    /* Hide agent prompts when messages are present */
+    .has-messages .agent-prompts-container {
+        display: none;
+    }
 </style>
 
 <script>
@@ -246,6 +324,26 @@ use App\Module\Chat\Domain\Chat;
                 return;
             }
 
+            // Function to check if chat has messages and toggle agent prompts
+            function toggleAgentPrompts() {
+                const messages = messagesList.querySelectorAll('.message[data-message-uuid]');
+                const agentPromptsContainer = document.getElementById('agent-prompts');
+
+                if (messages.length > 0) {
+                    // Hide agent prompts when messages exist
+                    messagesList.classList.add('has-messages');
+                    if (agentPromptsContainer) {
+                        agentPromptsContainer.style.display = 'none';
+                    }
+                } else {
+                    // Show agent prompts when no messages
+                    messagesList.classList.remove('has-messages');
+                    if (agentPromptsContainer) {
+                        agentPromptsContainer.style.display = 'block';
+                    }
+                }
+            }
+
             // Auto-scroll to bottom when new messages arrive
             function scrollToBottom() {
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -272,7 +370,7 @@ use App\Module\Chat\Domain\Chat;
             // Handle form submission state
             function setFormSubmittingState(submitting) {
                 isFormSubmitting = submitting;
-                
+
                 if (submitting) {
                     messageForm.classList.add('sending-state');
                     sendButton.disabled = true;
@@ -373,7 +471,13 @@ use App\Module\Chat\Domain\Chat;
                             // Initialize positions for any new pending messages
                             initializePendingMessagePositions();
 
+                            // Check and toggle agent prompts visibility
+                            toggleAgentPrompts();
+
                             setTimeout(scrollToBottom, 50);
+                        } else {
+                            // No messages returned, ensure agent prompts are visible
+                            toggleAgentPrompts();
                         }
                     })
                     .catch(error => {
@@ -509,13 +613,13 @@ use App\Module\Chat\Domain\Chat;
 
             messageForm.addEventListener('htmx:afterRequest', function(evt) {
                 setFormSubmittingState(false);
-                
+
                 if (evt.detail.xhr.status === 200) {
                     // Success - clear form and stored text
                     textarea.value = '';
                     pendingMessageText = '';
                     adjustTextareaHeight();
-                    
+
                     // Trigger immediate polling for new messages
                     setTimeout(pollNewMessages, 100);
                 } else {
@@ -523,8 +627,20 @@ use App\Module\Chat\Domain\Chat;
                     textarea.value = pendingMessageText;
                     adjustTextareaHeight();
                     setFormError();
-                    
+
                     console.error('Message send failed with status:', evt.detail.xhr.status);
+                }
+            });
+
+            // Handle agent prompt button clicks
+            document.addEventListener('htmx:afterRequest', function(evt) {
+                if (evt.detail.target.id === 'messages-list') {
+                    // Check if this was an agent initialization request
+                    if (evt.detail.xhr.responseURL && evt.detail.xhr.responseURL.includes('/init-agent/')) {
+                        // Agent was initialized, hide prompts and trigger message polling
+                        toggleAgentPrompts();
+                        setTimeout(pollNewMessages, 100);
+                    }
                 }
             });
 
@@ -534,6 +650,9 @@ use App\Module\Chat\Domain\Chat;
             // Start polling intervals
             messagesPollingInterval = setInterval(pollNewMessages, 300);
             tokensPollingInterval = setInterval(pollPendingMessages, 300);
+
+            // Initial check for agent prompts visibility
+            setTimeout(toggleAgentPrompts, 100);
 
             // Initial scroll to bottom
             setTimeout(scrollToBottom, 200);

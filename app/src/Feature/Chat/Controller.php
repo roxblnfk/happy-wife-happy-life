@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Feature\Chat;
 
+use App\Module\Agent\AgentProvider;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\Message;
@@ -27,9 +28,9 @@ final class Controller
     public const ROUTE_CHAT = 'chat-view';
     public const ROUTE_LIST = 'chat-list';
     public const ROUTE_SEND = 'chat-send';
-    public const ROUTE_MESSAGES = 'chat-messages';
     public const ROUTE_MESSAGES_SINCE = 'chat-messages-since';
     public const ROUTE_MESSAGE_TOKENS = 'chat-message-tokens';
+    public const ROUTE_INIT_AGENT = 'chat-init-agent';
 
     public function __construct(
         private readonly ChatService $chatService,
@@ -65,11 +66,24 @@ final class Controller
      * Response: HTML content for chat area
      */
     #[Route(route: '/chat/create', name: self::ROUTE_CREATE, methods: ['POST'])]
-    public function createChat(): string
+    public function createChat(AgentProvider $agentProvider): string
     {
         return $this->views->render('chat:chat', [
             'chat' => $this->chatService->createChat(),
+            'agents' => $agentProvider->getAgentCards(),
         ]);
+    }
+
+    /**
+     * Initializes the agent for the chat session
+     * This method can be used to set up any necessary agent state or configuration
+     * Currently does nothing, but can be extended in the future
+     */
+    #[Route(route: '/chat/init-agent/<uuid>/<name>', name: self::ROUTE_INIT_AGENT, methods: ['POST'])]
+    public function initAgent(string $uuid, string $name, AgentProvider $agentProvider): void
+    {
+        $chat = Chat::findByPK($uuid) ?? throw new \RuntimeException('Chat not found.');
+        $chat->messages === [] and $agentProvider->buildAgent($name)->chatInit($chat);
     }
 
     /**
@@ -90,11 +104,15 @@ final class Controller
      * Response: HTML content for chat area
      */
     #[Route(route: '/chat/<uuid>', name: self::ROUTE_CHAT, methods: ['GET'])]
-    public function getChat(string $uuid): string
+    public function getChat(string $uuid, AgentProvider $agentProvider): string
     {
         $chat = Chat::findByPK($uuid) ?? throw new \RuntimeException('Chat not found.');
+        $agents = $chat->messages === []
+            ? $agentProvider->getAgentCards()
+            : [];
         return $this->views->render('chat:chat', [
             'chat' => $chat,
+            'agents' => $agents,
         ]);
     }
 
