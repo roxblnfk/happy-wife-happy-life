@@ -101,7 +101,7 @@ final class LLM implements \App\Module\LLM\LLM
         ?callable $onComplete = null,
         ?callable $onFinish = null,
     ): Request {
-        $response = $this->rawRequest($input, $options);
+        $response = $this->rawRequest($input, ['stream' => true] + $options);
         $request = Request::create(
             $this->model->getName(),
             $input,
@@ -116,9 +116,8 @@ final class LLM implements \App\Module\LLM\LLM
             $onFinish,
         ): \Generator {
             $request = null;
+            $result = '';
             try {
-                # todo Wait generators from Symfony side
-                /*
                 $generator = $response->asStream();
                 while ($generator->valid()) {
                     $chunk = $generator->current();
@@ -133,22 +132,15 @@ final class LLM implements \App\Module\LLM\LLM
                     } catch (\Throwable) {
                         # Do nothing
                     }
+                    $result .= $chunk;
                     yield;
+                    $generator->next();
                 }
-                /*/
-                yield
-                $chunk = $response->asText();
-                try {
-                    $onProgress === null or $onProgress($uuid, $chunk);
-                } catch (\Throwable) {
-                    # Do nothing
-                }
-                // */
 
                 $request = Request::findByPK($uuid) ?? throw new \RuntimeException(
                     "Request with UUID `{$uuid}` not found.",
                 );
-                $request->output = $response->asText();
+                $request->output = $result;
                 $request->status = RequestStatus::Completed;
                 $request->saveOrFail();
 
@@ -157,6 +149,7 @@ final class LLM implements \App\Module\LLM\LLM
                 $request = Request::findByPK($uuid) ?? throw new \RuntimeException(
                     "Request with UUID `{$uuid}` not found.",
                 );
+                $request->output = $result;
                 $request->status = RequestStatus::Failed;
 
                 $onError === null or $onError($uuid, $e);

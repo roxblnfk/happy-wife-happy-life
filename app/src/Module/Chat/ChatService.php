@@ -67,7 +67,7 @@ final class ChatService
             $aiMessage = Message::create($chat, null, false);
             $messageId = $aiMessage->uuid;
             $aiMessage->saveOrFail();
-            $request = $this->llm->callAgent(
+            $request = $this->llm->request(
                 new MessageBag(\Symfony\AI\Platform\Message\Message::ofUser($message->message)),
                 options: [],
                 onProgress: function (UuidInterface $requestUuid, string $chunk) use ($messageId): void {

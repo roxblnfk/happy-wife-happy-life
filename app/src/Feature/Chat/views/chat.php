@@ -49,20 +49,21 @@ use App\Module\Chat\Domain\Chat;
 
     <!-- Message Input -->
     <div class="bg-white border-top p-3">
-        <form hx-post="/chat/<?= $chat->uuid->toString() ?>/send"
+        <form id="message-form"
+              hx-post="/chat/<?= $chat->uuid->toString() ?>/send"
               hx-target="#messages-list"
               hx-swap="beforeend"
-              hx-on::after-request="this.reset()"
               class="d-flex gap-2">
             <div class="flex-grow-1">
                 <textarea class="form-control"
                           name="message"
+                          id="message-textarea"
                           placeholder="Введите ваше сообщение..."
                           rows="1"
                           style="resize: none; min-height: 40px;"
                           required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary px-3">
+            <button type="submit" class="btn btn-primary px-3" id="send-button">
                 <i class="bi bi-send"></i>
             </button>
         </form>
@@ -187,6 +188,17 @@ use App\Module\Chat\Domain\Chat;
             opacity: 1;
         }
     }
+
+    /* Error state for form */
+    .form-error {
+        border-color: #dc3545 !important;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+    }
+
+    .sending-state {
+        opacity: 0.7;
+        pointer-events: none;
+    }
 </style>
 
 <script>
@@ -209,6 +221,10 @@ use App\Module\Chat\Domain\Chat;
         let isPollingMessages = false;
         let isPollingTokens = false;
 
+        // Form state tracking
+        let pendingMessageText = '';
+        let isFormSubmitting = false;
+
         // Position tracking for pending messages
         const messagePositions = new Map();
 
@@ -221,9 +237,11 @@ use App\Module\Chat\Domain\Chat;
 
             const messagesContainer = document.getElementById('messages-container');
             const messagesList = document.getElementById('messages-list');
-            const textarea = document.querySelector('textarea[name="message"]');
+            const textarea = document.getElementById('message-textarea');
+            const messageForm = document.getElementById('message-form');
+            const sendButton = document.getElementById('send-button');
 
-            if (!messagesContainer || !messagesList) {
+            if (!messagesContainer || !messagesList || !textarea || !messageForm) {
                 console.error('Required chat elements not found');
                 return;
             }
@@ -234,22 +252,47 @@ use App\Module\Chat\Domain\Chat;
             }
 
             // Auto-resize textarea
-            if (textarea) {
-                textarea.addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-                });
+            function adjustTextareaHeight() {
+                textarea.style.height = 'auto';
+                textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+            }
 
-                // Submit on Enter (but allow Shift+Enter for new line)
-                textarea.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        const form = this.closest('form');
-                        if (this.value.trim()) {
-                            htmx.trigger(form, 'submit');
-                        }
+            textarea.addEventListener('input', adjustTextareaHeight);
+
+            // Submit on Enter (but allow Shift+Enter for new line)
+            textarea.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (this.value.trim() && !isFormSubmitting) {
+                        htmx.trigger(messageForm, 'submit');
                     }
-                });
+                }
+            });
+
+            // Handle form submission state
+            function setFormSubmittingState(submitting) {
+                isFormSubmitting = submitting;
+                
+                if (submitting) {
+                    messageForm.classList.add('sending-state');
+                    sendButton.disabled = true;
+                    textarea.disabled = true;
+                } else {
+                    messageForm.classList.remove('sending-state');
+                    sendButton.disabled = false;
+                    textarea.disabled = false;
+                }
+            }
+
+            // Clear form error state
+            function clearFormError() {
+                textarea.classList.remove('form-error');
+            }
+
+            // Set form error state
+            function setFormError() {
+                textarea.classList.add('form-error');
+                setTimeout(clearFormError, 3000); // Clear error after 3 seconds
             }
 
             // Function to get last message UUID from DOM
@@ -455,18 +498,45 @@ use App\Module\Chat\Domain\Chat;
                         isPollingTokens = false;
                     });
             }
+
+            // Handle form submission events
+            messageForm.addEventListener('htmx:beforeRequest', function(evt) {
+                // Store the message text before sending
+                pendingMessageText = textarea.value.trim();
+                setFormSubmittingState(true);
+                clearFormError();
+            });
+
+            messageForm.addEventListener('htmx:afterRequest', function(evt) {
+                setFormSubmittingState(false);
+                
+                if (evt.detail.xhr.status === 200) {
+                    // Success - clear form and stored text
+                    textarea.value = '';
+                    pendingMessageText = '';
+                    adjustTextareaHeight();
+                    
+                    // Trigger immediate polling for new messages
+                    setTimeout(pollNewMessages, 100);
+                } else {
+                    // Error - restore message text and show error
+                    textarea.value = pendingMessageText;
+                    adjustTextareaHeight();
+                    setFormError();
+                    
+                    console.error('Message send failed with status:', evt.detail.xhr.status);
+                }
+            });
+
             // Immediate initial load of messages
             pollNewMessages();
 
-            // Start polling intervals with longer interval to reduce load
-            messagesPollingInterval = setInterval(pollNewMessages, 500);
-            tokensPollingInterval = setInterval(pollPendingMessages, 500);
+            // Start polling intervals
+            messagesPollingInterval = setInterval(pollNewMessages, 300);
+            tokensPollingInterval = setInterval(pollPendingMessages, 300);
 
             // Initial scroll to bottom
-            setTimeout(scrollToBottom, 200); // Increased delay for initial load
-
-            // Start polling intervals
-
+            setTimeout(scrollToBottom, 200);
         }
 
         // Cleanup function
@@ -482,9 +552,11 @@ use App\Module\Chat\Domain\Chat;
             // Сбрасываем флаги состояния
             isPollingMessages = false;
             isPollingTokens = false;
+            isFormSubmitting = false;
             isInitialized = false;
 
-            // Clear position tracking
+            // Clear stored state
+            pendingMessageText = '';
             messagePositions.clear();
         }
 
@@ -503,15 +575,6 @@ use App\Module\Chat\Domain\Chat;
                     setTimeout(() => {
                         messagesContainer.scrollTop = messagesContainer.scrollHeight;
                     }, 50);
-                }
-            }
-        });
-
-        document.body.addEventListener('htmx:afterRequest', function(evt) {
-            if (evt.detail.elt.matches('form') && evt.detail.xhr.status === 200) {
-                const textarea = document.querySelector('textarea[name="message"]');
-                if (textarea) {
-                    textarea.style.height = 'auto';
                 }
             }
         });

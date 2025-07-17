@@ -129,14 +129,10 @@ final class Controller
      * Response: HTML content for messages list
      */
     #[Route(route: '/chat/<uuid>/send', name: self::ROUTE_SEND, methods: ['POST'])]
-    public function sendMessage(string $uuid, ServerRequestInterface $request): string
+    public function sendMessage(string $uuid, ServerRequestInterface $request): void
     {
         $data = $request->getParsedBody();
         $this->chatService->sendMessage($uuid, $data['message'], isHuman: true);
-
-        return $this->views->render('chat:messages', [
-            'messages' => [],
-        ]);
     }
 
     /**
