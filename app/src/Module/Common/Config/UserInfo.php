@@ -7,7 +7,7 @@ namespace App\Module\Common\Config;
 use App\Module\Config\Attribute\Config;
 
 #[Config(name: 'user-info')]
-class UserInfo implements \JsonSerializable
+class UserInfo implements \JsonSerializable, \Stringable
 {
     /**
      * @param non-empty-string $name
@@ -20,5 +20,15 @@ class UserInfo implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return \get_object_vars($this);
+    }
+
+    public function __toString(): string
+    {
+        return <<<TEXT
+            ---
+            User Info:
+            Name: {$this->name}
+            ---
+            TEXT;
     }
 }
