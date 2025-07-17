@@ -9,12 +9,12 @@ use App\Module\Chat\Domain\Message;
 use App\Module\Chat\Domain\MessageRole;
 use App\Module\Chat\Domain\MessageStatus;
 use App\Module\Chat\Internal\StreamCache;
+use App\Module\Context\ChatHistory;
 use App\Module\LLM\Internal\Domain\Request;
 use App\Module\LLM\Internal\Domain\RequestStatus;
 use App\Module\LLM\LLM;
 use Ramsey\Uuid\UuidInterface;
 use Spiral\Core\Attribute\Proxy;
-use Symfony\AI\Platform\Message\MessageBag;
 
 final class ChatService
 {
@@ -65,11 +65,15 @@ final class ChatService
         $message->saveOrFail();
 
         if ($role === MessageRole::User) {
+            $history = (new ChatHistory($chat))->getMessageBag();
+            $history->add(\Symfony\AI\Platform\Message\Message::forSystem('You are a silent assistant that respond only "yes" or "no" even if the user asks for more information or does not ask a question.'));
+
             $aiMessage = Message::create($chat, null, MessageRole::Assistant);
             $messageId = $aiMessage->uuid;
             $aiMessage->saveOrFail();
+
             $request = $this->llm->request(
-                new MessageBag(\Symfony\AI\Platform\Message\Message::ofUser($message->message)),
+                $history,
                 options: [],
                 onProgress: function (UuidInterface $requestUuid, string $chunk) use ($messageId): void {
                     $this->cache->write($messageId->toString(), $chunk, true);
