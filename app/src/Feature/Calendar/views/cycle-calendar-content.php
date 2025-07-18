@@ -7,6 +7,7 @@
 
 use App\Application\Value\Date;
 use App\Feature\Calendar\Controller;
+
 ?>
 
 <!-- Current Day Info Header -->
@@ -82,8 +83,8 @@ use App\Feature\Calendar\Controller;
             <?php
             $dayCounter = 0;
 
-            // Start calendar grid
-            for ($week = 0; $week < 6; $week++): ?>
+// Start calendar grid
+for ($week = 0; $week < 6; $week++): ?>
                 <div class="row g-1 mb-1">
                     <?php for ($dayOfWeek = 0; $dayOfWeek < 7; $dayOfWeek++):
                         $cellIndex = $week * 7 + $dayOfWeek;
@@ -108,7 +109,7 @@ use App\Feature\Calendar\Controller;
                                      hx-swap="innerHTML"
                                      hx-trigger="click"
                                      onclick="openDayDetailsModal()"
-                                     title="<?= $cycleDay ? '<strong>День ' . $cycleDay->dayOfCycle . ' цикла</strong><br>' . htmlspecialchars($cycleDay->getPhaseName()) . '<br>' . htmlspecialchars($cycleDay->getDangerLevelName()) : '' ?>">
+                                     title="<?= $cycleDay ? '<strong>День ' . $cycleDay->dayOfCycle . ' цикла</strong><br>' . \htmlspecialchars($cycleDay->getPhaseName()) . '<br>' . \htmlspecialchars($cycleDay->getDangerLevelName()) : '' ?>">
 
                                     <!-- Top row with icon and day number -->
                                     <div class="d-flex justify-content-between align-items-start w-100">
@@ -155,7 +156,7 @@ use App\Feature\Calendar\Controller;
                 if ($dayCounter >= $calendarInfo->daysInMonth) {
                     break;
                 }
-                ?>
+    ?>
             <?php endfor; ?>
         </div>
     </div>
@@ -170,6 +171,22 @@ use App\Feature\Calendar\Controller;
         // Show loading state
         modalContent.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Загрузка...</span></div></div>';
         modal.show();
+    }
+
+    // Clear modal content when it's hidden
+    const modalElement = document.getElementById('dayDetailsModal');
+    if (modalElement) {
+        // Remove existing event listener to avoid duplicates
+        modalElement.removeEventListener('hidden.bs.modal', clearModalContent);
+        // Add new event listener
+        modalElement.addEventListener('hidden.bs.modal', clearModalContent);
+    }
+
+    function clearModalContent() {
+        const modalContent = document.getElementById('dayDetailsContent');
+        if (modalContent) {
+            modalContent.innerHTML = '';
+        }
     }
 
     // Handle HTMX indicators

@@ -44,8 +44,25 @@ use App\Module\Common\Config\UserInfo;
 <!-- Main Dashboard -->
 <div class="container-fluid">
     <div class="row g-4">
+        <!-- Closest events Widget -->
+        <div>
+            <div hx-get="<?= $router->uri(CalendarController::ROUTE_CLOSEST_DATES)->__toString() ?>"
+                 hx-trigger="load"
+                 hx-indicator="#calendar-spinner">
+                <!-- Loading spinner -->
+                <div id="calendar-spinner" class="card h-100 d-flex align-items-center justify-content-center" style="border-radius: 12px; min-height: 300px;">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Загрузка событий...</span>
+                        </div>
+                        <p class="text-muted mt-2 mb-0">Загрузка событий...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Calendar Widget -->
-        <div class="col-lg-6 col-xl-4">
+        <div>
             <div hx-get="<?= $router->uri(CalendarController::ROUTE_CYCLE_CALENDAR) ?>"
                  hx-trigger="load"
                  hx-indicator="#calendar-spinner">

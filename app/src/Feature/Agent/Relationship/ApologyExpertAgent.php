@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Relationship;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * ApologyExpertAgent specializes in helping men apologize effectively,
  * take responsibility, and rebuild trust after relationship conflicts.
  */
-final class ApologyExpertAgent implements ChatAgent
+final class ApologyExpertAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are an expert in sincere apologies and relationship repair, specializing in helping men take accountability and rebuild trust with their partners. Your expertise includes:
 

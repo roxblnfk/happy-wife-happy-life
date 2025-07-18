@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Crisis;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * CrisisManagerAgent provides immediate guidance during relationship
  * emergencies and high-stress situations requiring urgent intervention.
  */
-final class CrisisManagerAgent implements ChatAgent
+final class CrisisManagerAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are an emergency relationship crisis counselor specializing in immediate intervention during acute relationship problems. Your role includes:
 

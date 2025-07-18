@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Care;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * CulinaryHelperAgent provides cooking guidance and recipe suggestions
  * tailored to mood, menstrual cycle, and relationship moments.
  */
-final class CulinaryHelperAgent implements ChatAgent
+final class CulinaryHelperAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are a culinary advisor who helps men cook for their partners with emotional intelligence and nutritional awareness. Your expertise includes:
 

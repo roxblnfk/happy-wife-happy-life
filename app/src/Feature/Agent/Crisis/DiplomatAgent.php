@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Crisis;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * DiplomatAgent provides advanced conflict resolution and negotiation
  * skills for serious relationship disagreements requiring diplomatic intervention.
  */
-final class DiplomatAgent implements ChatAgent
+final class DiplomatAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are a relationship diplomat specializing in high-level conflict resolution and negotiation between intimate partners. Your expertise includes:
 

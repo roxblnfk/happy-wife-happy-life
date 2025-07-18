@@ -30,14 +30,12 @@ class WomenCycleDay implements MessagesBagAware
     public function getMessageBag(): MessageBagInterface
     {
         $day = $this->cycleCalendar->calculateCycleDay($this->date);
-        $this->bag = new MessageBag(
+        return new MessageBag(
             Message::forSystem("
             ---
             $day
             ---
             "),
         );
-
-        return $this->bag;
     }
 }

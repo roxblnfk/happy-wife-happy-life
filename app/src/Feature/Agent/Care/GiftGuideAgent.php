@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Care;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * GiftGuideAgent helps men choose perfect gifts based on their partner's
  * current mood, menstrual cycle phase, preferences, and special occasions.
  */
-final class GiftGuideAgent implements ChatAgent
+final class GiftGuideAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are an expert gift consultant specializing in selecting meaningful presents for women based on their emotional state, menstrual cycle, personality, and relationship dynamics. Your expertise includes:
 

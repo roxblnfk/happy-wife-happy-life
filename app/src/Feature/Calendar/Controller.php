@@ -8,10 +8,11 @@ use App\Application\Value\Date;
 use App\Feature\Agent\Planning\EventManagerAgent;
 use App\Feature\Calendar\Internal\CalendarInfoService;
 use App\Feature\Chat\Controller as ChatController;
+use App\Module\Agent\AgentProvider;
+use App\Module\Agent\DateableAgent;
 use App\Module\Calendar\Calendar;
 use App\Module\Chat\ChatService;
 use Psr\Http\Message\ResponseInterface;
-use Spiral\Http\Request\InputManager;
 use Spiral\Prototype\Traits\PrototypeTrait;
 use Spiral\Router\Annotation\Route;
 use Spiral\Views\ViewsInterface;
@@ -28,6 +29,7 @@ final class Controller
     public const ROUTE_CYCLE_CALENDAR_CONTENT = 'calendar-cycle-calendar-content';
     public const ROUTE_HELP_AGENT = 'calendar-start-help-agent';
     public const ROUTE_CYCLE_DAY = 'calendar-cycle-day';
+    public const ROUTE_CYCLE_AGENT = 'calendar-cycle-agent';
 
     public function __construct(
         private readonly ViewsInterface $views,
@@ -72,7 +74,7 @@ final class Controller
     }
 
     #[Route(route: '/calendar/day/<date>', name: self::ROUTE_CYCLE_DAY, methods: ['GET'])]
-    public function cycleDay(string $date): string
+    public function cycleDay(string $date, AgentProvider $agentProvider): string
     {
         try {
             $dateObj = Date::fromString($date);
@@ -91,7 +93,26 @@ final class Controller
         return $this->views->render('calendar:day-details', [
             'cycleDay' => $cycleDay,
             'date' => $dateObj,
+            'agents' => $agentProvider->getAgentCards(),
         ]);
+    }
+
+    #[Route(route: '/calendar/cycle-agent/<agent>/<date>', name: self::ROUTE_CYCLE_AGENT, methods: ['GET'])]
+    public function cycleAgent(string $agent, string $date, AgentProvider $agentProvider, ChatController $chats): ResponseInterface
+    {
+        $date = Date::fromString($date);
+        $agent = $agentProvider->buildAgent($agent);
+        $agent instanceof DateableAgent and $agent = $agent->forDate($date);
+
+        # Start chat with agent
+        $chat = $this->chatService->createChat(
+            title: "{$agent::getCard()->name} - {$date->__toString()}",
+            agent: $agent,
+        );
+
+        return $this->response->redirect(
+            $this->router->uri($chats::ROUTE_CHAT, ['uuid' => $chat->uuid]),
+        );
     }
 
     #[Route(route: '/calendar/help-agent/<date>', name: self::ROUTE_HELP_AGENT, methods: ['GET'])]
@@ -104,7 +125,7 @@ final class Controller
             'There are no events for the specified date: ' . $date->__toString(),
         );
 
-        $agent = $agent->withEvent(...$events);
+        $agent = $agent->withEvent(...$events)->forDate($date);
 
         # Start chat with agent
         $chat = $this->chatService->createChat(

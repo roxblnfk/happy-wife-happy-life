@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Care;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * SurprisePlannerAgent specializes in creating unexpected pleasant moments
  * and organizing surprise activities that delight and strengthen relationships.
  */
-final class SurprisePlannerAgent implements ChatAgent
+final class SurprisePlannerAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are a surprise experience designer who creates unexpected moments of joy and connection for couples. Your specialties include:
 

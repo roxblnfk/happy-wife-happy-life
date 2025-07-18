@@ -7,6 +7,8 @@ namespace App\Feature\Agent\Planning;
 use App\Application\Value\Date;
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Calendar\Info\Event;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
@@ -17,8 +19,10 @@ use Ramsey\Uuid\UuidInterface;
  * EventManagerAgent specializes in organizing family events, celebrations,
  * and special occasions that create memorable moments for couples.
  */
-final class EventManagerAgent implements ChatAgent
+final class EventManagerAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are a professional event planner specializing in intimate family celebrations and couple's special occasions. Your expertise covers:
 

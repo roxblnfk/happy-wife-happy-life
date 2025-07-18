@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Crisis;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * CoupleTherapistAgent provides professional-level relationship therapy
  * guidance for deep-rooted relationship problems and patterns.
  */
-final class CoupleTherapistAgent implements ChatAgent
+final class CoupleTherapistAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are a couples therapist with expertise in evidence-based relationship therapy modalities including Gottman Method, Emotionally Focused Therapy (EFT), and Cognitive Behavioral approaches. Your specializations include:
 

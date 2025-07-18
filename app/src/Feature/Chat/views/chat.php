@@ -373,6 +373,17 @@ use App\Module\Chat\Domain\Chat;
         // Position tracking for pending messages
         const messagePositions = new Map();
 
+        // Функция проверки существования контейнера чата
+        function chatContainerExists() {
+            return document.contains(chatContainer) && document.getElementById('chat-container');
+        }
+
+        // Функция проверки существования конкретного сообщения в DOM
+        function messageExists(messageUuid) {
+            const messageEl = document.querySelector(`.message[data-message-uuid="${messageUuid}"]`);
+            return messageEl && document.contains(messageEl);
+        }
+
         function initializeChat() {
             if (isInitialized) {
                 return;
@@ -503,6 +514,13 @@ use App\Module\Chat\Domain\Chat;
 
             // Poll for new messages
             function pollNewMessages() {
+                // Проверяем, что контейнер чата все еще существует
+                if (!chatContainerExists()) {
+                    console.log('Chat container no longer exists, stopping messages polling');
+                    cleanup();
+                    return;
+                }
+
                 // Пропускаем, если уже выполняется запрос
                 if (isPollingMessages) {
                     return;
@@ -526,6 +544,13 @@ use App\Module\Chat\Domain\Chat;
                         return response.text();
                     })
                     .then(html => {
+                        // Повторно проверяем существование контейнера после получения ответа
+                        if (!chatContainerExists()) {
+                            console.log('Chat container removed during messages polling');
+                            cleanup();
+                            return;
+                        }
+
                         if (html.trim()) {
                             if (currentLastUuid) {
                                 // Append new messages for incremental updates
@@ -557,6 +582,13 @@ use App\Module\Chat\Domain\Chat;
 
             // Poll for pending message tokens
             function pollPendingMessages() {
+                // Проверяем, что контейнер чата все еще существует
+                if (!chatContainerExists()) {
+                    console.log('Chat container no longer exists, stopping tokens polling');
+                    cleanup();
+                    return;
+                }
+
                 // Пропускаем, если уже выполняется запрос
                 if (isPollingTokens) {
                     return;
@@ -581,6 +613,14 @@ use App\Module\Chat\Domain\Chat;
                         return Promise.resolve();
                     }
 
+                    // Проверяем, что сообщение все еще существует в DOM
+                    if (!messageExists(messageUuid)) {
+                        console.log(`Message ${messageUuid} no longer exists, skipping token polling`);
+                        // Удаляем позицию для несуществующего сообщения
+                        messagePositions.delete(messageUuid);
+                        return Promise.resolve();
+                    }
+
                     // Get current position for this message
                     const currentPosition = messagePositions.get(messageUuid) || 0;
 
@@ -595,6 +635,13 @@ use App\Module\Chat\Domain\Chat;
                             return response.json();
                         })
                         .then(data => {
+                            // Повторно проверяем существование сообщения после получения ответа
+                            if (!messageExists(messageUuid)) {
+                                console.log(`Message ${messageUuid} removed during token polling`);
+                                messagePositions.delete(messageUuid);
+                                return;
+                            }
+
                             const contentEl = messageEl.querySelector('.message-content');
                             if (!contentEl) {
                                 console.warn('Message content element not found');

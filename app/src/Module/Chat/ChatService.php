@@ -6,6 +6,8 @@ namespace App\Module\Chat;
 
 use App\Module\Agent\AgentProvider;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Calendar\CycleCalendar;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\Message;
 use App\Module\Chat\Domain\MessageRole;
@@ -32,6 +34,7 @@ final class ChatService
         private readonly LLM $llm,
         private readonly FactoryInterface $factory,
         private readonly AgentProvider $agentProvider,
+        private readonly CycleCalendar $cycleCalendar,
     ) {}
 
     /**
@@ -57,6 +60,13 @@ final class ChatService
 
         # Initialize the agent with the chat
         $agent->chatInit($chat);
+
+        # Add Wonmen Cycle Day context if the agent is a DateableAgent
+        if ($agent instanceof DateableAgent and null !== $forDate = $agent->getDate()) {
+            $cycleDay = $this->cycleCalendar->calculateCycleDay($forDate);
+            $this->sendMessage($chat, $cycleDay->__toString(), MessageRole::System);
+        }
+
         $chat->saveOrFail();
         return $chat;
     }
@@ -156,7 +166,6 @@ final class ChatService
     }
 
     /**
-     * @return void
      * @throws \Throwable
      */
     public function deleteMessage(string|UuidInterface|Chat $chat, string|UuidInterface|Message $message): void

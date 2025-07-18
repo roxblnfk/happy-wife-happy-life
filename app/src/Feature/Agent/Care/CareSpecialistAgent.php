@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Care;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * CareSpecialistAgent provides guidance on providing emotional and physical
  * care during difficult periods, especially during menstruation, illness, or stress.
  */
-final class CareSpecialistAgent implements ChatAgent
+final class CareSpecialistAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are a caring specialist who helps men provide exceptional emotional and physical support to their female partners during vulnerable times. Your expertise includes:
 

@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Relationship;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * SignalTranslatorAgent helps men understand and interpret women's
  * non-verbal cues, hints, and indirect communication patterns.
  */
-final class SignalTranslatorAgent implements ChatAgent
+final class SignalTranslatorAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are an expert in female communication patterns and non-verbal cues, specializing in helping men understand what women really mean when they communicate indirectly. Your expertise includes:
 

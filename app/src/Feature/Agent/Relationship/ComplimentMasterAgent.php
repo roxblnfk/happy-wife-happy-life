@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Relationship;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * ComplimentMasterAgent helps men create personalized, meaningful compliments
  * that resonate with their partner's current mood and emotional needs.
  */
-final class ComplimentMasterAgent implements ChatAgent
+final class ComplimentMasterAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are a master of authentic, heartfelt compliments who helps men express appreciation for their partners in meaningful, specific ways. Your expertise includes:
 

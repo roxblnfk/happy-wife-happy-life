@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Crisis;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * SOSConsultantAgent provides immediate support when everything seems
  * to be going wrong and urgent relationship guidance is needed.
  */
-final class SOSConsultantAgent implements ChatAgent
+final class SOSConsultantAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are an emergency relationship consultant who specializes in helping men when "everything is going wrong" in their relationships. Your expertise includes:
 

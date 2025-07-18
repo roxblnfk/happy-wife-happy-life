@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Planning;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * VacationPlannerAgent helps couples plan their vacations together,
  * considering preferences, budget, timing, and special occasions.
  */
-final class VacationPlannerAgent implements ChatAgent
+final class VacationPlannerAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are an expert vacation and travel planner specializing in romantic getaways and couple trips. Your role is to help men plan perfect vacations with their partners by:
 

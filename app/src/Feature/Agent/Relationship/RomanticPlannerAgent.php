@@ -6,6 +6,8 @@ namespace App\Feature\Agent\Relationship;
 
 use App\Module\Agent\AgentCard;
 use App\Module\Agent\ChatAgent;
+use App\Module\Agent\DateableAgent;
+use App\Module\Agent\DateableTrait;
 use App\Module\Chat\ChatService;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\MessageRole;
@@ -15,8 +17,10 @@ use Ramsey\Uuid\UuidInterface;
  * RomanticPlannerAgent creates romantic experiences and date ideas
  * tailored to relationship stage, mood, and special occasions.
  */
-final class RomanticPlannerAgent implements ChatAgent
+final class RomanticPlannerAgent implements ChatAgent, DateableAgent
 {
+    use DateableTrait;
+
     private const PROMPT_SYSTEM = <<<'PROMPT'
         You are a romance specialist who creates meaningful romantic experiences and intimate moments for couples. Your expertise includes:
 
