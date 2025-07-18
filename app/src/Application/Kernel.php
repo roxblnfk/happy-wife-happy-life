@@ -8,6 +8,7 @@ use App\Application\Bootloader\AppBootloader;
 use App\Application\Bootloader\FormsBootloader;
 use App\Feature;
 use App\Module\Agent\AgentBootloader;
+use App\Module\Calendar\CalendarBootloader;
 use App\Module\Chat\ChatBootloader;
 use App\Module\Config\ConfigBootloader;
 use App\Module\LLM\LLMBootloader;
@@ -104,12 +105,14 @@ class Kernel extends \Spiral\Framework\Kernel
             Feature\Setup\Bootloader::class,
             Feature\Index\Bootloader::class,
             Feature\Chat\Bootloader::class,
+            Feature\Calendar\Bootloader::class,
 
             // Modules
             ConfigBootloader::class,
             ChatBootloader::class,
             LLMBootloader::class,
             AgentBootloader::class,
+            CalendarBootloader::class,
         ];
     }
 }

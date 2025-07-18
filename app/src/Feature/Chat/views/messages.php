@@ -26,10 +26,10 @@ foreach ($messages as $message):
         <div class="message-bubble">
             <div class="message-content"
             ><?= \htmlspecialchars($content) ?><?php
-                if ($isPending):
-                    ?><span class="typing-indicator"><span></span><span></span><span></span></span><?php
-                endif;
-            ?></div>
+    if ($isPending):
+        ?><span class="typing-indicator"><span></span><span></span><span></span></span><?php
+    endif;
+    ?></div>
             <button class="message-delete-btn"
                     hx-post="/chat/<?= $chatUuid ?>/remove/<?= $message->uuid->toString() ?>"
                     hx-target="closest .message"
