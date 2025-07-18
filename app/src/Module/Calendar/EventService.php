@@ -18,7 +18,7 @@ final class EventService
         $entity = EventEntity::create(
             date: $event->date,
             title: $event->title,
-            period: $event->period,
+            period: empty($event->period) ? null : $event->period,
             description: $event->description,
         );
         $entity->saveOrFail();
@@ -38,7 +38,7 @@ final class EventService
 
         $entity->date = $event->date;
         $entity->title = $event->title;
-        $entity->period = $event->period;
+        $entity->period = empty($event->period) ? null : $event->period;
         $entity->description = $event->description;
 
         $entity->saveOrFail();

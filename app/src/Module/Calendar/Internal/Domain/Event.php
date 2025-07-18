@@ -24,7 +24,7 @@ use Ramsey\Uuid\UuidInterface;
 #[Uuid7('uuid')]
 #[CreatedAt('createdAt')]
 #[UpdatedAt('updatedAt')]
-final class Event extends ActiveRecord
+class Event extends ActiveRecord
 {
     #[Column(type: 'uuid', primary: true, nullable: false, typecast: 'uuid')]
     public UuidInterface $uuid;
@@ -32,7 +32,7 @@ final class Event extends ActiveRecord
     #[Column(type: 'string', nullable: false)]
     public string $title;
 
-    #[Column(type: 'date', nullable: false, typecast: Date::class)]
+    #[Column(type: 'date', nullable: false, typecast: [Date::class, 'fromString'])]
     public Date $date;
 
     #[Column(type: 'string', nullable: true)]

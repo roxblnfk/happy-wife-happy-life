@@ -46,7 +46,10 @@ final class Calendar
         $deadline = $startDate->withInterval($interval);
 
         /** @var list<array{0: non-empty-string, 1: Event}> $events */
-        $result = $this->eventRepository->getUpcomingEvents($startDate, $interval);
+        $result = \array_map(
+            static fn(Event $e): array => [$e->getClosestDate()->__toString(), $e],
+            $this->eventRepository->getUpcomingEvents($startDate, $interval),
+        );
         foreach ($events as $event) {
             $closest = $event->getClosestDate();
             $closest->isBetween($startDate, $deadline) and $result[] = [$closest->__toString(), $event];

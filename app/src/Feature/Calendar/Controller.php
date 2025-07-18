@@ -6,11 +6,14 @@ namespace App\Feature\Calendar;
 
 use App\Application\Value\Date;
 use App\Feature\Agent\Planning\EventManagerAgent;
+use App\Feature\Calendar\Input\EventForm;
 use App\Feature\Calendar\Internal\CalendarInfoService;
 use App\Feature\Chat\Controller as ChatController;
 use App\Module\Agent\AgentProvider;
 use App\Module\Agent\DateableAgent;
 use App\Module\Calendar\Calendar;
+use App\Module\Calendar\EventService;
+use App\Module\Calendar\Info\Event;
 use App\Module\Chat\ChatService;
 use Psr\Http\Message\ResponseInterface;
 use Spiral\Prototype\Traits\PrototypeTrait;
@@ -30,12 +33,15 @@ final class Controller
     public const ROUTE_HELP_AGENT = 'calendar-start-help-agent';
     public const ROUTE_CYCLE_DAY = 'calendar-cycle-day';
     public const ROUTE_CYCLE_AGENT = 'calendar-cycle-agent';
+    public const ROUTE_EVENT_CREATE_FORM = 'calendar-event-create-form';
+    public const ROUTE_EVENT_CREATE = 'calendar-event-create';
 
     public function __construct(
         private readonly ViewsInterface $views,
         private readonly Calendar $calendar,
         private readonly ChatService $chatService,
         private readonly CalendarInfoService $calendarInfoService,
+        private readonly EventService $eventService,
     ) {}
 
     #[Route(route: '/calendar/closest-dates', name: self::ROUTE_CLOSEST_DATES, methods: ['GET'])]
@@ -136,5 +142,41 @@ final class Controller
         return $this->response->redirect(
             $this->router->uri($chats::ROUTE_CHAT, ['uuid' => $chat->uuid]),
         );
+    }
+
+    #[Route(route: '/calendar/event/create-form', name: self::ROUTE_EVENT_CREATE_FORM, methods: ['GET'])]
+    public function eventCreateForm(): string
+    {
+        return $this->views->render('calendar:event-create-form', [
+            'router' => $this->router,
+            'form' => null,
+        ]);
+    }
+
+    #[Route(route: '/calendar/event/create', name: self::ROUTE_EVENT_CREATE, methods: ['POST'])]
+    public function eventCreate(EventForm $form): string
+    {
+        $event = new Event(
+            date: $form->date,
+            title: $form->title,
+            period: $form->period,
+            description: $form->description,
+        );
+        $this->eventService->create($event);
+
+        // Return JavaScript to close modal and refresh widget
+        return '<script>
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById("eventCreateModal"));
+            if (modal) {
+                modal.hide();
+            }
+
+            // Refresh closest dates widget
+            htmx.ajax("GET", "' . $this->router->uri(self::ROUTE_CLOSEST_DATES) . '", {
+                target: "#closest-dates-widget",
+                swap: "outerHTML"
+            });
+        </script>';
     }
 }

@@ -14,15 +14,28 @@ if ($events === []) {
 }
 ?>
 
-<div class="card h-100" style="border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+<div id="closest-dates-widget" class="card h-100" style="border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center" style="border-radius: 12px 12px 0 0;">
-        <h5 class="mb-0">
-            <i class="bi bi-calendar-event me-2"></i>
-            Ближайшие события
-        </h5>
-        <small class="text-white-50">
-            <?= \count($events) ?> событий
-        </small>
+        <div class="d-flex align-items-center">
+            <h5 class="mb-0">
+                <i class="bi bi-calendar-event me-2"></i>
+                Ближайшие события
+            </h5>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <small class="text-white-50">
+                <?= \count($events) ?> событий
+            </small>
+            <button type="button" 
+                    class="btn btn-light btn-sm" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#eventCreateModal"
+                    hx-get="<?= $router->uri(Controller::ROUTE_EVENT_CREATE_FORM) ?>"
+                    hx-target="#event-create-form-content"
+                    title="Добавить событие">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+        </div>
     </div>
 
     <div class="card-body p-0">
@@ -30,7 +43,7 @@ if ($events === []) {
             <div class="text-center py-5">
                 <i class="bi bi-calendar-x text-muted" style="font-size: 3rem;"></i>
                 <p class="text-muted mt-3 mb-0">Нет предстоящих событий</p>
-                <small class="text-muted">Добавьте важные даты в настройках</small>
+                <small class="text-muted">Добавьте важные даты с помощью кнопки "+"</small>
             </div>
         <?php else: ?>
             <div class="list-group list-group-flush">
@@ -112,6 +125,37 @@ if ($events === []) {
     </div>
 </div>
 
+<!-- Модальное окно для создания события -->
+<div class="modal fade" id="eventCreateModal" tabindex="-1" aria-labelledby="eventCreateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <!-- Заголовок модального окна -->
+            <div class="modal-header bg-primary text-white" style="border-radius: 12px 12px 0 0;">
+                <h5 class="modal-title" id="eventCreateModalLabel">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Создать событие
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+
+            <!-- Тело модального окна с формой -->
+            <div class="modal-body">
+                <div id="event-create-form-content">
+                    <!-- Контент формы будет загружен сюда через HTMX -->
+                    <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary mb-3" role="status">
+                                <span class="visually-hidden">Загрузка...</span>
+                            </div>
+                            <p class="text-muted">Загрузка формы...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Модальное окно AI-агента -->
 <div class="modal fade" id="aiAgentModal" tabindex="-1" aria-labelledby="aiAgentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -157,39 +201,54 @@ if ($events === []) {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Обработка событий модального окна
+    // Обработка событий модального окна AI-агента
     const agentModal = document.getElementById('aiAgentModal');
+    if (agentModal) {
+        agentModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const eventTitle = button.getAttribute('data-event-title');
+            
+            const modalTitle = agentModal.querySelector('#aiAgentModalLabel');
+            modalTitle.innerHTML = `<i class="bi bi-robot me-2"></i>Помощь по событию: ${eventTitle}`;
+        });
 
-    agentModal.addEventListener('show.bs.modal', function (event) {
-        // Кнопка, которая вызвала модальное окно
-        const button = event.relatedTarget;
-        const eventTitle = button.getAttribute('data-event-title');
-        const eventDate = button.getAttribute('data-event-date');
-
-        // Обновляем заголовок модального окна
-        const modalTitle = agentModal.querySelector('#aiAgentModalLabel');
-        modalTitle.innerHTML = `<i class="bi bi-robot me-2"></i>Помощь по событию: ${eventTitle}`;
-    });
-
-    agentModal.addEventListener('hidden.bs.modal', function (event) {
-        // Очищаем содержимое чата при закрытии
-        const chatContent = document.getElementById('agent-chat-content');
-        chatContent.innerHTML = `
-            <div class="d-flex justify-content-center align-items-center h-100">
-                <div class="text-center">
-                    <div class="spinner-border text-primary mb-3" role="status">
-                        <span class="visually-hidden">Загрузка...</span>
+        agentModal.addEventListener('hidden.bs.modal', function (event) {
+            const chatContent = document.getElementById('agent-chat-content');
+            chatContent.innerHTML = `
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Загрузка...</span>
+                        </div>
+                        <p class="text-muted">Запуск AI-помощника...</p>
                     </div>
-                    <p class="text-muted">Запуск AI-помощника...</p>
                 </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    }
+
+    // Обработка событий модального окна создания события
+    const createModal = document.getElementById('eventCreateModal');
+    if (createModal) {
+        createModal.addEventListener('hidden.bs.modal', function (event) {
+            const formContent = document.getElementById('event-create-form-content');
+            formContent.innerHTML = `
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Загрузка...</span>
+                        </div>
+                        <p class="text-muted">Загрузка формы...</p>
+                    </div>
+                </div>
+            `;
+        });
+    }
 });
 </script>
 
 <style>
-/* Дополнительные стили для модального окна */
+/* Дополнительные стили для модальных окон */
 .modal-backdrop {
     backdrop-filter: blur(5px);
     background-color: rgba(0, 0, 0, 0.5);
@@ -231,5 +290,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 #agent-chat-content::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
+}
+
+/* Стили для кнопки добавления события */
+#eventCreateModal .btn-close-white {
+    filter: brightness(0) invert(1);
+}
+
+/* Анимация для успешного создания */
+.success-animation {
+    animation: successPulse 0.6s ease-in-out;
+}
+
+@keyframes successPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 </style>

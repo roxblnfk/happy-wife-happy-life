@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Feature\Setup\Input\Calendar;
 
 use App\Application\Value\Date;
+use App\Feature\Calendar\Input\ImportantDateForm;
 use Spiral\Filters\Attribute\Input\Post;
 use Spiral\Filters\Attribute\NestedArray;
 use Spiral\Filters\Model\Filter;
@@ -26,11 +27,11 @@ final class CalendarForm extends Filter
     #[Post(key: 'anniversary')]
     public ?Date $anniversary;
 
-    /** @var array<ImportantDateForm> */
-    #[NestedArray(
-        class: ImportantDateForm::class,
-        input: new Post('important_date'),
-        // prefix: 'important_date',
-    )]
-    public array $importantDates = [];
+    // /** @var array<ImportantDateForm> */
+    // #[NestedArray(
+    //     class: ImportantDateForm::class,
+    //     input: new Post('important_date'),
+    //     // prefix: 'important_date',
+    // )]
+    // public array $importantDates = [];
 }
