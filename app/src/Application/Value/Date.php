@@ -148,6 +148,18 @@ class Date implements \Stringable
         return $thisDate >= $startDate && $thisDate <= $endDate;
     }
 
+    /**
+     * Check if this date is before or equal to another date.
+     *
+     * @return bool True if this date is before or equal to the given date.
+     */
+    public function isAfterOrEqual(Date $fromDate): bool
+    {
+        return $this->year > $fromDate->year
+            || ($this->year === $fromDate->year && $this->month > $fromDate->month)
+            || ($this->year === $fromDate->year && $this->month === $fromDate->month && $this->day >= $fromDate->day);
+    }
+
     public function __toString(): string
     {
         return \sprintf('%04d-%02d-%02d', $this->year, $this->month, $this->day);

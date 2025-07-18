@@ -13,6 +13,7 @@ final class Calendar
 {
     public function __construct(
         private readonly RelationshipInfo $relationshipInfo,
+        private readonly EventRepository $eventRepository,
         private readonly WomenInfo $womenInfo,
     ) {}
 
@@ -45,7 +46,7 @@ final class Calendar
         $deadline = $startDate->withInterval($interval);
 
         /** @var list<array{0: non-empty-string, 1: Event}> $events */
-        $result = [];
+        $result = $this->eventRepository->getUpcomingEvents($startDate, $interval);
         foreach ($events as $event) {
             $closest = $event->getClosestDate();
             $closest->isBetween($startDate, $deadline) and $result[] = [$closest->__toString(), $event];
