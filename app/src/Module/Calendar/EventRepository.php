@@ -7,6 +7,7 @@ namespace App\Module\Calendar;
 use App\Application\Value\Date;
 use App\Module\Calendar\Info\Event;
 use App\Module\Calendar\Internal\Domain\Event as EventEntity;
+use Ramsey\Uuid\UuidInterface;
 
 final class EventRepository
 {
@@ -42,6 +43,19 @@ final class EventRepository
     public function getAll(): array
     {
         return $this->mapArray(EventEntity::query()->orderBy('date', 'ASC')->fetchAll());
+    }
+
+    /**
+     * Find an event by UUID.
+     *
+     * @param UuidInterface $uuid The UUID of the event to find.
+     * @return Event|null The event DTO if found, null otherwise.
+     */
+    public function findByUuid(UuidInterface $uuid): ?Event
+    {
+        $entity = EventEntity::findByPK($uuid);
+
+        return $entity?->toDTO();
     }
 
     /**

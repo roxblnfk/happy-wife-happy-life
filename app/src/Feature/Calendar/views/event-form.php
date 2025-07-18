@@ -3,16 +3,24 @@
  * @var \Spiral\Views\ViewInterface $this
  * @var \Spiral\Router\RouterInterface $router
  * @var \App\Feature\Calendar\Input\EventForm|null $form
+ * @var \App\Module\Calendar\Info\Event|null $event
+ * @var string $action
  * @var array<string, string>|null $errors
  */
 
-use App\Feature\Calendar\Controller;
 use App\Module\Calendar\Info\Event;
 
 $errors = $errors ?? [];
+$isEdit = $event !== null;
+$title = $isEdit ? $event->title : ($form?->title ?? '');
+$date = $isEdit ? $event->date->__toString() : ($form?->date?->__toString() ?? '');
+$period = $isEdit ? $event->period : ($form?->period ?? '');
+$description = $isEdit ? $event->description : ($form?->description ?? '');
+$buttonText = $isEdit ? 'Сохранить изменения' : 'Создать событие';
+$buttonIcon = $isEdit ? 'bi-check-lg' : 'bi-plus-lg';
 ?>
 
-<form hx-post="<?= $router->uri(Controller::ROUTE_EVENT_CREATE) ?>" 
+<form hx-post="<?= $action ?>" 
       hx-target="#event-form-container" 
       hx-swap="outerHTML"
       class="needs-validation" 
@@ -29,7 +37,7 @@ $errors = $errors ?? [];
                    class="form-control <?= isset($errors['title']) ? 'is-invalid' : '' ?>" 
                    id="event-title" 
                    name="title" 
-                   value="<?= \htmlspecialchars($form?->title ?? '') ?>"
+                   value="<?= \htmlspecialchars($title) ?>"
                    placeholder="Например: День рождения, Годовщина свадьбы"
                    required>
             <?php if (isset($errors['title'])): ?>
@@ -49,7 +57,7 @@ $errors = $errors ?? [];
                    class="form-control <?= isset($errors['date']) ? 'is-invalid' : '' ?>" 
                    id="event-date" 
                    name="date" 
-                   value="<?= $form?->date?->__toString() ?? '' ?>"
+                   value="<?= $date ?>"
                    required>
             <?php if (isset($errors['date'])): ?>
                 <div class="invalid-feedback">
@@ -67,14 +75,16 @@ $errors = $errors ?? [];
             <select class="form-select <?= isset($errors['period']) ? 'is-invalid' : '' ?>" 
                     id="event-period" 
                     name="period">
-                <option value="">Однократное событие</option>
-                <option value="<?= Event::PERIOD_ANNUAL ?>" <?= ($form?->period === Event::PERIOD_ANNUAL) ? 'selected' : '' ?>>
+                <option value="" <?= ($period === '') ? 'selected' : '' ?>>
+                    Однократное событие
+                </option>
+                <option value="<?= Event::PERIOD_ANNUAL ?>" <?= ($period === Event::PERIOD_ANNUAL) ? 'selected' : '' ?>>
                     Ежегодно
                 </option>
-                <option value="1 month" <?= ($form?->period === '1 month') ? 'selected' : '' ?>>
+                <option value="1 month" <?= ($period === '1 month') ? 'selected' : '' ?>>
                     Ежемесячно
                 </option>
-                <option value="1 week" <?= ($form?->period === '1 week') ? 'selected' : '' ?>>
+                <option value="1 week" <?= ($period === '1 week') ? 'selected' : '' ?>>
                     Еженедельно
                 </option>
             </select>
@@ -99,7 +109,7 @@ $errors = $errors ?? [];
                       id="event-description" 
                       name="description" 
                       rows="3" 
-                      placeholder="Дополнительная информация о событии"><?= \htmlspecialchars($form?->description ?? '') ?></textarea>
+                      placeholder="Дополнительная информация о событии"><?= \htmlspecialchars($description) ?></textarea>
             <?php if (isset($errors['description'])): ?>
                 <div class="invalid-feedback">
                     <?= \htmlspecialchars($errors['description']) ?>
@@ -125,8 +135,8 @@ $errors = $errors ?? [];
             </button>
             <button type="submit" 
                     class="btn btn-primary">
-                <i class="bi bi-plus-lg me-1"></i>
-                Создать событие
+                <i class="<?= $buttonIcon ?> me-1"></i>
+                <?= $buttonText ?>
             </button>
         </div>
     </div>

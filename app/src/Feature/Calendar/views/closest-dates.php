@@ -26,12 +26,12 @@ if ($events === []) {
             <small class="text-white-50">
                 <?= \count($events) ?> событий
             </small>
-            <button type="button" 
-                    class="btn btn-light btn-sm" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#eventCreateModal"
+            <button type="button"
+                    class="btn btn-light btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#eventModal"
                     hx-get="<?= $router->uri(Controller::ROUTE_EVENT_CREATE_FORM) ?>"
-                    hx-target="#event-create-form-content"
+                    hx-target="#event-form-content"
                     title="Добавить событие">
                 <i class="bi bi-plus-lg"></i>
             </button>
@@ -103,8 +103,31 @@ if ($events === []) {
                                 </div>
                             </div>
 
-                            <!-- Кнопка помощи с модальным окном -->
-                            <div class="flex-shrink-0">
+                            <!-- Кнопки действий -->
+                            <div class="flex-shrink-0 d-flex gap-2">
+                                <?php if ($event->uuid !== null): ?>
+                                    <!-- Кнопка редактирования -->
+                                    <button class="btn btn-outline-secondary btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#eventModal"
+                                            hx-get="<?= $router->uri(Controller::ROUTE_EVENT_EDIT_FORM, ['uuid' => $event->uuid->toString()]) ?>"
+                                            hx-target="#event-form-content"
+                                            title="Редактировать событие">
+                                        <i class="bi bi-pencil" style="font-size: 0.8rem;"></i>
+                                    </button>
+
+                                    <!-- Кнопка удаления -->
+                                    <button class="btn btn-outline-danger btn-sm"
+                                            hx-delete="<?= $router->uri(Controller::ROUTE_EVENT_DELETE, ['uuid' => $event->uuid->toString()]) ?>"
+                                            hx-confirm="Вы уверены, что хотите удалить событие '<?= \htmlspecialchars($event->title) ?>'?"
+                                            hx-target="#closest-dates-widget"
+                                            hx-swap="outerHTML"
+                                            title="Удалить событие">
+                                        <i class="bi bi-trash" style="font-size: 0.8rem;"></i>
+                                    </button>
+                                <?php endif; ?>
+
+                                <!-- Кнопка помощи с модальным окном -->
                                 <button class="btn btn-outline-secondary btn-sm"
                                         data-bs-toggle="modal"
                                         data-bs-target="#aiAgentModal"
@@ -114,7 +137,7 @@ if ($events === []) {
                                         data-event-title="<?= \htmlspecialchars($event->title) ?>"
                                         data-event-date="<?= $closestDate->__toString() ?>">
                                     <i class="bi bi-robot" style="font-size: 0.8rem;"></i>
-                                    <span class="ms-1 d-none d-md-inline">Помощь</span>
+                                    <span class="ms-1 d-none d-lg-inline">Помощь</span>
                                 </button>
                             </div>
                         </div>
@@ -125,22 +148,22 @@ if ($events === []) {
     </div>
 </div>
 
-<!-- Модальное окно для создания события -->
-<div class="modal fade" id="eventCreateModal" tabindex="-1" aria-labelledby="eventCreateModalLabel" aria-hidden="true">
+<!-- Модальное окно для создания/редактирования события -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
             <!-- Заголовок модального окна -->
             <div class="modal-header bg-primary text-white" style="border-radius: 12px 12px 0 0;">
-                <h5 class="modal-title" id="eventCreateModalLabel">
+                <h5 class="modal-title" id="eventModalLabel">
                     <i class="bi bi-plus-circle me-2"></i>
-                    Создать событие
+                    Событие
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
 
             <!-- Тело модального окна с формой -->
             <div class="modal-body">
-                <div id="event-create-form-content">
+                <div id="event-form-content">
                     <!-- Контент формы будет загружен сюда через HTMX -->
                     <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
                         <div class="text-center">
@@ -207,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
         agentModal.addEventListener('show.bs.modal', function (event) {
             const button = event.relatedTarget;
             const eventTitle = button.getAttribute('data-event-title');
-            
+
             const modalTitle = agentModal.querySelector('#aiAgentModalLabel');
             modalTitle.innerHTML = `<i class="bi bi-robot me-2"></i>Помощь по событию: ${eventTitle}`;
         });
@@ -227,11 +250,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Обработка событий модального окна создания события
-    const createModal = document.getElementById('eventCreateModal');
-    if (createModal) {
-        createModal.addEventListener('hidden.bs.modal', function (event) {
-            const formContent = document.getElementById('event-create-form-content');
+    // Обработка событий модального окна создания/редактирования события
+    const eventModal = document.getElementById('eventModal');
+    if (eventModal) {
+        eventModal.addEventListener('hidden.bs.modal', function (event) {
+            const formContent = document.getElementById('event-form-content');
             formContent.innerHTML = `
                 <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
                     <div class="text-center">
@@ -242,6 +265,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             `;
+
+            // Сброс заголовка
+            const modalTitle = eventModal.querySelector('#eventModalLabel');
+            modalTitle.innerHTML = '<i class="bi bi-plus-circle me-2"></i>Событие';
+        });
+
+        eventModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const modalTitle = eventModal.querySelector('#eventModalLabel');
+
+            // Определяем тип операции по URL в hx-get
+            const hxGet = button.getAttribute('hx-get');
+            if (hxGet && hxGet.includes('edit-form')) {
+                modalTitle.innerHTML = '<i class="bi bi-pencil me-2"></i>Редактировать событие';
+            } else {
+                modalTitle.innerHTML = '<i class="bi bi-plus-circle me-2"></i>Создать событие';
+            }
         });
     }
 });
@@ -293,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 /* Стили для кнопки добавления события */
-#eventCreateModal .btn-close-white {
+#eventModal .btn-close-white {
     filter: brightness(0) invert(1);
 }
 
@@ -306,5 +346,21 @@ document.addEventListener('DOMContentLoaded', function() {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
+}
+
+/* Стили для кнопок действий */
+.btn-sm {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Анимация для кнопок при наведении */
+.btn-outline-secondary:hover,
+.btn-outline-danger:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
 }
 </style>

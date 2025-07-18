@@ -7,7 +7,6 @@ namespace App\Feature\Calendar\Input;
 use App\Application\Value\Date;
 use Spiral\Filters\Attribute\Input\Post;
 use Spiral\Filters\Model\Filter;
-use Spiral\Validator\FilterDefinition;
 
 final class EventForm extends Filter
 {
