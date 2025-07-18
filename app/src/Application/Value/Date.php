@@ -34,6 +34,30 @@ class Date implements \Stringable
     }
 
     /**
+     * Create a date from year, month, and day numbers.
+     *
+     * @param int|string $year Year as an integer or string.
+     * @param int|string $month Month as an integer or string.
+     * @param int|string $day Day as an integer or string.
+     */
+    public static function fromNumbers(int|string $year, int|string $month, int|string $day): self
+    {
+        return new self((int) $year, (int) $month, (int) $day);
+    }
+
+    /**
+     * Format the date using standard DateTime format strings.
+     */
+    public function format(string $format): string
+    {
+        $dateTime = \DateTimeImmutable::createFromFormat('Y-m-d', $this->__toString());
+        if (!$dateTime) {
+            throw new \InvalidArgumentException('Invalid date.');
+        }
+        return $dateTime->format($format);
+    }
+
+    /**
      * Count the number of days between this date and another date.
      *
      * @return int<0, max>

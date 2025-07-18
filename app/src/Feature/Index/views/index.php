@@ -46,39 +46,16 @@ use App\Module\Common\Config\UserInfo;
     <div class="row g-4">
         <!-- Calendar Widget -->
         <div class="col-lg-6 col-xl-4">
-            <div hx-get="<?= $router->uri(CalendarController::ROUTE_INDEX)->__toString() ?>"
+            <div hx-get="<?= $router->uri(CalendarController::ROUTE_CYCLE_CALENDAR) ?>"
                  hx-trigger="load"
                  hx-indicator="#calendar-spinner">
                 <!-- Loading spinner -->
                 <div id="calendar-spinner" class="card h-100 d-flex align-items-center justify-content-center" style="border-radius: 12px; min-height: 300px;">
                     <div class="text-center">
                         <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Загрузка событий...</span>
+                            <span class="visually-hidden">Загрузка календаря...</span>
                         </div>
-                        <p class="text-muted mt-2 mb-0">Загрузка событий...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Placeholder for future widgets -->
-        <div class="col-lg-6 col-xl-4">
-            <div class="card h-100" style="border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
-                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 300px;">
-                    <div class="text-center text-muted">
-                        <i class="bi bi-plus-circle" style="font-size: 3rem;"></i>
-                        <p class="mt-3 mb-0">Здесь будет следующий виджет</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6 col-xl-4">
-            <div class="card h-100" style="border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
-                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 300px;">
-                    <div class="text-center text-muted">
-                        <i class="bi bi-plus-circle" style="font-size: 3rem;"></i>
-                        <p class="mt-3 mb-0">Здесь будет следующий виджет</p>
+                        <p class="text-muted mt-2 mb-0">Загрузка календаря...</p>
                     </div>
                 </div>
             </div>

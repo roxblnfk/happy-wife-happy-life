@@ -6,7 +6,7 @@
  */
 
 use App\Application\Value\Date;
-use \App\Feature\Calendar\Controller;
+use App\Feature\Calendar\Controller;
 use App\Module\Calendar\Info\Event;
 
 if ($events === []) {
@@ -159,18 +159,18 @@ if ($events === []) {
 document.addEventListener('DOMContentLoaded', function() {
     // Обработка событий модального окна
     const agentModal = document.getElementById('aiAgentModal');
-    
+
     agentModal.addEventListener('show.bs.modal', function (event) {
         // Кнопка, которая вызвала модальное окно
         const button = event.relatedTarget;
         const eventTitle = button.getAttribute('data-event-title');
         const eventDate = button.getAttribute('data-event-date');
-        
+
         // Обновляем заголовок модального окна
         const modalTitle = agentModal.querySelector('#aiAgentModalLabel');
         modalTitle.innerHTML = `<i class="bi bi-robot me-2"></i>Помощь по событию: ${eventTitle}`;
     });
-    
+
     agentModal.addEventListener('hidden.bs.modal', function (event) {
         // Очищаем содержимое чата при закрытии
         const chatContent = document.getElementById('agent-chat-content');
