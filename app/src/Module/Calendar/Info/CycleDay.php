@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Calendar\DTO;
+namespace App\Module\Calendar\Info;
 
 use App\Application\Value\Date;
 
@@ -10,7 +10,7 @@ use App\Application\Value\Date;
  * Represents information about a specific day in a woman's menstrual cycle.
  * Contains danger levels and characteristics for men to understand the day's specifics.
  */
-final class CycleDay
+final class CycleDay implements \Stringable
 {
     public function __construct(
         public readonly Date $date,
@@ -81,5 +81,19 @@ final class CycleDay
     public function getDangerLevelName(): string
     {
         return $this->dangerLevel->getLabel();
+    }
+
+    public function __toString(): string
+    {
+        return <<<MARKDOWN
+            Women's Cycle Day Information:
+            For Date: {$this->date->__toString()};
+            Day of Cycle: {$this->dayOfCycle};
+            Cycle Phase: {$this->phase->name};
+            Danger Level: {$this->dangerLevel->name};
+            Mood Description: {$this->moodDescription};
+            Recommendation: {$this->recommendation};
+            Is PMS: " . ($this->isPMS ? 'Yes' : 'No') . ";
+            MARKDOWN;
     }
 }

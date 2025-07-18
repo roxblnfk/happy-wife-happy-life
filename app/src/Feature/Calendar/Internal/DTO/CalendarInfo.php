@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Feature\Calendar\Internal\DTO;
 
 use App\Application\Value\Date;
-use App\Module\Calendar\DTO\CycleDay;
+use App\Module\Calendar\Info\CycleDay;
 
 /**
  * Calendar information DTO containing all data needed for calendar rendering.
@@ -33,7 +33,7 @@ final class CalendarInfo
     {
         return match ($this->month) {
             1 => 'Январь',
-            2 => 'Февраль', 
+            2 => 'Февраль',
             3 => 'Март',
             4 => 'Апрель',
             5 => 'Май',

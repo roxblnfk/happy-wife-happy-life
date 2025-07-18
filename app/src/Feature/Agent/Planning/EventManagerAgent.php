@@ -87,8 +87,7 @@ final class EventManagerAgent implements ChatAgent
         $self = clone $this;
 
         foreach ($events as $event) {
-            $closest = $event->getClosestDate();
-            $self->events[$closest->__toString()] = $event;
+            $self->events[] = $event;
         }
 
         return $self;

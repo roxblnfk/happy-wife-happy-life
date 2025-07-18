@@ -6,7 +6,7 @@ namespace App\Feature\Calendar\Internal;
 
 use App\Application\Value\Date;
 use App\Feature\Calendar\Internal\DTO\CalendarInfo;
-use App\Module\Calendar\Service\CycleCalendarService;
+use App\Module\Calendar\CycleCalendar;
 
 /**
  * Service for calculating calendar information and parameters.
@@ -14,7 +14,7 @@ use App\Module\Calendar\Service\CycleCalendarService;
 final class CalendarInfoService
 {
     public function __construct(
-        private readonly CycleCalendarService $cycleCalendarService,
+        private readonly CycleCalendar $cycleCalendarService,
     ) {}
 
     public function getCalendarInfo(?int $year = null, ?int $month = null): CalendarInfo
@@ -80,7 +80,7 @@ final class CalendarInfoService
         $firstDay = Date::fromNumbers($year, $month, 1);
         $firstDayDateTime = \DateTime::createFromFormat('Y-m-d', $firstDay->__toString());
         $dayOfWeek = (int) $firstDayDateTime->format('N'); // 1 = Monday, 7 = Sunday
-        
+
         return $dayOfWeek - 1; // Offset for Monday start
     }
 }

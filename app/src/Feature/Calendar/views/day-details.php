@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \Spiral\Views\ViewInterface $this
- * @var \App\Module\Calendar\DTO\CycleDay $cycleDay
+ * @var \App\Module\Calendar\Info\CycleDay $cycleDay
  * @var \App\Application\Value\Date $date
  */
 ?>

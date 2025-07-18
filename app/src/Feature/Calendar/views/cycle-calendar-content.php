@@ -142,7 +142,7 @@ use App\Feature\Calendar\Controller;
                             </div>
                         <?php else: ?>
                             <div class="col">
-                                <div class="calendar-day p-2 text-center" style="min-height: 60px; aspect-ratio: 1; opacity: 0.3;">
+                                <div class="calendar-day p-2 text-center w-100" style="min-height: 60px; aspect-ratio: 1; opacity: 0.3;">
                                     <!-- Empty cell for days outside current month -->
                                 </div>
                             </div>

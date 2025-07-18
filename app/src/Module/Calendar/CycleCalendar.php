@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Calendar\Service;
+namespace App\Module\Calendar;
 
 use App\Application\Value\Date;
-use App\Module\Calendar\DTO\CycleDay;
-use App\Module\Calendar\DTO\CyclePhase;
-use App\Module\Calendar\DTO\DangerLevel;
+use App\Module\Calendar\Info\CycleDay;
+use App\Module\Calendar\Info\CyclePhase;
+use App\Module\Calendar\Info\DangerLevel;
 use App\Module\Calendar\Info\WomenCycleInfo;
 
 /**
  * Service for generating cycle day information based on women's cycle data.
  */
-final class CycleCalendarService
+final class CycleCalendar
 {
     public function __construct(
         private readonly WomenCycleInfo $cycleInfo,
@@ -49,7 +49,7 @@ final class CycleCalendarService
     /**
      * Calculate cycle day information for a specific date.
      */
-    private function calculateCycleDay(Date $date): CycleDay
+    public function calculateCycleDay(Date $date): CycleDay
     {
         $daysSinceLastPeriod = $this->cycleInfo->lastPeriodStart->daysTo($date);
         $dayOfCycle = ($daysSinceLastPeriod % $this->cycleInfo->cycleLength) + 1;

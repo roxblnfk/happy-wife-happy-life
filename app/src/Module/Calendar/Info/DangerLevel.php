@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Calendar\DTO;
+namespace App\Module\Calendar\Info;
 
 /**
  * Danger levels for cycle days to help understand the risk level of interaction.

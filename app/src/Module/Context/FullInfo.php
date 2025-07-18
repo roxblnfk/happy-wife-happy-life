@@ -20,7 +20,6 @@ class FullInfo implements MessagesBagAware
         RelationshipInfo $relationInfo,
         WomenInfo $womenInfo,
     ) {
-        // todo : \App\Module\Calendar\Info\WomenCycleInfo
         $this->bag = new MessageBag(
             Message::forSystem("$userInfo $relationInfo $womenInfo"),
         );
