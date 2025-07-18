@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Module\Chat;
 
+use App\Module\Agent\AgentProvider;
+use App\Module\Agent\ChatAgent;
 use App\Module\Chat\Domain\Chat;
 use App\Module\Chat\Domain\Message;
 use App\Module\Chat\Domain\MessageRole;
@@ -29,11 +31,32 @@ final class ChatService
         #[Proxy]
         private readonly LLM $llm,
         private readonly FactoryInterface $factory,
+        private readonly AgentProvider $agentProvider,
     ) {}
 
-    public function createChat(): Chat
-    {
-        $chat = Chat::create();
+    /**
+     * Creates a new chat.
+     *
+     * @param non-empty-string|null $title The title of the chat.
+     * @param ChatAgent|non-empty-string|null $agent Init agent for the chat.
+     * @return Chat The created chat object.
+     */
+    public function createChat(
+        ?string $title = null,
+        ChatAgent|string|null $agent = null,
+    ): Chat {
+        $chat = Chat::create(title: $title);
+
+        if ($agent === null) {
+            $chat->saveOrFail();
+            return $chat;
+        }
+
+        # Try to build the agent if it's a string
+        $agent instanceof ChatAgent or $agent = $this->agentProvider->buildAgent($agent);
+
+        # Initialize the agent with the chat
+        $agent->chatInit($chat);
         $chat->saveOrFail();
         return $chat;
     }

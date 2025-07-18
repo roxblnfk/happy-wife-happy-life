@@ -17,12 +17,16 @@ final class Calendar
     ) {}
 
     /**
-     * Get the upcoming events.
+     * Get the upcoming events from the specified start date to the end of the given interval.
      *
-     * @return array<non-empty-string, Event> An array of upcoming events within the specified interval with keys as
-     *         closest dates in 'Y-m-d' format and values as Event objects.
+     * @param int|string|\DateInterval $interval The interval to check for upcoming events. Can be a number of days,
+     *        a string representing a time interval (e.g., '1 month'), or a \DateInterval object.
+     * @param Date|null $startDate The start date from which to check for upcoming events. If null, the current date
+     *        will be used.
+     *
+     * @return list<Event> An array of upcoming events from the specified start date to the end of the interval.
      */
-    public function getUpcomingEvents(int|string|\DateInterval $interval): array
+    public function getUpcomingEvents(?Date $startDate = null, int|string|\DateInterval $interval = 0): array
     {
         /** @var list<Event> $events */
         $events = [];
@@ -37,17 +41,18 @@ final class Calendar
             Event::PERIOD_ANNUAL,
         );
 
-        $today = Date::today();
-        $deadline = $today->withInterval($interval);
+        $startDate ??= Date::today();
+        $deadline = $startDate->withInterval($interval);
 
+        /** @var list<array{0: non-empty-string, 1: Event}> $events */
         $result = [];
         foreach ($events as $event) {
             $closest = $event->getClosestDate();
-            $closest->isBetween($today, $deadline) and $result[$closest->__toString()] = $event;
+            $closest->isBetween($startDate, $deadline) and $result[] = [$closest->__toString(), $event];
         }
 
-        \ksort($result);
+        \usort($result, static fn(array $a, array $b): int => \strcmp($a[0], $b[0]));
 
-        return $result;
+        return \array_column($result, 1);
     }
 }

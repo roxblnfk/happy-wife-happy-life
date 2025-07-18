@@ -45,10 +45,11 @@ class Chat extends ActiveRecord implements \JsonSerializable
     #[HasMany(target: Message::class, innerKey: 'uuid', outerKey: 'chatUuid', orderBy: ['createdAt' => 'ASC'])]
     public array $messages = [];
 
-    public static function create(): self
+    public static function create(?string $title = null): self
     {
         return static::make([
             'uuid' => Uuid::uuid7(),
+            'title' => $title,
             'createdAt' => new \DateTimeImmutable(),
         ]);
     }
