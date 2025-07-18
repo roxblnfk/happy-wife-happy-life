@@ -110,6 +110,7 @@ final class Controller
 
             # Render model selection page
             return $this->views->render('setup:llm/model-selection', [
+                'router' => $this->router,
                 'globalState' => $globalState,
                 'models' => $models,
                 'LLMConfig' => $LLMConfig,
@@ -117,6 +118,7 @@ final class Controller
         } catch (\Throwable $e) {
             # Render error page
             return $this->views->render('setup:llm/error', [
+                'router' => $this->router,
                 'globalState' => $globalState,
                 'exception' => $e,
                 'LLMConfig' => $LLMConfig,
@@ -188,7 +190,7 @@ final class Controller
         ?WomenInfo $womenInfo,
         ?string $page = null,
     ): string {
-        \in_array($page, ['relation', 'llm', 'calendar'], true)
+        \in_array($page, ['relation', 'llm', 'calendar', 'personal'], true)
             ? $page = "setup:$page"
             : $page = null;
 
@@ -201,6 +203,7 @@ final class Controller
         };
 
         return $this->views->render($page, [
+            'router' => $this->router,
             'globalState' => $globalState,
             'relationInfo' => $relationInfo,
             'userInfo' => $userInfo,

@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \Spiral\Views\ViewInterface $this
+ * @var \Spiral\Router\RouterInterface $router
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
  * @var null|\App\Module\Common\Config\RelationshipInfo $relationInfo
  * @var null|\App\Module\Common\Config\UserInfo $userInfo
@@ -9,6 +10,7 @@
  * @var null|\App\Module\Calendar\Info\WomenCycleInfo $womenCycleInfo
  */
 
+use App\Feature\Setup\Controller;
 use App\Module\Common\Config\RelationType;
 
 $stepIndicator = 1;
@@ -59,7 +61,12 @@ include __DIR__ . '/step-indicator.php';
             </label>
         </div>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-between">
+            <?php if ($globalState->configured): ?>
+                <button type="button" class="btn btn-outline-secondary"
+                        hx-get="<?= $router->uri(Controller::ROUTE_SETUP) ?>" hx-target="#app-content"
+                >Назад</button>
+            <?php endif; ?>
             <button type="submit" class="btn btn-primary btn-next">
                 Сохранить
                 <span class="htmx-indicator spinner-border spinner-border-sm ms-2" role="status"></span>

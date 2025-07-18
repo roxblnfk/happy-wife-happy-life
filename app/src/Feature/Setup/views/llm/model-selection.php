@@ -1,11 +1,13 @@
 <?php
 /**
  * @var \Spiral\Views\ViewInterface $this
+ * @var \Spiral\Router\RouterInterface $router
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
  * @var null|\App\Module\LLM\Config\LLMConfig $LLMConfig
  * @var list<Model> $models Available models for the selected platform
  */
 
+use App\Feature\Setup\Controller;
 use App\Module\LLM\Config\Platforms;
 use Symfony\AI\Platform\Model;
 
@@ -39,11 +41,11 @@ use Symfony\AI\Platform\Model;
         </div>
 
         <div class="d-flex justify-content-between">
-            <?php if (!$globalState->configured): ?>
-                <button type="button" class="btn btn-outline-secondary" hx-get="/setup/relation" hx-target="#app-content">
-                    Назад
-                </button>
-            <?php endif; ?>
+            <button type="button" class="btn btn-outline-secondary"
+                    hx-get="<?= $router->uri(Controller::ROUTE_SETUP, $globalState->configured ? [] : ['page' => 'relation']) ?>"
+                    hx-target="#app-content">
+                Назад
+            </button>
             <button type="submit" class="btn btn-primary btn-next">
                 Сохранить
                 <span class="htmx-indicator spinner-border spinner-border-sm ms-2" role="status"></span>

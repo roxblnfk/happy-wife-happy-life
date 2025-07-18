@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \Spiral\Views\ViewInterface $this
+ * @var \Spiral\Router\RouterInterface $router
  * @var \App\Module\Common\Config\GlobalStateConfig $globalState
  * @var null|\App\Module\Common\Config\RelationshipInfo $relationInfo
  * @var null|\App\Module\Common\Config\UserInfo $userInfo
@@ -8,6 +9,8 @@
  * @var null|\App\Module\LLM\Config\LLMConfig $LLMConfig
  * @var null|\App\Module\Calendar\Info\WomenCycleInfo $womenCycleInfo
  */
+
+use App\Feature\Setup\Controller;
 
 $stepIndicator = 4;
 include __DIR__ . '/step-indicator.php';
@@ -35,11 +38,11 @@ include __DIR__ . '/step-indicator.php';
         </div>
 
         <div class="d-flex justify-content-between">
-            <?php if (!$globalState->configured): ?>
-            <button type="button" class="btn btn-outline-secondary" hx-get="/setup/calendar" hx-target="#app-content">
+            <button type="button" class="btn btn-outline-secondary"
+                    hx-get="<?= $router->uri(Controller::ROUTE_SETUP, $globalState->configured ? [] : ['page' => 'calendar']) ?>"
+                    hx-target="#app-content">
                 Назад
             </button>
-            <?php endif; ?>
 
             <button type="submit" class="btn btn-success btn-next">
                 Сохранить

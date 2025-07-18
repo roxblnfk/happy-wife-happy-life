@@ -1,7 +1,11 @@
 <?php
 /**
  * @var \Spiral\Views\ViewInterface $this
+ * @var \Spiral\Router\RouterInterface $router
  */
+
+use App\Feature\Setup\Controller;
+
 ?>
 
 <div class="app-header">
@@ -12,7 +16,7 @@
 <div class="row g-4">
     <!-- Анкетные данные -->
     <div class="col-md-6">
-        <div class="card h-100" hx-get="/setup/relation" hx-target="#app-content" style="cursor: pointer">
+        <div class="card h-100" hx-get="<?= $router->uri(Controller::ROUTE_SETUP, ['page' => 'relation']) ?>" hx-target="#app-content" style="cursor: pointer">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
                     <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
@@ -30,7 +34,7 @@
 
     <!-- Настройки LLM -->
     <div class="col-md-6">
-        <div class="card h-100" hx-get="/setup/llm" hx-target="#app-content" style="cursor: pointer">
+        <div class="card h-100" hx-get="<?= $router->uri(Controller::ROUTE_SETUP, ['page' => 'llm']) ?>" hx-target="#app-content" style="cursor: pointer">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
                     <div class="rounded-circle bg-success d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
@@ -48,7 +52,7 @@
 
     <!-- Важные даты -->
     <div class="col-md-6">
-        <div class="card h-100" hx-get="/setup/calendar" hx-target="#app-content" style="cursor: pointer">
+        <div class="card h-100" hx-get="<?= $router->uri(Controller::ROUTE_SETUP, ['page' => 'calendar']) ?>" hx-target="#app-content" style="cursor: pointer">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
                     <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
@@ -66,7 +70,7 @@
 
     <!-- Важные даты -->
     <div class="col-md-6">
-        <div class="card h-100" hx-get="/setup/calendar" hx-target="#app-content" style="cursor: pointer">
+        <div class="card h-100" hx-get="<?= $router->uri(Controller::ROUTE_SETUP, ['page' => 'personal']) ?>" hx-target="#app-content" style="cursor: pointer">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
                     <div class="rounded-circle bg-info d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
