@@ -9,6 +9,9 @@ use App\Feature\Setup\Input\Calendar\CalendarForm;
 use App\Feature\Setup\Input\LLMProviderForm;
 use App\Feature\Setup\Input\PersonalDataForm;
 use App\Feature\Setup\Input\RelationshipForm;
+use App\Module\Calendar\EventRepository;
+use App\Module\Calendar\EventService;
+use App\Module\Calendar\Info\Event;
 use App\Module\Calendar\Info\WomenCycleInfo;
 use App\Module\Common\Config\GlobalStateConfig;
 use App\Module\Common\Config\RelationshipInfo;
@@ -19,6 +22,7 @@ use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\Config\Platforms;
 use App\Module\LLM\LLMProvider;
 use Psr\Http\Message\ResponseInterface;
+use Ramsey\Uuid\Uuid;
 use Spiral\Prototype\Traits\PrototypeTrait;
 use Spiral\Router\Annotation\Route;
 use Spiral\Views\ViewsInterface;
@@ -35,6 +39,7 @@ final class Controller
     public const ROUTE_SETUP = 'setup';
     public const ROUTE_SETUP_RELATION = 'setup-relation';
     public const POST_SETUP_LLM = 'setup-llm';
+    public const ROUTE_SETUP_REMOVE_EVENT = 'setup-remove-event';
 
     public function __construct(
         private readonly ViewsInterface $views,
@@ -132,6 +137,7 @@ final class Controller
         ?WomenCycleInfo $womenCycleInfo,
         ?RelationshipInfo $relationInfo,
         ?WomenInfo $womenInfo,
+        EventService $eventService,
     ): ResponseInterface {
         # Get configs or create new ones if they do not exist
         $womenCycleInfo ??= new WomenCycleInfo(
@@ -147,8 +153,14 @@ final class Controller
 
         # Store important dates
         foreach ($form->importantDates as $date) {
-            // todo
-            // $date->
+            $eventService->create(
+                new Event(
+                    date: $date->date,
+                    title: $date->title,
+                    period: $date->period ?: null,
+                    description: $date->description ?: null,
+                ),
+            );
         }
 
         # Persist configs
@@ -157,6 +169,14 @@ final class Controller
         $womenInfo === null or $this->configService->persistConfig($womenInfo, true);
 
         return $this->response->redirect($this->router->uri(IndexController::ROUTE_INDEX));
+    }
+
+    #[Route(route: '/setup/calendar/remove-event/<uuid>', name: self::ROUTE_SETUP_REMOVE_EVENT, methods: ['DELETE'])]
+    public function removeEvent(string $uuid, EventService $eventService): string
+    {
+        $eventUuid = Uuid::fromString($uuid);
+        $eventService->delete($eventUuid);
+        return '';
     }
 
     #[Route(route: '/setup/personal', methods: ['POST'])]
@@ -189,6 +209,7 @@ final class Controller
         ?UserInfo $userInfo,
         ?WomenInfo $womenInfo,
         ?string $page = null,
+        EventRepository $eventRepository,
     ): string {
         \in_array($page, ['relation', 'llm', 'calendar', 'personal'], true)
             ? $page = "setup:$page"
@@ -210,6 +231,7 @@ final class Controller
             'womenInfo' => $womenInfo,
             'LLMConfig' => $LLMConfig,
             'womenCycleInfo' => $womenCycleInfo,
+            'events' => $page === 'setup:calendar' ? $eventRepository->getAll() : [],
         ]);
     }
 }
