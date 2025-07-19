@@ -26,13 +26,24 @@ final class EventRepository
         $startDate ??= Date::today();
         $deadline = $startDate->withInterval($interval);
 
-        $events = EventEntity::query()
+        # Future events
+        $events = $this->mapArray(EventEntity::query()
             ->orderBy('date', 'ASC')
             ->where('date', '>=', $startDate->__toString())
             ->where('date', '<=', $deadline->__toString())
-            ->fetchAll();
+            ->fetchAll());
 
-        return $this->mapArray($events);
+        # Past cyclic events
+        $cyclic = $this->mapArray(EventEntity::query()
+            ->orderBy('date', 'ASC')
+            ->where('period', '!=', null)
+            ->where('date', '<', $deadline->__toString())
+            ->fetchAll());
+        foreach ($cyclic as $event) {
+            $event->getClosestDate()->isBetween($startDate, $deadline) and $events[] = $event;
+        }
+
+        return $events;
     }
 
     /**

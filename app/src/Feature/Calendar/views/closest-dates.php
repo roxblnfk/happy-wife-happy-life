@@ -9,9 +9,6 @@ use App\Application\Value\Date;
 use App\Feature\Calendar\Controller;
 use App\Module\Calendar\Info\Event;
 
-if ($events === []) {
-    return;
-}
 ?>
 
 <div id="closest-dates-widget" class="card h-100" style="border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
