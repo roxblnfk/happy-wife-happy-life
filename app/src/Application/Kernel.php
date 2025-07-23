@@ -13,6 +13,7 @@ use App\Module\Chat\ChatBootloader;
 use App\Module\Config\ConfigBootloader;
 use App\Module\LLM\LLMBootloader;
 use App\Module\ORM\ORMBootloader;
+use Boson\Bridge\Spiral\Bootloader\BosonBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
 use Spiral\Bootloader\I18nBootloader;
@@ -99,9 +100,9 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // APP
             AppBootloader::class,
+            BosonBootloader::class,
 
             // Features
-            Feature\Boson\Bootloader::class,
             Feature\Setup\Bootloader::class,
             Feature\Index\Bootloader::class,
             Feature\Chat\Bootloader::class,
