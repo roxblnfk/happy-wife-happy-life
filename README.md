@@ -73,12 +73,7 @@ The full development story and technical details are available in [this article 
    composer install
    ```
 
-3. **Run database migrations**
-   ```bash
-   php app.php migrate
-   ```
-
-4. **Start the application**
+3. **Start the application**
    ```bash
    # For development (web browser)
    php -S localhost:8080 app.php
@@ -87,13 +82,16 @@ The full development story and technical details are available in [this article 
    php app.php boson:start
    ```
 
-## Setup Process
+## Usage
 
 The application guides users through initial configuration:
 
-1. **Personal Information**: Enter your name and your partner's name
+1. **Relationship Information**: Enter your name and your partner's name, relationship details
 2. **AI Configuration**: Choose LLM provider and add API token
 3. **Cycle Data**: Input menstrual cycle information and important dates
+4. **Women's Preferences**: What she likes, dislikes, etc.
+
+After setup, the main dashboard provides access to all features through an intuitive interface built with HTMX and PHP backend.
 
 ## The Science Behind Survival
 
@@ -162,7 +160,3 @@ app
 **Lessons Learned**: Some battles with Symfony packages lasted longer than expected. Active Record and Spiral Prototype saved the day when time was running out and technical debt was piling up like dirty dishes.
 
 **Warning**: This project demonstrates that even engineers need survival guides for relationships. Use responsibly.
-
-## Usage
-
-After setup, the main dashboard provides access to all features through an intuitive interface built with HTMX and PHP backend.
