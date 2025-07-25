@@ -30,7 +30,7 @@ class LLMProvider
         } else {
             $models = $this->getPlatformModels($config->platform);
             # Find the model
-            $model = array_find(
+            $model = \array_find(
                 $models,
                 static fn(Model $model): bool => $model->getName() === $config->model,
             ) ?? throw new \InvalidArgumentException(
