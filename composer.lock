@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "40c6ffcbdac87115a3f41b28b8ce7b26",
+    "content-hash": "5592c978b497fc07ddeb082e0ff7931f",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -1209,21 +1209,22 @@
         },
         {
             "name": "cycle/active-record",
-            "version": "v0.8.0",
+            "version": "v1.0.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cycle/active-record.git",
-                "reference": "4f4a952d2fc67f20e6cd02ad7875db94eafee149"
+                "reference": "7b6539bb5bb66ee939d6c6ae1859e19976514284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cycle/active-record/zipball/4f4a952d2fc67f20e6cd02ad7875db94eafee149",
-                "reference": "4f4a952d2fc67f20e6cd02ad7875db94eafee149",
+                "url": "https://api.github.com/repos/cycle/active-record/zipball/7b6539bb5bb66ee939d6c6ae1859e19976514284",
+                "reference": "7b6539bb5bb66ee939d6c6ae1859e19976514284",
                 "shasum": ""
             },
             "require": {
+                "cycle/database": "^2.11",
                 "cycle/orm": "^2.7",
-                "php": "^8.2",
+                "php": ">=8.2",
                 "psr/container": "^2.0"
             },
             "require-dev": {
@@ -1314,11 +1315,11 @@
             },
             "funding": [
                 {
-                    "url": "https://github.com/cycle",
+                    "url": "https://github.com/sponsors/cycle",
                     "type": "github"
                 }
             ],
-            "time": "2024-07-24T19:10:13+00:00"
+            "time": "2024-12-20T20:45:22+00:00"
         },
         {
             "name": "cycle/annotated",
@@ -13881,7 +13882,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1",
+        "php": ">=8.4",
         "ext-mbstring": "*"
     },
     "platform-dev": {},

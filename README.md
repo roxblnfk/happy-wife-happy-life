@@ -1,197 +1,168 @@
-# My awesome Cli application
+<div align="center">
 
-Hello developer! Welcome to your new awesome `Cli` application built with the Spiral framework.
-
-We're excited that you've chosen Spiral for your project and we hope that our installer package has made the
-installation process a breeze.
-
-To help you get started, we've provided some instructions for configuring the individual packages that were installed.
-Depending on the packages you chose during the installation, you'll find the following next steps:
-
-## Configuration
-
-### Environment variables
-
-- Please, configure the environment variables in the `.env` file at the application's root.
+# Happy Wife – Happy Life
 
 
-### CycleBridge
+</div>
 
-- Database configuration file: `app/config/database.php`
-- Migrations configuration file: `app/config/migration.php`
-- Cycle ORM configuration file: `app/config/cycle.php`
-- Documentation: `https://spiral.dev/docs/basics-orm`
+<p align="center">Survival Guide for Modern Relationships 🆘</p>
 
+<div align="center">
 
-### Translator
+[![Support](https://img.shields.io/static/v1?style=flat-square&label=Support&message=%E2%9D%A4&logo=GitHub&color=%23fe0086)](https://boosty.to/roxblnfk)
 
-- Documentation: https://spiral.dev/docs/advanced-i18n
+</div>
 
+<br />
 
-## Usage
+A desktop application that helps men survive and understand relationships with women using AI-powered insights and cycle tracking. Because nothing distracts from work like family life!
 
-To create your first command effortlessly, use the scaffolding command:
+**Created for an AI agent competition** to experiment with cutting-edge PHP technologies:
+[BosonPHP](https://github.com/boson-php) for desktop apps,
+[Symfony AI Platform](https://github.com/symfony/ai-platform) for multi-provider LLM integration,
+[Spiral](https://github.com/spiral/framework) for long-running applications,
+and [Cycle Active Record](https://github.com/cycle/active-record) for rapid prototyping.
+The full development story and technical details are available in [this article [ru]][article-ru].
 
-```bash
-php app.php create:command FirstCommand
-```
+[article-ru]: https://triangular-octopus-0f6.notion.site/Symfony-AI-Platform-2395a7ab4c6c80b79909f20c30616da5
 
-After executing this command, a new command class will be created in the `src/Endpoint/Console/Command` directory. The
-class will look like this:
+## Video Demo
+
+[![Happy Wife - Happy Life Demo](https://img.youtube.com/vi/uAW0tnt5--4/0.jpg)](https://youtu.be/uAW0tnt5--4)
+
+*Click to watch the survival tutorial*
+
+## Survival Features
+
+- **Danger Level Detection**: Real-time threat assessment (scale 1-PHP_INT_MAX)
+- **Mood Prediction**: Advanced AI forecasting to avoid emotional minefields
+- **Emergency Chocolate Alerts**: Critical supply warnings for high-danger periods
+- **Safe Zone Calendar**: Know when it's actually safe to ask "What's wrong?"
+- **Memory Backup**: Never forget important dates (your relationship depends on it!)
+- **Strategic Retreat Notifications**: AI tells you when to just... disappear for a while
+
+## Tech Stack
+
+**Backend:**
+- PHP 8.4+
+- Spiral Framework
+- Cycle ORM - Active Record
+- SQLite for local data storage
+- Symfony AI Platform for LLM integration
+- BosonPHP for native desktop WebView
+
+**Frontend:**
+- Bootstrap 5 for responsive design
+- HTMX for dynamic interactions
+
+**AI Integration:**
+- Multi-provider support (OpenAI, Anthropic, Google, Ollama)
+- Streaming responses with context awareness
+- Cycle-based mood prediction algorithms
+
+## Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/roxblnfk/happy-wife-happy-life.git
+   cd happy-wife-happy-life
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer install
+   ```
+
+3. **Run database migrations**
+   ```bash
+   php app.php migrate
+   ```
+
+4. **Start the application**
+   ```bash
+   # For development (web browser)
+   php -S localhost:8080 app.php
+
+   # For desktop mode
+   php app.php boson:start
+   ```
+
+## Setup Process
+
+The application guides users through initial configuration:
+
+1. **Personal Information**: Enter your name and your partner's name
+2. **AI Configuration**: Choose LLM provider and add API token
+3. **Cycle Data**: Input menstrual cycle information and important dates
+
+## The Science Behind Survival
+
+The app uses a battle-tested algorithm to predict dangerous situations:
 
 ```php
-namespace App\Endpoint\Console;
+/**
+ * Relationship Survival Algorithm v2.0
+ *
+ * @param int<1, 28> $day Menstrual cycle day
+ * @return Women Current threat level and survival requirements
+ */
+function getWomen(int $day): Women {
+   return match(true) {
+       // Code Red: Maximum Danger ⚠️
+       $day <= 5 => Women::create()
+           ->dangerLevel(8)
+           ->mood(Mood::KernelPanic)
+           ->requires('chocolate')
+           ->advice('Hide in garage'),
 
-use Spiral\Console\Attribute\Argument;
-use Spiral\Console\Attribute\AsCommand;
-use Spiral\Console\Attribute\Option;
-use Spiral\Console\Attribute\Question;
-use Spiral\Console\Command;
+       // Green Zone: You might actually survive 🟢
+       $day == 14 => Women::create()
+           ->dangerLevel(1)
+           ->libido(PHP_INT_MAX)
+           ->mood(Mood::ProductionReady)
+           ->advice('This is your chance!'),
 
-#[AsCommand(name: 'first')]
-final class FirstCommand extends Command
-{
-    public function __invoke(): int
-    {
-        // Put your command logic here
-        $this->info('Command logic is not implemented yet');
-
-        return self::SUCCESS;
-    }
+       // Default: Proceed with extreme caution 🟨
+       default => Women::create()
+           ->dangerLevel(PHP_INT_MAX)
+           ->mood(Mood::BufferOverflow)
+           ->requires('chocolate AND flowers AND apology')
+           ->advice('Just say "Yes, dear"')
+   };
 }
 ```
 
-To invoke your command, run the following command in the console:
-
-```bash
-php app.php first
-```
-
-Read more about commands in the [Spiral documentation](https://spiral.dev/docs/console-commands).
-
-
-## Console commands
-
-#### To invoke application command just run:
-
-```bash
-php app.php command:name
-```
-
-#### To get a list of available commands:
-
-```bash
-php app.php list
-```
-
-#### To get help about a particular command:
-
-```bash
-php app.php help command:name
-```
-
-## Useful resources
-
-- [**Spiral Framework documentation**](https://spiral.dev/docs)
-- [**Roadmap of Learning Spiral Framework**](https://spiral.dev/roadmap) - For all the newcomers who are eager to dive into the Spiral Environment, this roadmap will be your guiding star. We understand the challenges beginners face, and with this structured path, our aim is to simplify your learning journey.
-- [**RoadRunner documentation**](https://roadrunner.dev/docs)
-- [Community packages](https://github.com/spiral-packages)
-- [Buggregator](https://github.com/buggregator/server) — OpenSource tool that offers a range of debugging features for Long running PHP applications.
-- [Birddog](https://github.com/roadrunner-server/birddog) — OpenSource tool for monitoring RoadRunner instances.
-- [Support us](https://github.com/sponsors/roadrunner-server)
-- [Contributing](https://spiral.dev/docs/about-contributing/)
+*Remember: Happy Wife = Happy Life = Peaceful Code Reviews*
 
 ## Project Structure
 
-If you chose to install the default application skeleton, your project will have the following directory structure:
-
 ```
-- Endpoint
-    - Web
-        - UserController.php
-        - Filter
-            - CreateUserFilter.php
-        - Middleware
-            - LocaleMiddleware.php
-        - Interceptor
-            - ValidateFiltersInterceptor.php
-        - routes.php
-    - Console
-        - Interceptor
-            - PromptRequiredArguments.php
-        - CreateUserCommand.php
-    - RPC
-        - ...
-    - Temporal
-        - Workflow
-            - ...
-        - Activity
-            - ...
-- Application
-    - Bootloader
-        - RoutesBootloader.php
-        - UserModuleBootloader.php
-    - Exception
-        - SomeException.php
-        - Renderer
-            - ViewRenderer.php
-    - AppDirectories.php
-    - Kernel.php
-- Domain
-    - User
-        - Entity
-            - User.php
-        - Service
-            - StoreUserService.php
-        - Repository
-            - UserRepositoryInterface.php
-        - Exception
-            - UserNotFoundException.php
-- Infrastructure
-    - Persistence
-        - CycleUserRepository.php
-    - CycleORM
-        - Typecaster
-            - UuidTypecast.php
-    - Interceptor
-        - LogInterceptor.php
-        - ExceptionHandlerInterceptor.php
+app.php                  # Application entry point
+app
+├── config               # Configuration files
+├── database             # SQLite and migrations
+├── public               # Web assets
+└── src
+    ├── Application      # Framework-specific services
+    ├── Feature          # UI features
+    └── Module           # Core business logic
 ```
 
-#### Here's a brief explanation of the directories and files in this structure:
+## Development Notes
 
-- **Endpoint**: This directory contains the entry points for your application, including HTTP endpoints (in the Web
-  subdirectory), command-line interfaces (in the Console subdirectory), and gRPC services (in the RPC subdirectory).
+**Mission Background**: Built during a 4-day emergency development sprint for an AI agent competition. The goal was to experiment with bleeding-edge PHP technologies while solving real-world survival problems.
 
-- **Application**: This directory contains the core of your application, including the Kernel class that boots your
-  application, the Bootloader classes that register services with the container, and the Exception directory that
-  contains exception handling logic.
+**Technologies Tested in Combat**:
+- BosonPHP (because desktop PHP apps shouldn't be a war crime)
+- Symfony AI Platform (teaching AI about relationship survival)
+- Spiral Framework (for applications that need to survive longer than your last argument)
+- Cycle Active Record (rapid deployment when time is critical)
+- HTMX (dynamic frontend without the JavaScript drama)
 
-- **Domain**: This directory contains your domain logic, organized by subdomains. For example, an Entity for the User
-  model, a Service for storing new users, a Repository for fetching users from the database, and an Exception for
-  handling user-related errors.
+**Lessons Learned**: Some battles with Symfony packages lasted longer than expected. Active Record and Spiral Prototype saved the day when time was running out and technical debt was piling up like dirty dishes.
 
-- **Infrastructure**: This directory contains the infrastructure code for your application, including the Persistence
-  directory for database-related code, the CycleORM directory for ORM-related code, and the Interceptor directory for
-  global interceptors.
+**Warning**: This project demonstrates that even engineers need survival guides for relationships. Use responsibly.
 
-The project structure we provided is a common structure used in many PHP applications, and it can serve as a starting
-point for your projects By following this structure, you can organize your code in a logical and maintainable
-way, making it easier to build and scale your applications over time. Of course, you may need to make adjustments to fit
-the specific needs of your project, but this structure provides a solid foundation for most applications.
+## Usage
 
-**Good luck with your project!**
-
-## Support
-
-If you have any questions or need help with the project, please don't hesitate to reach out! You can find us on Discord
-at the following link:
-
-[Discord Server](https://discord.gg/TFeEmCs)
-
-Alternatively, you can create an issue on GitHub to report a bug or request a feature:
-
-[Create an Issue on GitHub](https://github.com/spiral/framework/issues/new/choose)
-
-We welcome any feedback or suggestions you may have, and are always happy to help troubleshoot any issues you may
-encounter.
+After setup, the main dashboard provides access to all features through an intuitive interface built with HTMX and PHP backend.
