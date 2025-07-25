@@ -99,7 +99,7 @@ final class Controller
 
             if ($LLMConfig->model !== null) {
                 # Check model name
-                $LLMConfig->platform === Platforms::Local or \array_find(
+                $LLMConfig->platform === Platforms::Local or array_find(
                     $models,
                     static fn(Model $model): bool => $model->getName() === $LLMConfig->model,
                 ) ?? throw new \InvalidArgumentException(
