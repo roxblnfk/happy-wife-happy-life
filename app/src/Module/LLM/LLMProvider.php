@@ -32,7 +32,7 @@ class LLMProvider
             # Find the model
             $model = \array_find(
                 $models,
-                static fn(Model $model): bool => $model->getName() === $model,
+                static fn(Model $m): bool => $m->getName() === $model,
             ) ?? throw new \InvalidArgumentException(
                 "Model `{$model}` not found for platform `{$config->platform->value}`.",
             );

@@ -478,6 +478,58 @@
             "time": "2025-06-20T16:10:40+00:00"
         },
         {
+            "name": "boson-php/id-contracts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boson-php/id-contracts.git",
+                "reference": "c981a17856e94f662c649fa15460d3ba11e717d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boson-php/id-contracts/zipball/c981a17856e94f662c649fa15460d3ba11e717d5",
+                "reference": "c981a17856e94f662c649fa15460d3ba11e717d5",
+                "shasum": ""
+            },
+            "require": {
+                "boson-php/value-object-contracts": "^0.15",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.15.x-dev",
+                    "dev-master": "0.15.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Boson\\Contracts\\Id\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "Provides basic ID interfaces",
+            "homepage": "https://bosonphp.com",
+            "support": {
+                "issues": "https://github.com/boson-php/boson/issues",
+                "source": "https://github.com/boson-php/id-contracts"
+            },
+            "time": "2025-07-28T01:32:14+00:00"
+        },
+        {
             "name": "boson-php/os-info",
             "version": "dev-master",
             "source": {
@@ -646,12 +698,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/runtime.git",
-                "reference": "05b4a62282fa3001a66efd4f499202fec06e3033"
+                "reference": "abb2fc9949fd5ea8ce42ad45146984cb11e7b9b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/runtime/zipball/05b4a62282fa3001a66efd4f499202fec06e3033",
-                "reference": "05b4a62282fa3001a66efd4f499202fec06e3033",
+                "url": "https://api.github.com/repos/boson-php/runtime/zipball/abb2fc9949fd5ea8ce42ad45146984cb11e7b9b4",
+                "reference": "abb2fc9949fd5ea8ce42ad45146984cb11e7b9b4",
                 "shasum": ""
             },
             "require": {
@@ -659,7 +711,9 @@
                 "boson-php/event-listener-contracts": "^0.15",
                 "boson-php/http": "^0.15",
                 "boson-php/http-contracts": "^0.15",
+                "boson-php/id-contracts": "^0.15",
                 "boson-php/os-info": "^0.15",
+                "boson-php/value-object-contracts": "^0.15",
                 "boson-php/weak-types": "^0.15",
                 "ext-ffi": "*",
                 "ffi/env": "^1.0",
@@ -699,7 +753,7 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/runtime"
             },
-            "time": "2025-07-22T15:56:07+00:00"
+            "time": "2025-07-28T11:47:27+00:00"
         },
         {
             "name": "boson-php/spiral-bridge",
@@ -762,6 +816,57 @@
                 "source": "https://github.com/boson-php/spiral-bridge"
             },
             "time": "2025-07-22T10:02:25+00:00"
+        },
+        {
+            "name": "boson-php/value-object-contracts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boson-php/value-object-contracts.git",
+                "reference": "cdecd8799c88df67d7f686510d589d3d0857c359"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boson-php/value-object-contracts/zipball/cdecd8799c88df67d7f686510d589d3d0857c359",
+                "reference": "cdecd8799c88df67d7f686510d589d3d0857c359",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.15.x-dev",
+                    "dev-master": "0.15.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Boson\\Contracts\\ValueObject\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "Provides basic value object interfaces",
+            "homepage": "https://bosonphp.com",
+            "support": {
+                "issues": "https://github.com/boson-php/boson/issues",
+                "source": "https://github.com/boson-php/value-object-contracts"
+            },
+            "time": "2025-07-28T01:30:32+00:00"
         },
         {
             "name": "boson-php/weak-types",
