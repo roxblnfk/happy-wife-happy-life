@@ -9,6 +9,7 @@ use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\Config\Platforms;
 use App\Module\LLM\Internal\AIPlatformBridge;
 use Spiral\Core\Attribute\Singleton;
+use Symfony\AI\Platform\Bridge\Meta\Llama;
 use Symfony\AI\Platform\Model;
 
 #[Singleton]
@@ -22,19 +23,18 @@ class LLMProvider
     public function getLLM(LLMConfig $config): LLM
     {
         $platform = $this->platformBridge->getPlatform($config);
-
-        $config->model ?? throw new \LogicException('Platform model not configured.');
+        $model = $config->model ?? throw new \LogicException('Platform model not configured.');
 
         if ($config->platform === Platforms::Local) {
-            $model = new Model($config->model);
+            $model = new Llama($model);
         } else {
             $models = $this->getPlatformModels($config->platform);
             # Find the model
             $model = \array_find(
                 $models,
-                static fn(Model $model): bool => $model->getName() === $config->model,
+                static fn(Model $model): bool => $model->getName() === $model,
             ) ?? throw new \InvalidArgumentException(
-                "Model `{$config->model}` not found for platform `{$config->platform->value}`.",
+                "Model `{$model}` not found for platform `{$config->platform->value}`.",
             );
         }
 
