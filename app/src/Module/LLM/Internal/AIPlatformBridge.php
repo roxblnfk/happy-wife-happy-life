@@ -8,11 +8,11 @@ use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\Config\Platforms;
 use Symfony\AI\Platform\Bridge\Anthropic\Claude;
 use Symfony\AI\Platform\Bridge\Anthropic\PlatformFactory as AnthropicPlatformFactory;
-use Symfony\AI\Platform\Bridge\Google\Gemini;
-use Symfony\AI\Platform\Bridge\Google\PlatformFactory as GoogleFactoryAlias;
+use Symfony\AI\Platform\Bridge\Gemini\Gemini;
+use Symfony\AI\Platform\Bridge\Gemini\PlatformFactory as GoogleFactoryAlias;
 use Symfony\AI\Platform\Bridge\Ollama\PlatformFactory as OllamaPlatformFactory;
-use Symfony\AI\Platform\Bridge\OpenAI\GPT;
-use Symfony\AI\Platform\Bridge\OpenAI\PlatformFactory as OpenAIPlatformFactory;
+use Symfony\AI\Platform\Bridge\OpenAi\Gpt;
+use Symfony\AI\Platform\Bridge\OpenAi\PlatformFactory as OpenAIPlatformFactory;
 use Symfony\AI\Platform\Model;
 use Symfony\AI\Platform\PlatformInterface;
 
@@ -42,15 +42,15 @@ final class AIPlatformBridge
     }
 
     /**
-     * @return list<GPT>
+     * @return list<Gpt>
      */
     private function getOpenAIModels(): array
     {
         $result = [];
 
-        $constants = (new \ReflectionClass(GPT::class))->getConstants(\ReflectionClassConstant::IS_PUBLIC);
+        $constants = (new \ReflectionClass(Gpt::class))->getConstants(\ReflectionClassConstant::IS_PUBLIC);
         foreach ($constants as $value) {
-            $result[] = new GPT($value);
+            $result[] = new Gpt($value);
         }
 
         return $result;

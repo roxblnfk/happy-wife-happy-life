@@ -8,8 +8,8 @@ use App\Module\LLM\Internal\Domain\Request;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\AI\Agent\AgentInterface;
 use Symfony\AI\Platform\Message\MessageBagInterface;
-use Symfony\AI\Platform\Response\ResponseInterface;
-use Symfony\AI\Platform\Response\ResponsePromise;
+use Symfony\AI\Platform\Result\ResultInterface;
+use Symfony\AI\Platform\Result\ResultPromise;
 
 interface LLM
 {
@@ -19,7 +19,7 @@ interface LLM
      * @param array<mixed>|string|object $input
      * @param array<string, mixed> $options
      */
-    public function rawRequest(array|string|object $input, array $options = []): ResponsePromise;
+    public function rawRequest(array|string|object $input, array $options = []): ResultPromise;
 
     /**
      * High-level request to the LLM.
@@ -36,11 +36,11 @@ interface LLM
      *        Arguments:
      *          - UuidInterface: The UUID of the request.
      *          - \Throwable: The error that occurred.
-     * @param null|callable(Request, ResponsePromise): void $onComplete Callback for completion handling.
+     * @param null|callable(Request, ResultPromise): void $onComplete Callback for completion handling.
      *        Arguments:
      *          - UuidInterface: The UUID of the request.
      *          - ResponsePromise: The response promise containing the result.
-     * @param null|callable(null|Request, ResponsePromise): void $onFinish Callback for finalization.
+     * @param null|callable(null|Request, ResultPromise): void $onFinish Callback for finalization.
      *         Arguments:
      *          - Request: Updated request object with status and response.
      *          - ResponsePromise: The response promise containing the result.
@@ -74,11 +74,11 @@ interface LLM
      *        Arguments:
      *          - UuidInterface: The UUID of the request.
      *          - \Throwable: The error that occurred.
-     * @param null|callable(Request, ResponseInterface): void $onComplete Callback for completion handling.
+     * @param null|callable(Request, ResultInterface): void $onComplete Callback for completion handling.
      *        Arguments:
      *          - UuidInterface: The UUID of the request.
      *          - ResponsePromise: The response promise containing the result.
-     * @param null|callable(null|Request, ResponseInterface): void $onFinish Callback for finalization.
+     * @param null|callable(null|Request, ResultInterface): void $onFinish Callback for finalization.
      *         Arguments:
      *          - Request: Updated request object with status and response.
      *          - ResponsePromise: The response promise containing the result.

@@ -6307,12 +6307,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-agent.git",
-                "reference": "2e2a894a161070c419387b65674c70b33f54bcef"
+                "reference": "75f394af2411a4888f3957ab82f79ea10cd572d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-agent/zipball/2e2a894a161070c419387b65674c70b33f54bcef",
-                "reference": "2e2a894a161070c419387b65674c70b33f54bcef",
+                "url": "https://api.github.com/repos/symfony/ai-agent/zipball/75f394af2411a4888f3957ab82f79ea10cd572d5",
+                "reference": "75f394af2411a4888f3957ab82f79ea10cd572d5",
                 "shasum": ""
             },
             "require": {
@@ -6386,11 +6386,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-17T08:55:01+00:00"
+            "time": "2025-08-01T09:18:26+00:00"
         },
         {
             "name": "symfony/ai-platform",
@@ -6398,12 +6402,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ai-platform.git",
-                "reference": "17cc7e7a30ce6d688ba80855d750546901867c6c"
+                "reference": "9c6194a7d3de2f4fb62ee0a55b24a9f8301505f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/17cc7e7a30ce6d688ba80855d750546901867c6c",
-                "reference": "17cc7e7a30ce6d688ba80855d750546901867c6c",
+                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/9c6194a7d3de2f4fb62ee0a55b24a9f8301505f6",
+                "reference": "9c6194a7d3de2f4fb62ee0a55b24a9f8301505f6",
                 "shasum": ""
             },
             "require": {
@@ -6482,11 +6486,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-17T08:55:01+00:00"
+            "time": "2025-08-01T09:18:26+00:00"
         },
         {
             "name": "symfony/clock",

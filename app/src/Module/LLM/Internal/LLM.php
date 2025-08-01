@@ -15,8 +15,8 @@ use Symfony\AI\Platform\Message\MessageBag;
 use Symfony\AI\Platform\Message\MessageBagInterface;
 use Symfony\AI\Platform\Model;
 use Symfony\AI\Platform\PlatformInterface;
-use Symfony\AI\Platform\Response\ResponseInterface;
-use Symfony\AI\Platform\Response\ResponsePromise;
+use Symfony\AI\Platform\Result\ResultInterface;
+use Symfony\AI\Platform\Result\ResultPromise;
 
 final class LLM implements \App\Module\LLM\LLM
 {
@@ -49,7 +49,7 @@ final class LLM implements \App\Module\LLM\LLM
         $agent = $this->agent();
         $response = $agent->call($messages, ['stream' => true] + $options);
 
-        $this->process->defer((static function (ResponseInterface $response, UuidInterface $uuid) use (
+        $this->process->defer((static function (ResultInterface $response, UuidInterface $uuid) use (
             $onProgress,
             $onError,
             $onComplete,
@@ -90,9 +90,9 @@ final class LLM implements \App\Module\LLM\LLM
         return $request;
     }
 
-    public function rawRequest(array|string|object $input, array $options = []): ResponsePromise
+    public function rawRequest(array|string|object $input, array $options = []): ResultPromise
     {
-        return $this->platform->request($this->model, $input, $options);
+        return $this->platform->invoke($this->model, $input, $options);
     }
 
     public function request(
@@ -113,7 +113,7 @@ final class LLM implements \App\Module\LLM\LLM
         );
         $request->saveOrFail();
 
-        $this->process->defer((static function (ResponsePromise $response, UuidInterface $uuid) use (
+        $this->process->defer((static function (ResultPromise $response, UuidInterface $uuid) use (
             $onProgress,
             $onError,
             $onComplete,
