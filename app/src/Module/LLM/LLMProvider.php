@@ -9,7 +9,7 @@ use App\Module\LLM\Config\LLMConfig;
 use App\Module\LLM\Config\Platforms;
 use App\Module\LLM\Internal\AIPlatformBridge;
 use Spiral\Core\Attribute\Singleton;
-use Symfony\AI\Platform\Bridge\Meta\Llama;
+use Symfony\AI\Platform\Bridge\Ollama\Ollama;
 use Symfony\AI\Platform\Model;
 
 #[Singleton]
@@ -26,7 +26,7 @@ class LLMProvider
         $model = $config->model ?? throw new \LogicException('Platform model not configured.');
 
         if ($config->platform === Platforms::Local) {
-            $model = new Llama($model);
+            $model = new Ollama($model);
         } else {
             $models = $this->getPlatformModels($config->platform);
             # Find the model
