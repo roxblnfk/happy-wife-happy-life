@@ -43,9 +43,8 @@ class ChatHistory implements MessagesBagAware
 
         return match ($message->role) {
             MessageRole::System => SFMessage::forSystem($content),
-            MessageRole::Assistant, # TODO ofAssistant
+            MessageRole::Assistant => SFMessage::ofAssistant($content, []),
             MessageRole::User => SFMessage::ofUser($content),
-            // MessageRole::Agent, MessageRole::Assistant => SFMessage::ofAssistant($content, []),
             // MessageRole::Tool => SFMessage::ofToolCall()
             default => null,
         };
