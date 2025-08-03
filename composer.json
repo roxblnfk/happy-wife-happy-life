@@ -11,7 +11,7 @@
         "php": ">=8.4",
         "ext-mbstring": "*",
         "boson-php/psr-http-bridge": "^0.15",
-        "boson-php/spiral-bridge": "dev-master",
+        "boson-php/spiral-bridge": "^0.15",
         "boson-php/runtime": "^0.15",
         "cycle/active-record": "^1.0",
         "cycle/entity-behavior-uuid": "^1.2",

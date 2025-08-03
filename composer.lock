@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5592c978b497fc07ddeb082e0ff7931f",
+    "content-hash": "ea245b917c080e86766aaa9440dd7935",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -55,16 +55,16 @@
         },
         {
             "name": "boson-php/cpu-info",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/cpu-info.git",
-                "reference": "bf62a3f383f7b50e84499cce25208b2a16f71e61"
+                "reference": "0f438827bf78fd11dd07ffb38d53e8d5b06390ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/cpu-info/zipball/bf62a3f383f7b50e84499cce25208b2a16f71e61",
-                "reference": "bf62a3f383f7b50e84499cce25208b2a16f71e61",
+                "url": "https://api.github.com/repos/boson-php/cpu-info/zipball/0f438827bf78fd11dd07ffb38d53e8d5b06390ad",
+                "reference": "0f438827bf78fd11dd07ffb38d53e8d5b06390ad",
                 "shasum": ""
             },
             "require": {
@@ -75,7 +75,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -104,11 +103,11 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/cpu-info"
             },
-            "time": "2025-06-26T19:58:56+00:00"
+            "time": "2025-07-30T01:33:56+00:00"
         },
         {
             "name": "boson-php/event-listener-contracts",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/event-listener-contracts.git",
@@ -127,7 +126,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -160,16 +158,16 @@
         },
         {
             "name": "boson-php/globals-provider",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/globals-provider.git",
-                "reference": "24cd4084c9f8b7c91de5c9208c2067311a3b879f"
+                "reference": "365fc73f7534fb5ceb700084c2fd13929f33c083"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/globals-provider/zipball/24cd4084c9f8b7c91de5c9208c2067311a3b879f",
-                "reference": "24cd4084c9f8b7c91de5c9208c2067311a3b879f",
+                "url": "https://api.github.com/repos/boson-php/globals-provider/zipball/365fc73f7534fb5ceb700084c2fd13929f33c083",
+                "reference": "365fc73f7534fb5ceb700084c2fd13929f33c083",
                 "shasum": ""
             },
             "require": {
@@ -181,7 +179,6 @@
                 "boson-php/http": "^0.15",
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -210,33 +207,33 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/globals-provider"
             },
-            "time": "2025-06-20T16:10:44+00:00"
+            "time": "2025-07-30T01:35:05+00:00"
         },
         {
             "name": "boson-php/http",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/http.git",
-                "reference": "524d63fa8fe963202f7981b4aaeea343bda07073"
+                "reference": "2fdd7e6ba1ab072041232b9e459056af98f3e847"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/http/zipball/524d63fa8fe963202f7981b4aaeea343bda07073",
-                "reference": "524d63fa8fe963202f7981b4aaeea343bda07073",
+                "url": "https://api.github.com/repos/boson-php/http/zipball/2fdd7e6ba1ab072041232b9e459056af98f3e847",
+                "reference": "2fdd7e6ba1ab072041232b9e459056af98f3e847",
                 "shasum": ""
             },
             "require": {
                 "boson-php/http-contracts": "^0.15",
+                "boson-php/uri-factory": "^0.15",
                 "php": "^8.4"
             },
             "provide": {
-                "boson-php/http-contracts-implementation": "^4.0"
+                "boson-php/http-contracts-implementation": "^0.15"
             },
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -265,20 +262,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/http"
             },
-            "time": "2025-06-20T16:10:42+00:00"
+            "time": "2025-08-03T14:59:43+00:00"
         },
         {
             "name": "boson-php/http-body-decoder",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/http-body-decoder.git",
-                "reference": "58462657b9f2dce24f2c801eaaa0d738f11e161a"
+                "reference": "006aaefd25be75a548ed5c5d3410be839d2b88a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/http-body-decoder/zipball/58462657b9f2dce24f2c801eaaa0d738f11e161a",
-                "reference": "58462657b9f2dce24f2c801eaaa0d738f11e161a",
+                "url": "https://api.github.com/repos/boson-php/http-body-decoder/zipball/006aaefd25be75a548ed5c5d3410be839d2b88a9",
+                "reference": "006aaefd25be75a548ed5c5d3410be839d2b88a9",
                 "shasum": ""
             },
             "require": {
@@ -288,7 +285,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -317,20 +313,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/http-body-decoder"
             },
-            "time": "2025-06-20T23:55:38+00:00"
+            "time": "2025-08-03T14:18:57+00:00"
         },
         {
             "name": "boson-php/http-bridge",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/http-bridge.git",
-                "reference": "7810acb7d3404e76219192d5490ba8be348f8cde"
+                "reference": "deea64afc1276fcae99a18d7757554801e1efd00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/http-bridge/zipball/7810acb7d3404e76219192d5490ba8be348f8cde",
-                "reference": "7810acb7d3404e76219192d5490ba8be348f8cde",
+                "url": "https://api.github.com/repos/boson-php/http-bridge/zipball/deea64afc1276fcae99a18d7757554801e1efd00",
+                "reference": "deea64afc1276fcae99a18d7757554801e1efd00",
                 "shasum": ""
             },
             "require": {
@@ -343,7 +339,6 @@
                 "boson-php/http": "^0.15",
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -372,29 +367,29 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/http-bridge"
             },
-            "time": "2025-06-20T23:55:43+00:00"
+            "time": "2025-07-29T14:07:13+00:00"
         },
         {
             "name": "boson-php/http-contracts",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/http-contracts.git",
-                "reference": "4fbb78e00b3e6b61b7812b6672cda8b216e6d8ba"
+                "reference": "3477d3ff486b288b92621309d46ac6e38324e3b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/http-contracts/zipball/4fbb78e00b3e6b61b7812b6672cda8b216e6d8ba",
-                "reference": "4fbb78e00b3e6b61b7812b6672cda8b216e6d8ba",
+                "url": "https://api.github.com/repos/boson-php/http-contracts/zipball/3477d3ff486b288b92621309d46ac6e38324e3b8",
+                "reference": "3477d3ff486b288b92621309d46ac6e38324e3b8",
                 "shasum": ""
             },
             "require": {
+                "boson-php/value-object-contracts": "^0.15",
                 "php": "^8.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -423,20 +418,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/http-contracts"
             },
-            "time": "2025-06-20T23:55:32+00:00"
+            "time": "2025-08-03T15:01:13+00:00"
         },
         {
             "name": "boson-php/http-static-provider",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/http-static-provider.git",
-                "reference": "93ffcf94a8d3e957b14c09cd5b88a412bfb4d80f"
+                "reference": "b1eab02c9bf8429bcbbba8f2ab25f0235b5c3e46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/http-static-provider/zipball/93ffcf94a8d3e957b14c09cd5b88a412bfb4d80f",
-                "reference": "93ffcf94a8d3e957b14c09cd5b88a412bfb4d80f",
+                "url": "https://api.github.com/repos/boson-php/http-static-provider/zipball/b1eab02c9bf8429bcbbba8f2ab25f0235b5c3e46",
+                "reference": "b1eab02c9bf8429bcbbba8f2ab25f0235b5c3e46",
                 "shasum": ""
             },
             "require": {
@@ -446,7 +441,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -475,20 +469,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/http-static-provider"
             },
-            "time": "2025-06-20T16:10:40+00:00"
+            "time": "2025-07-29T14:06:09+00:00"
         },
         {
             "name": "boson-php/id-contracts",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/id-contracts.git",
-                "reference": "c981a17856e94f662c649fa15460d3ba11e717d5"
+                "reference": "8314ebc0879ebdca86e4ee59980634be2f43ef66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/id-contracts/zipball/c981a17856e94f662c649fa15460d3ba11e717d5",
-                "reference": "c981a17856e94f662c649fa15460d3ba11e717d5",
+                "url": "https://api.github.com/repos/boson-php/id-contracts/zipball/8314ebc0879ebdca86e4ee59980634be2f43ef66",
+                "reference": "8314ebc0879ebdca86e4ee59980634be2f43ef66",
                 "shasum": ""
             },
             "require": {
@@ -498,7 +492,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -527,20 +520,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/id-contracts"
             },
-            "time": "2025-07-28T01:32:14+00:00"
+            "time": "2025-07-30T01:35:45+00:00"
         },
         {
             "name": "boson-php/os-info",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/os-info.git",
-                "reference": "97032c026477bc54b026e2ab497a8f139c9b6e0f"
+                "reference": "a29ad9cd9855b0bffdd90dba7849a0d4c839df0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/os-info/zipball/97032c026477bc54b026e2ab497a8f139c9b6e0f",
-                "reference": "97032c026477bc54b026e2ab497a8f139c9b6e0f",
+                "url": "https://api.github.com/repos/boson-php/os-info/zipball/a29ad9cd9855b0bffdd90dba7849a0d4c839df0a",
+                "reference": "a29ad9cd9855b0bffdd90dba7849a0d4c839df0a",
                 "shasum": ""
             },
             "require": {
@@ -552,7 +545,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -581,20 +573,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/os-info"
             },
-            "time": "2025-06-29T09:10:25+00:00"
+            "time": "2025-07-30T01:33:55+00:00"
         },
         {
             "name": "boson-php/pasm",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/pasm.git",
-                "reference": "05cc2e8431665c9cb2e24567081e414e8c64ad42"
+                "reference": "6f409f9522b4d3ccc997d477e66e246452d0bf64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/pasm/zipball/05cc2e8431665c9cb2e24567081e414e8c64ad42",
-                "reference": "05cc2e8431665c9cb2e24567081e414e8c64ad42",
+                "url": "https://api.github.com/repos/boson-php/pasm/zipball/6f409f9522b4d3ccc997d477e66e246452d0bf64",
+                "reference": "6f409f9522b4d3ccc997d477e66e246452d0bf64",
                 "shasum": ""
             },
             "require": {
@@ -605,7 +597,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -634,20 +625,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/pasm"
             },
-            "time": "2025-06-26T18:08:09+00:00"
+            "time": "2025-07-28T01:30:33+00:00"
         },
         {
             "name": "boson-php/psr-http-bridge",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/psr-http-bridge.git",
-                "reference": "9ee83822545c3a4dd0afa582e58e65eb648cfca3"
+                "reference": "ef99c09af28531e762aac8ecc435b89401a1435d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/psr-http-bridge/zipball/9ee83822545c3a4dd0afa582e58e65eb648cfca3",
-                "reference": "9ee83822545c3a4dd0afa582e58e65eb648cfca3",
+                "url": "https://api.github.com/repos/boson-php/psr-http-bridge/zipball/ef99c09af28531e762aac8ecc435b89401a1435d",
+                "reference": "ef99c09af28531e762aac8ecc435b89401a1435d",
                 "shasum": ""
             },
             "require": {
@@ -661,7 +652,6 @@
                 "nyholm/psr7": "^1.8",
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -690,20 +680,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/psr-http-bridge"
             },
-            "time": "2025-06-20T16:10:40+00:00"
+            "time": "2025-08-03T14:18:53+00:00"
         },
         {
             "name": "boson-php/runtime",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/runtime.git",
-                "reference": "abb2fc9949fd5ea8ce42ad45146984cb11e7b9b4"
+                "reference": "8db345bd558d75c40d2f49cb0cc20c0e6fec3b15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/runtime/zipball/abb2fc9949fd5ea8ce42ad45146984cb11e7b9b4",
-                "reference": "abb2fc9949fd5ea8ce42ad45146984cb11e7b9b4",
+                "url": "https://api.github.com/repos/boson-php/runtime/zipball/8db345bd558d75c40d2f49cb0cc20c0e6fec3b15",
+                "reference": "8db345bd558d75c40d2f49cb0cc20c0e6fec3b15",
                 "shasum": ""
             },
             "require": {
@@ -713,6 +703,10 @@
                 "boson-php/http-contracts": "^0.15",
                 "boson-php/id-contracts": "^0.15",
                 "boson-php/os-info": "^0.15",
+                "boson-php/uri": "^0.15",
+                "boson-php/uri-contracts": "^0.15",
+                "boson-php/uri-factory": "^0.15",
+                "boson-php/uri-factory-contracts": "^0.15",
                 "boson-php/value-object-contracts": "^0.15",
                 "boson-php/weak-types": "^0.15",
                 "ext-ffi": "*",
@@ -724,7 +718,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -753,20 +746,20 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/runtime"
             },
-            "time": "2025-07-28T11:47:27+00:00"
+            "time": "2025-08-03T15:00:02+00:00"
         },
         {
             "name": "boson-php/spiral-bridge",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/spiral-bridge.git",
-                "reference": "8d29f870d1cc2abbc9681809253fcd89d275757c"
+                "reference": "ae3df757123f5c704c0ac12e52da0f72a6e62816"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/spiral-bridge/zipball/8d29f870d1cc2abbc9681809253fcd89d275757c",
-                "reference": "8d29f870d1cc2abbc9681809253fcd89d275757c",
+                "url": "https://api.github.com/repos/boson-php/spiral-bridge/zipball/ae3df757123f5c704c0ac12e52da0f72a6e62816",
+                "reference": "ae3df757123f5c704c0ac12e52da0f72a6e62816",
                 "shasum": ""
             },
             "require": {
@@ -780,9 +773,9 @@
                 "spiral/http": "^3.15"
             },
             "require-dev": {
+                "nyholm/psr7": "^1.8",
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -815,20 +808,231 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/spiral-bridge"
             },
-            "time": "2025-07-22T10:02:25+00:00"
+            "time": "2025-08-03T15:01:23+00:00"
         },
         {
-            "name": "boson-php/value-object-contracts",
-            "version": "dev-master",
+            "name": "boson-php/uri",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/boson-php/value-object-contracts.git",
-                "reference": "cdecd8799c88df67d7f686510d589d3d0857c359"
+                "url": "https://github.com/boson-php/uri.git",
+                "reference": "be0c25fad64da1f282711438f59bc1fc1f0e8394"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boson-php/value-object-contracts/zipball/cdecd8799c88df67d7f686510d589d3d0857c359",
-                "reference": "cdecd8799c88df67d7f686510d589d3d0857c359",
+                "url": "https://api.github.com/repos/boson-php/uri/zipball/be0c25fad64da1f282711438f59bc1fc1f0e8394",
+                "reference": "be0c25fad64da1f282711438f59bc1fc1f0e8394",
+                "shasum": ""
+            },
+            "require": {
+                "boson-php/uri-contracts": "^0.15",
+                "php": "^8.4"
+            },
+            "provide": {
+                "boson-php/uri-contracts-implementation": "^0.15"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.15.x-dev",
+                    "dev-master": "0.15.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Boson\\Component\\Uri\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "Provides modern object-oriented API to interact with URI",
+            "homepage": "https://bosonphp.com",
+            "support": {
+                "issues": "https://github.com/boson-php/boson/issues",
+                "source": "https://github.com/boson-php/uri"
+            },
+            "time": "2025-08-03T14:59:44+00:00"
+        },
+        {
+            "name": "boson-php/uri-contracts",
+            "version": "0.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boson-php/uri-contracts.git",
+                "reference": "91bd528a454702bb925e0e15ff94b437279a1b24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boson-php/uri-contracts/zipball/91bd528a454702bb925e0e15ff94b437279a1b24",
+                "reference": "91bd528a454702bb925e0e15ff94b437279a1b24",
+                "shasum": ""
+            },
+            "require": {
+                "boson-php/value-object-contracts": "^0.15",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.15.x-dev",
+                    "dev-master": "0.15.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Boson\\Contracts\\Uri\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "Provides basic URI interfaces",
+            "homepage": "https://bosonphp.com",
+            "support": {
+                "issues": "https://github.com/boson-php/boson/issues",
+                "source": "https://github.com/boson-php/uri-contracts"
+            },
+            "time": "2025-07-29T14:06:43+00:00"
+        },
+        {
+            "name": "boson-php/uri-factory",
+            "version": "0.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boson-php/uri-factory.git",
+                "reference": "58e9a8e6bac091105a237afb363e3d5ebee6f6e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boson-php/uri-factory/zipball/58e9a8e6bac091105a237afb363e3d5ebee6f6e3",
+                "reference": "58e9a8e6bac091105a237afb363e3d5ebee6f6e3",
+                "shasum": ""
+            },
+            "require": {
+                "boson-php/uri": "^0.15",
+                "boson-php/uri-factory-contracts": "^0.15",
+                "php": "^8.4"
+            },
+            "provide": {
+                "boson-php/uri-factory-contracts-implementation": "^0.15"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.15.x-dev",
+                    "dev-master": "0.15.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Boson\\Component\\Uri\\Factory\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "Provides URI factory implementations",
+            "homepage": "https://bosonphp.com",
+            "support": {
+                "issues": "https://github.com/boson-php/boson/issues",
+                "source": "https://github.com/boson-php/uri-factory"
+            },
+            "time": "2025-08-03T15:01:54+00:00"
+        },
+        {
+            "name": "boson-php/uri-factory-contracts",
+            "version": "0.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boson-php/uri-factory-contracts.git",
+                "reference": "298565634112aeccd50fda6d617db0ef9a41dbf1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boson-php/uri-factory-contracts/zipball/298565634112aeccd50fda6d617db0ef9a41dbf1",
+                "reference": "298565634112aeccd50fda6d617db0ef9a41dbf1",
+                "shasum": ""
+            },
+            "require": {
+                "boson-php/uri-contracts": "^0.15",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.15.x-dev",
+                    "dev-master": "0.15.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Boson\\Contracts\\Uri\\Factory\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "Provides basic URI factory interfaces",
+            "homepage": "https://bosonphp.com",
+            "support": {
+                "issues": "https://github.com/boson-php/boson/issues",
+                "source": "https://github.com/boson-php/uri-factory-contracts"
+            },
+            "time": "2025-08-03T15:15:18+00:00"
+        },
+        {
+            "name": "boson-php/value-object-contracts",
+            "version": "0.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boson-php/value-object-contracts.git",
+                "reference": "83a22cbcac2930bbdb732dbebc51a3f840433f66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boson-php/value-object-contracts/zipball/83a22cbcac2930bbdb732dbebc51a3f840433f66",
+                "reference": "83a22cbcac2930bbdb732dbebc51a3f840433f66",
                 "shasum": ""
             },
             "require": {
@@ -837,7 +1041,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -866,11 +1069,11 @@
                 "issues": "https://github.com/boson-php/boson/issues",
                 "source": "https://github.com/boson-php/value-object-contracts"
             },
-            "time": "2025-07-28T01:30:32+00:00"
+            "time": "2025-07-30T01:33:52+00:00"
         },
         {
             "name": "boson-php/weak-types",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boson-php/weak-types.git",
@@ -888,7 +1091,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1428,19 +1630,20 @@
         },
         {
             "name": "cycle/annotated",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cycle/annotated.git",
-                "reference": "35890d8fe16b6a7a29cbacef5715d31b13b78212"
+                "reference": "f996d3ee0c22aa8f2c03dca5d693408f8b7fdbbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cycle/annotated/zipball/35890d8fe16b6a7a29cbacef5715d31b13b78212",
-                "reference": "35890d8fe16b6a7a29cbacef5715d31b13b78212",
+                "url": "https://api.github.com/repos/cycle/annotated/zipball/f996d3ee0c22aa8f2c03dca5d693408f8b7fdbbe",
+                "reference": "f996d3ee0c22aa8f2c03dca5d693408f8b7fdbbe",
                 "shasum": ""
             },
             "require": {
+                "cycle/database": "^2.15",
                 "cycle/orm": "^2.9.2",
                 "cycle/schema-builder": "^2.11.1",
                 "doctrine/inflector": "^2.0",
@@ -1497,20 +1700,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-14T14:48:40+00:00"
+            "time": "2025-07-22T06:19:06+00:00"
         },
         {
             "name": "cycle/database",
-            "version": "2.14.0",
+            "version": "2.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cycle/database.git",
-                "reference": "876fbc2bc0d068f047388c0bd9b354e4d891af07"
+                "reference": "3d7ee3524b299c5897e2b03dc51bad2ddd609a90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cycle/database/zipball/876fbc2bc0d068f047388c0bd9b354e4d891af07",
-                "reference": "876fbc2bc0d068f047388c0bd9b354e4d891af07",
+                "url": "https://api.github.com/repos/cycle/database/zipball/3d7ee3524b299c5897e2b03dc51bad2ddd609a90",
+                "reference": "3d7ee3524b299c5897e2b03dc51bad2ddd609a90",
                 "shasum": ""
             },
             "require": {
@@ -1590,20 +1793,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-14T11:36:41+00:00"
+            "time": "2025-07-22T05:27:52+00:00"
         },
         {
             "name": "cycle/entity-behavior",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cycle/entity-behavior.git",
-                "reference": "49b0c71485855f16193b0720d637d822d65f688c"
+                "reference": "0c8d84fb3eaa50ec426f336a158d62ad2b4a83b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cycle/entity-behavior/zipball/49b0c71485855f16193b0720d637d822d65f688c",
-                "reference": "49b0c71485855f16193b0720d637d822d65f688c",
+                "url": "https://api.github.com/repos/cycle/entity-behavior/zipball/0c8d84fb3eaa50ec426f336a158d62ad2b4a83b6",
+                "reference": "0c8d84fb3eaa50ec426f336a158d62ad2b4a83b6",
                 "shasum": ""
             },
             "require": {
@@ -1665,7 +1868,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-14T19:37:04+00:00"
+            "time": "2025-07-22T05:27:05+00:00"
         },
         {
             "name": "cycle/entity-behavior-uuid",
@@ -3045,16 +3248,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.13.3",
+            "version": "1.13.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36"
+                "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/faed855a7b5f4d4637717c2b3863e277116beb36",
-                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/07d290f0c47959fd5eed98c95ee5602db07e0b6a",
+                "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a",
                 "shasum": ""
             },
             "require": {
@@ -3093,7 +3296,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.3"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.4"
             },
             "funding": [
                 {
@@ -3101,7 +3304,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-05T12:25:42+00:00"
+            "time": "2025-08-01T08:46:24+00:00"
         },
         {
             "name": "nette/php-generator",
@@ -3260,16 +3463,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.5.0",
+            "version": "v5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
+                "reference": "221b0d0fdf1369c71047ad1d18bb5880017bbc56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
-                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/221b0d0fdf1369c71047ad1d18bb5880017bbc56",
+                "reference": "221b0d0fdf1369c71047ad1d18bb5880017bbc56",
                 "shasum": ""
             },
             "require": {
@@ -3312,9 +3515,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.0"
             },
-            "time": "2025-05-31T08:24:38+00:00"
+            "time": "2025-07-27T20:03:57+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -3462,16 +3665,16 @@
         },
         {
             "name": "oskarstark/enum-helper",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OskarStark/enum-helper.git",
-                "reference": "adccc8c099db61cb26497a1e1987fc95ebda02a9"
+                "reference": "89245d0966f394f643cb5b35e1dfcda30a41063f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OskarStark/enum-helper/zipball/adccc8c099db61cb26497a1e1987fc95ebda02a9",
-                "reference": "adccc8c099db61cb26497a1e1987fc95ebda02a9",
+                "url": "https://api.github.com/repos/OskarStark/enum-helper/zipball/89245d0966f394f643cb5b35e1dfcda30a41063f",
+                "reference": "89245d0966f394f643cb5b35e1dfcda30a41063f",
                 "shasum": ""
             },
             "require": {
@@ -3507,9 +3710,9 @@
             ],
             "support": {
                 "issues": "https://github.com/OskarStark/enum-helper/issues",
-                "source": "https://github.com/OskarStark/enum-helper/tree/1.6.1"
+                "source": "https://github.com/OskarStark/enum-helper/tree/1.7.0"
             },
-            "time": "2025-03-26T16:14:22+00:00"
+            "time": "2025-07-30T08:08:45+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5083,16 +5286,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "4.14.1",
+            "version": "4.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "a28c4a6f5fda2bf730789a638501d7a737a64eda"
+                "reference": "bfeec74303d60d3f8bc33701ab3e86f8a8729f17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/a28c4a6f5fda2bf730789a638501d7a737a64eda",
-                "reference": "a28c4a6f5fda2bf730789a638501d7a737a64eda",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/bfeec74303d60d3f8bc33701ab3e86f8a8729f17",
+                "reference": "bfeec74303d60d3f8bc33701ab3e86f8a8729f17",
                 "shasum": ""
             },
             "require": {
@@ -5156,7 +5359,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-php/issues",
-                "source": "https://github.com/getsentry/sentry-php/tree/4.14.1"
+                "source": "https://github.com/getsentry/sentry-php/tree/4.14.2"
             },
             "funding": [
                 {
@@ -5168,7 +5371,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-06-23T15:25:52+00:00"
+            "time": "2025-07-21T08:28:29+00:00"
         },
         {
             "name": "spiral-packages/yii-error-handler-bridge",
@@ -5462,25 +5665,27 @@
         },
         {
             "name": "spiral/data-grid",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/data-grid.git",
-                "reference": "dde45cec1a42802f84da191df6a67b11f7f30e3f"
+                "reference": "6718350c8f8d49483442f04f50f293c069f5fc78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/data-grid/zipball/dde45cec1a42802f84da191df6a67b11f7f30e3f",
-                "reference": "dde45cec1a42802f84da191df6a67b11f7f30e3f",
+                "url": "https://api.github.com/repos/spiral/data-grid/zipball/6718350c8f8d49483442f04f50f293c069f5fc78",
+                "reference": "6718350c8f8d49483442f04f50f293c069f5fc78",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "spiral/attributes": "^2.10 || ^3.0"
+                "spiral/attributes": "^3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5.20",
                 "ramsey/uuid": "^4.2.3",
+                "rector/rector": "^2.1.2",
+                "spiral/code-style": "^2.2.2",
                 "vimeo/psalm": "^4.27"
             },
             "type": "library",
@@ -5517,7 +5722,7 @@
                 "issues": "https://github.com/spiral/framework/issues",
                 "source": "https://github.com/spiral/data-grid"
             },
-            "time": "2022-09-14T18:34:05+00:00"
+            "time": "2025-07-27T09:23:44+00:00"
         },
         {
             "name": "spiral/data-grid-bridge",
@@ -6572,16 +6777,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "9e27aecde8f506ba0fd1d9989620c04a87697101"
+                "reference": "5f360ebc65c55265a74d23d7fe27f957870158a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/9e27aecde8f506ba0fd1d9989620c04a87697101",
-                "reference": "9e27aecde8f506ba0fd1d9989620c04a87697101",
+                "url": "https://api.github.com/repos/symfony/console/zipball/5f360ebc65c55265a74d23d7fe27f957870158a1",
+                "reference": "5f360ebc65c55265a74d23d7fe27f957870158a1",
                 "shasum": ""
             },
             "require": {
@@ -6646,7 +6851,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.3.1"
+                "source": "https://github.com/symfony/console/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -6658,11 +6863,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-27T19:55:54+00:00"
+            "time": "2025-07-30T17:13:41+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -6889,16 +7098,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v7.3.0",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "ec2344cf77a48253bbca6939aa3d2477773ea63d"
+                "reference": "2a6614966ba1074fa93dae0bc804227422df4dfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/ec2344cf77a48253bbca6939aa3d2477773ea63d",
-                "reference": "ec2344cf77a48253bbca6939aa3d2477773ea63d",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/2a6614966ba1074fa93dae0bc804227422df4dfe",
+                "reference": "2a6614966ba1074fa93dae0bc804227422df4dfe",
                 "shasum": ""
             },
             "require": {
@@ -6933,7 +7142,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v7.3.0"
+                "source": "https://github.com/symfony/finder/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -6945,24 +7154,28 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-30T19:00:26+00:00"
+            "time": "2025-07-15T13:41:35+00:00"
         },
         {
             "name": "symfony/http-client",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "4403d87a2c16f33345dca93407a8714ee8c05a64"
+                "reference": "1c064a0c67749923483216b081066642751cc2c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/4403d87a2c16f33345dca93407a8714ee8c05a64",
-                "reference": "4403d87a2c16f33345dca93407a8714ee8c05a64",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/1c064a0c67749923483216b081066642751cc2c7",
+                "reference": "1c064a0c67749923483216b081066642751cc2c7",
                 "shasum": ""
             },
             "require": {
@@ -7028,7 +7241,7 @@
                 "http"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v7.3.1"
+                "source": "https://github.com/symfony/http-client/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -7040,11 +7253,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-28T07:58:39+00:00"
+            "time": "2025-07-15T11:36:08+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -7126,16 +7343,16 @@
         },
         {
             "name": "symfony/mailer",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mailer.git",
-                "reference": "b5db5105b290bdbea5ab27b89c69effcf1cb3368"
+                "reference": "d43e84d9522345f96ad6283d5dfccc8c1cfc299b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mailer/zipball/b5db5105b290bdbea5ab27b89c69effcf1cb3368",
-                "reference": "b5db5105b290bdbea5ab27b89c69effcf1cb3368",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/d43e84d9522345f96ad6283d5dfccc8c1cfc299b",
+                "reference": "d43e84d9522345f96ad6283d5dfccc8c1cfc299b",
                 "shasum": ""
             },
             "require": {
@@ -7186,7 +7403,7 @@
             "description": "Helps sending emails",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/mailer/tree/v7.3.1"
+                "source": "https://github.com/symfony/mailer/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -7198,24 +7415,28 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-27T19:55:54+00:00"
+            "time": "2025-07-15T11:36:08+00:00"
         },
         {
             "name": "symfony/mime",
-            "version": "v7.3.0",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "0e7b19b2f399c31df0cdbe5d8cbf53f02f6cfcd9"
+                "reference": "e0a0f859148daf1edf6c60b398eb40bfc96697d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/0e7b19b2f399c31df0cdbe5d8cbf53f02f6cfcd9",
-                "reference": "0e7b19b2f399c31df0cdbe5d8cbf53f02f6cfcd9",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/e0a0f859148daf1edf6c60b398eb40bfc96697d1",
+                "reference": "e0a0f859148daf1edf6c60b398eb40bfc96697d1",
                 "shasum": ""
             },
             "require": {
@@ -7270,7 +7491,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v7.3.0"
+                "source": "https://github.com/symfony/mime/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -7282,24 +7503,28 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-19T08:51:26+00:00"
+            "time": "2025-07-15T13:41:35+00:00"
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v7.3.0",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "afb9a8038025e5dbc657378bfab9198d75f10fca"
+                "reference": "119bcf13e67dbd188e5dbc74228b1686f66acd37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/afb9a8038025e5dbc657378bfab9198d75f10fca",
-                "reference": "afb9a8038025e5dbc657378bfab9198d75f10fca",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/119bcf13e67dbd188e5dbc74228b1686f66acd37",
+                "reference": "119bcf13e67dbd188e5dbc74228b1686f66acd37",
                 "shasum": ""
             },
             "require": {
@@ -7337,7 +7562,7 @@
                 "options"
             ],
             "support": {
-                "source": "https://github.com/symfony/options-resolver/tree/v7.3.0"
+                "source": "https://github.com/symfony/options-resolver/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -7349,11 +7574,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-04T13:12:05+00:00"
+            "time": "2025-07-15T11:36:08+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -7838,16 +8067,16 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "518d15c8cca726ebe665dcd7154074584cf862e8"
+                "reference": "317916e49b2577a1908f321796f2b67984e61eab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/518d15c8cca726ebe665dcd7154074584cf862e8",
-                "reference": "518d15c8cca726ebe665dcd7154074584cf862e8",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/317916e49b2577a1908f321796f2b67984e61eab",
+                "reference": "317916e49b2577a1908f321796f2b67984e61eab",
                 "shasum": ""
             },
             "require": {
@@ -7894,7 +8123,7 @@
                 "reflection"
             ],
             "support": {
-                "source": "https://github.com/symfony/property-access/tree/v7.3.1"
+                "source": "https://github.com/symfony/property-access/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -7906,11 +8135,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-24T04:04:43+00:00"
+            "time": "2025-07-15T17:58:03+00:00"
         },
         {
             "name": "symfony/property-info",
@@ -8000,16 +8233,16 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "feaf837cedbbc8287986602223175d3fd639922d"
+                "reference": "0ed011583fd24899fa003abf77c45d4a901714da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/feaf837cedbbc8287986602223175d3fd639922d",
-                "reference": "feaf837cedbbc8287986602223175d3fd639922d",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/0ed011583fd24899fa003abf77c45d4a901714da",
+                "reference": "0ed011583fd24899fa003abf77c45d4a901714da",
                 "shasum": ""
             },
             "require": {
@@ -8045,7 +8278,7 @@
                 "symfony/property-access": "^6.4|^7.0",
                 "symfony/property-info": "^6.4|^7.0",
                 "symfony/translation-contracts": "^2.5|^3",
-                "symfony/type-info": "^7.1",
+                "symfony/type-info": "^7.1.8",
                 "symfony/uid": "^6.4|^7.0",
                 "symfony/validator": "^6.4|^7.0",
                 "symfony/var-dumper": "^6.4|^7.0",
@@ -8078,7 +8311,7 @@
             "description": "Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/serializer/tree/v7.3.1"
+                "source": "https://github.com/symfony/serializer/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -8090,11 +8323,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-27T19:55:54+00:00"
+            "time": "2025-07-26T13:07:17+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -8181,16 +8418,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v7.3.0",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "f3570b8c61ca887a9e2938e85cb6458515d2b125"
+                "reference": "42f505aff654e62ac7ac2ce21033818297ca89ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/f3570b8c61ca887a9e2938e85cb6458515d2b125",
-                "reference": "f3570b8c61ca887a9e2938e85cb6458515d2b125",
+                "url": "https://api.github.com/repos/symfony/string/zipball/42f505aff654e62ac7ac2ce21033818297ca89ca",
+                "reference": "42f505aff654e62ac7ac2ce21033818297ca89ca",
                 "shasum": ""
             },
             "require": {
@@ -8248,7 +8485,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v7.3.0"
+                "source": "https://github.com/symfony/string/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -8260,24 +8497,28 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-20T20:19:01+00:00"
+            "time": "2025-07-10T08:47:49+00:00"
         },
         {
             "name": "symfony/translation",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "241d5ac4910d256660238a7ecf250deba4c73063"
+                "reference": "81b48f4daa96272efcce9c7a6c4b58e629df3c90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/241d5ac4910d256660238a7ecf250deba4c73063",
-                "reference": "241d5ac4910d256660238a7ecf250deba4c73063",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/81b48f4daa96272efcce9c7a6c4b58e629df3c90",
+                "reference": "81b48f4daa96272efcce9c7a6c4b58e629df3c90",
                 "shasum": ""
             },
             "require": {
@@ -8344,7 +8585,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v7.3.1"
+                "source": "https://github.com/symfony/translation/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -8356,11 +8597,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-27T19:55:54+00:00"
+            "time": "2025-07-30T17:31:46+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -8442,16 +8687,16 @@
         },
         {
             "name": "symfony/type-info",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/type-info.git",
-                "reference": "5fa6e25e4195e73ce9e457b521ac5e61ec271150"
+                "reference": "b72d44c7d6638480fce101b7c4cd3abea4c2efba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/type-info/zipball/5fa6e25e4195e73ce9e457b521ac5e61ec271150",
-                "reference": "5fa6e25e4195e73ce9e457b521ac5e61ec271150",
+                "url": "https://api.github.com/repos/symfony/type-info/zipball/b72d44c7d6638480fce101b7c4cd3abea4c2efba",
+                "reference": "b72d44c7d6638480fce101b7c4cd3abea4c2efba",
                 "shasum": ""
             },
             "require": {
@@ -8501,7 +8746,7 @@
                 "type"
             ],
             "support": {
-                "source": "https://github.com/symfony/type-info/tree/v7.3.1"
+                "source": "https://github.com/symfony/type-info/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -8513,11 +8758,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-27T19:55:54+00:00"
+            "time": "2025-07-10T05:39:45+00:00"
         },
         {
             "name": "symfony/uid",
@@ -8595,16 +8844,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "0c3555045a46ab3cd4cc5a69d161225195230edb"
+                "reference": "b8d7d868da9eb0919e99c8830431ea087d6aae30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/0c3555045a46ab3cd4cc5a69d161225195230edb",
-                "reference": "0c3555045a46ab3cd4cc5a69d161225195230edb",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/b8d7d868da9eb0919e99c8830431ea087d6aae30",
+                "reference": "b8d7d868da9eb0919e99c8830431ea087d6aae30",
                 "shasum": ""
             },
             "require": {
@@ -8647,7 +8896,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.3.1"
+                "source": "https://github.com/symfony/yaml/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -8659,11 +8908,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-03T06:57:57+00:00"
+            "time": "2025-07-10T08:47:49+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -10578,20 +10831,20 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.84.0",
+            "version": "v3.85.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "38dad0767bf2a9b516b976852200ae722fe984ca"
+                "reference": "2fb6d7f6c3398dca5786a1635b27405d73a417ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/38dad0767bf2a9b516b976852200ae722fe984ca",
-                "reference": "38dad0767bf2a9b516b976852200ae722fe984ca",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/2fb6d7f6c3398dca5786a1635b27405d73a417ba",
+                "reference": "2fb6d7f6c3398dca5786a1635b27405d73a417ba",
                 "shasum": ""
             },
             "require": {
-                "clue/ndjson-react": "^1.0",
+                "clue/ndjson-react": "^1.3",
                 "composer/semver": "^3.4",
                 "composer/xdebug-handler": "^3.0.5",
                 "ext-filter": "*",
@@ -10601,12 +10854,12 @@
                 "fidry/cpu-core-counter": "^1.2",
                 "php": "^7.4 || ^8.0",
                 "react/child-process": "^0.6.6",
-                "react/event-loop": "^1.0",
-                "react/promise": "^2.11 || ^3.0",
-                "react/socket": "^1.0",
-                "react/stream": "^1.0",
+                "react/event-loop": "^1.5",
+                "react/promise": "^3.2",
+                "react/socket": "^1.16",
+                "react/stream": "^1.4",
                 "sebastian/diff": "^4.0.6 || ^5.1.1 || ^6.0.2 || ^7.0",
-                "symfony/console": "^5.4.45 || ^6.4.13 || ^7.0",
+                "symfony/console": "^5.4.47 || ^6.4.13 || ^7.0",
                 "symfony/event-dispatcher": "^5.4.45 || ^6.4.13 || ^7.0",
                 "symfony/filesystem": "^5.4.45 || ^6.4.13 || ^7.0",
                 "symfony/finder": "^5.4.45 || ^6.4.17 || ^7.0",
@@ -10671,7 +10924,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.84.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.85.1"
             },
             "funding": [
                 {
@@ -10679,7 +10932,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-15T18:21:57+00:00"
+            "time": "2025-07-29T22:22:50+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -13469,16 +13722,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v7.3.0",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "b8dce482de9d7c9fe2891155035a7248ab5c7fdb"
+                "reference": "edcbb768a186b5c3f25d0643159a787d3e63b7fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b8dce482de9d7c9fe2891155035a7248ab5c7fdb",
-                "reference": "b8dce482de9d7c9fe2891155035a7248ab5c7fdb",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/edcbb768a186b5c3f25d0643159a787d3e63b7fd",
+                "reference": "edcbb768a186b5c3f25d0643159a787d3e63b7fd",
                 "shasum": ""
             },
             "require": {
@@ -13515,7 +13768,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v7.3.0"
+                "source": "https://github.com/symfony/filesystem/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -13527,11 +13780,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-25T15:15:23+00:00"
+            "time": "2025-07-07T08:17:47+00:00"
         },
         {
             "name": "symfony/polyfill-php84",
@@ -13734,16 +13991,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "6e209fbe5f5a7b6043baba46fe5735a4b85d0d42"
+                "reference": "53205bea27450dc5c65377518b3275e126d45e75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/6e209fbe5f5a7b6043baba46fe5735a4b85d0d42",
-                "reference": "6e209fbe5f5a7b6043baba46fe5735a4b85d0d42",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/53205bea27450dc5c65377518b3275e126d45e75",
+                "reference": "53205bea27450dc5c65377518b3275e126d45e75",
                 "shasum": ""
             },
             "require": {
@@ -13755,7 +14012,6 @@
                 "symfony/console": "<6.4"
             },
             "require-dev": {
-                "ext-iconv": "*",
                 "symfony/console": "^6.4|^7.0",
                 "symfony/http-kernel": "^6.4|^7.0",
                 "symfony/process": "^6.4|^7.0",
@@ -13798,7 +14054,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v7.3.1"
+                "source": "https://github.com/symfony/var-dumper/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -13810,11 +14066,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-27T19:55:54+00:00"
+            "time": "2025-07-29T20:02:46+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -13988,7 +14248,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "boson-php/spiral-bridge": 20,
         "symfony/ai-agent": 20,
         "symfony/ai-platform": 20
     },
