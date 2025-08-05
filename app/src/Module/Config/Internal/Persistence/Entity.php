@@ -18,10 +18,4 @@ class Entity extends ActiveRecord
 
     #[Column(type: 'text', nullable: false)]
     public string $value;
-
-    public function __construct(string $name = '', string $value = '')
-    {
-        $this->name = $name;
-        $this->value = $value;
-    }
 }
